@@ -1,0 +1,183 @@
+---
+// Projects Grid Section - Pure Astro component
+// Mock project data - in real app this would come from API/CMS
+const projects = [
+  {
+    id: 1,
+    slug: 'ai-interview-assistant',
+    title: 'AI Interview Assistant',
+    date: 'Apr 2025',
+    category: 'Personal',
+    categoryIcon: '🛠',
+    tech: ['Next.js', 'Prisma', 'AWS RDS', 'OpenAI'],
+    summary: 'A platform to practice coding, system design, and behavioral interviews with AI. Real-time feedback and scoring system.',
+    status: 'Live',
+    featured: true
+  },
+  {
+    id: 2,
+    slug: 'ecommerce-dashboard',
+    title: 'E-commerce Analytics Dashboard',
+    date: 'Mar 2025',
+    category: 'Freelance',
+    categoryIcon: '👨‍💻',
+    tech: ['React', 'Node.js', 'PostgreSQL', 'Chart.js'],
+    summary: 'Custom analytics dashboard for online store. Real-time sales tracking, inventory management, and customer insights.',
+    status: 'Delivered',
+    featured: true
+  },
+  {
+    id: 3,
+    slug: 'kubernetes-deployment-pipeline',
+    title: 'Kubernetes Deployment Pipeline',
+    date: 'Feb 2025',
+    category: 'DevOps',
+    categoryIcon: '☁️',
+    tech: ['Kubernetes', 'Docker', 'GitHub Actions', 'AWS EKS'],
+    summary: 'Automated CI/CD pipeline for microservices deployment. Zero-downtime deployments with rollback capabilities.',
+    status: 'In Use',
+    featured: true
+  },
+  {
+    id: 4,
+    slug: 'recipe-sharing-app',
+    title: 'Recipe Sharing Community',
+    date: 'Jan 2025',
+    category: 'Personal',
+    categoryIcon: '🛠',
+    tech: ['Astro', 'Tailwind', 'Supabase', 'TypeScript'],
+    summary: 'Social platform for sharing and discovering recipes. Features rating system and meal planning tools.',
+    status: 'Building',
+    featured: false
+  },
+  {
+    id: 5,
+    slug: 'portfolio-cms',
+    title: 'Portfolio CMS API',
+    date: 'Dec 2024',
+    category: 'Personal',
+    categoryIcon: '🛠',
+    tech: ['Node.js', 'Express', 'MongoDB', 'Railway'],
+    summary: 'Headless CMS for managing portfolio content. RESTful API with authentication and file upload support.',
+    status: 'Live',
+    featured: false
+  },
+  {
+    id: 6,
+    slug: 'saas-monitoring-stack',
+    title: 'SaaS Monitoring Stack',
+    date: 'Nov 2024',
+    category: 'DevOps',
+    categoryIcon: '☁️',
+    tech: ['Grafana', 'Prometheus', 'Docker', 'AWS'],
+    summary: 'Complete monitoring solution for SaaS applications. Custom dashboards and alerting system.',
+    status: 'Deployed',
+    featured: false
+  }
+];
+
+import ProjectsFilter from './ProjectsFilter.tsx';
+---
+
+<section class="py-12 px-4 sm:px-6 lg:px-8">
+  <div class="max-w-6xl mx-auto">
+    
+    <!-- Interactive Filter Component (React Island) -->
+    <ProjectsFilter client:load />
+
+    <!-- Projects Grid (Static Astro) -->
+    <div id="projects-grid">
+      
+      <!-- Results count -->
+      <div id="results-count" class="text-center mb-8">
+        <p class="font-body text-text-muted">
+          Showing <span id="project-count">{projects.length}</span> projects
+        </p>
+      </div>
+
+      <!-- Projects Grid -->
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8" id="projects-container">
+        {projects.map((project) => (
+          <div 
+            class="project-card group" 
+            data-category={project.category.toLowerCase()}
+            data-tech={project.tech.join(',').toLowerCase()}
+            data-id={project.id}
+          >
+            <div class="space-y-4">
+              
+              <!-- Header -->
+              <div class="flex justify-between items-start">
+                <div class="flex items-center space-x-2">
+                  <span class="text-lg">{project.categoryIcon}</span>
+                  <span class="project-category-badge">
+                    {project.category}
+                  </span>
+                </div>
+                <span class="project-date">
+                  {project.date}
+                </span>
+              </div>
+
+              <!-- Title -->
+              <h3 class="font-display text-xl font-bold text-black group-hover:text-text-secondary transition-colors">
+                {project.title}
+              </h3>
+
+              <!-- Tech Stack -->
+              <div class="flex flex-wrap gap-2">
+                {project.tech.map((tech) => (
+                  <span class="tech-tag-small">
+                    {tech}
+                  </span>
+                ))}
+              </div>
+
+              <!-- Summary -->
+              <p class="font-body text-text-secondary leading-relaxed">
+                {project.summary}
+              </p>
+
+              <!-- Status & CTA -->
+              <div class="flex justify-between items-center pt-4 border-t border-border">
+                <span class="project-status-small">
+                  {project.status}
+                </span>
+                <a 
+                  href={`/projects/${project.slug}`}
+                  class="project-view-btn"
+                >
+                  🔎 View Project
+                </a>
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+
+      <!-- Empty state (hidden by default, shown when no results) -->
+      <div id="empty-state" class="text-center py-16 hidden">
+        <div class="text-6xl mb-4">🔍</div>
+        <h3 class="font-display text-xl font-bold text-black mb-2">
+          No projects found
+        </h3>
+        <p class="font-body text-text-muted">
+          Try adjusting your filters or search terms
+        </p>
+        <button 
+          id="clear-filters"
+          class="mt-4 font-body text-black hover:text-text-secondary transition-colors underline"
+        >
+          Clear all filters
+        </button>
+      </div>
+
+      <!-- Load More (placeholder for future) -->
+      <div class="text-center mt-12" id="load-more-section">
+        <button class="load-more-btn">
+          Load More Projects
+        </button>
+      </div>
+    </div>
+  </div>
+</section>

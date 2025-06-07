@@ -1,0 +1,35 @@
+---
+import "../styles/global.css";
+import Navigation from "../components/Navigation";
+---
+
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width" />
+		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<meta name="generator" content={Astro.generator} />
+		<!-- Google Fonts -->
+		<link rel="preconnect" href="https://fonts.googleapis.com">
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+		<link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+		<!-- Fontshare -->
+		<link href="https://api.fontshare.com/v2/css?f[]=bespoke-stencil@400,500,700&display=swap" rel="stylesheet">
+		<title>Portfolio</title>
+	</head>
+	<body>
+		<Navigation client:load />
+		<main class="pt-16">
+			<slot />
+		</main>
+	</body>
+</html>
+
+<style>
+	html,
+	body {
+		@apply grid place-content-center;
+		@apply p-20
+	}
+</style>

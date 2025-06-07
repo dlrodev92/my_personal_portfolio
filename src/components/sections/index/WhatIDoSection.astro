@@ -1,0 +1,62 @@
+---
+// What I Do Section for Index page
+const focusAreas = [
+  {
+    icon: "🛠",
+    title: "Personal Projects",
+    description: "Experimental tools, learning builds",
+    hoverText: "Building cool stuff to learn new tech"
+  },
+  {
+    icon: "👨‍💻",
+    title: "Freelance Work", 
+    description: "Real apps for real clients",
+    hoverText: "Delivering production-ready solutions"
+  },
+  {
+    icon: "☁️",
+    title: "DevOps Stuff",
+    description: "Infra, CI/CD, Docker, AWS", 
+    hoverText: "Making deployment magic happen"
+  }
+];
+---
+
+<section class="py-20 px-4 sm:px-6 lg:px-8 bg-surface/30">
+  <div class="max-w-7xl mx-auto">
+    
+    <!-- Section Header -->
+    <div class="text-center mb-16">
+      <h2 class="font-display text-3xl sm:text-4xl font-bold text-black mb-4">
+        What I Do
+      </h2>
+      <p class="font-body text-lg text-text-muted max-w-2xl mx-auto">
+        Focus areas that keep me busy and excited
+      </p>
+    </div>
+    
+    <!-- Cards Grid -->
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+      {focusAreas.map((area, index) => (
+        <div class="focus-card group">
+          <div class="text-center space-y-4">
+            <div class="text-4xl mb-4">{area.icon}</div>
+            <h3 class="font-display text-xl font-bold text-black">
+              {area.title}
+            </h3>
+            <p class="font-body text-text-secondary">
+              {area.description}
+            </p>
+            
+            <!-- Hover content -->
+            <div class="opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+              <p class="font-body text-sm text-text-muted italic">
+                {area.hoverText}
+              </p>
+            </div>
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>

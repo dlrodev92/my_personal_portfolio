@@ -1,0 +1,64 @@
+---
+// Currently Building Section for Index page
+const currentActivities = [
+  {
+    emoji: "🧪",
+    label: "Building",
+    content: "AI Interview App → v0.4"
+  },
+  {
+    emoji: "☁️", 
+    label: "Learning",
+    content: "Kubernetes & RAG pipelines"
+  },
+  {
+    emoji: "🔥",
+    label: "Stack",
+    content: "Next.js · Prisma · AWS · Ultravox"
+  }
+];
+---
+
+<section class="py-20 px-4 sm:px-6 lg:px-8 bg-surface/30">
+  <div class="max-w-4xl mx-auto">
+    
+    <!-- Section Header -->
+    <div class="text-center mb-12">
+      <h2 class="font-display text-3xl sm:text-4xl font-bold text-black mb-4">
+        Currently Building
+      </h2>
+      <p class="font-body text-lg text-text-muted">
+        Real-time updates from my dev journey
+      </p>
+    </div>
+    
+    <!-- Activities Dashboard -->
+    <div class="space-y-6">
+      {currentActivities.map((activity, index) => (
+        <div class="currently-building-item">
+          <div class="flex items-center space-x-4">
+            <div class="text-2xl">{activity.emoji}</div>
+            <div class="flex-1">
+              <span class="font-display font-bold text-black text-sm uppercase tracking-wider">
+                {activity.label}:
+              </span>
+              <span class="font-body text-text-secondary ml-3">
+                {activity.content}
+              </span>
+            </div>
+          </div>
+        </div>
+      ))}
+    </div>
+    
+    <!-- Optional: GitHub activity widget placeholder -->
+    <div class="mt-12 text-center">
+      <div class="bg-surface rounded-lg p-6 border border-border">
+        <div class="text-2xl mb-2">📊</div>
+        <p class="font-body text-sm text-text-muted">
+          GitHub activity & WakaTime stats coming soon
+        </p>
+      </div>
+    </div>
+  </div>
+</section>

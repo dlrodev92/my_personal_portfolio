@@ -1,0 +1,80 @@
+---
+// Fun Easter Egg Section
+const funFacts = [
+  "I debug faster when listening to anime openings",
+  "My rubber duck is actually a cat named Toby",
+  "I once spent 6 hours debugging... a missing semicolon",
+  "Coffee consumption directly correlates with code quality"
+];
+
+const randomFact = funFacts[Math.floor(Math.random() * funFacts.length)];
+---
+
+<section class="py-20 px-4 sm:px-6 lg:px-8">
+  <div class="max-w-3xl mx-auto text-center">
+    
+    <!-- Easter Egg Header -->
+    <div class="mb-12">
+      <h2 class="font-display text-2xl font-bold text-black mb-6">
+        🐱 Easter Egg Zone
+      </h2>
+      
+      <!-- Toby the Cat -->
+      <div class="bg-surface/50 rounded-2xl p-8 border border-border mb-8">
+        <div class="text-6xl mb-4">🐾</div>
+        <p class="font-body text-lg text-text-secondary mb-4">
+          <strong>PS:</strong> If you mention my cat Toby in your message, I'll reply 2x faster!
+        </p>
+        <p class="font-body text-sm text-text-muted italic">
+          Toby is my unofficial project manager and debugging assistant
+        </p>
+      </div>
+    </div>
+    
+    <!-- Random Fun Fact -->
+    <div class="bg-white/60 backdrop-blur-sm rounded-xl p-6 border border-border mb-8">
+      <div class="text-2xl mb-3">💡</div>
+      <h3 class="font-display text-lg font-bold text-black mb-3">
+        Random Dev Fact
+      </h3>
+      <p class="font-body text-text-secondary italic">
+        "{randomFact}"
+      </p>
+    </div>
+    
+    <!-- Developer Bingo Bonus -->
+    <div class="grid grid-cols-2 sm:grid-cols-3 gap-3 text-sm mb-8">
+      {[
+        "✅ Coded at 3 AM",
+        "✅ Blamed it on caching", 
+        "✅ 'Works on my machine'",
+        "✅ Stack Overflow MVP",
+        "✅ Git commit -m 'fix'",
+        "✅ Toby approved code"
+      ].map((item, index) => (
+        <div class="bg-surface/40 rounded-lg p-3 border border-border font-body text-text-muted">
+          {item}
+        </div>
+      ))}
+    </div>
+    
+    <!-- Fun Quote -->
+    <div class="max-w-md mx-auto">
+      <blockquote class="font-body text-text-secondary italic">
+        "Code is like humor. When you have to explain it, it's bad."
+      </blockquote>
+      <p class="font-body text-sm text-text-muted mt-2">
+        — Cory House (probably)
+      </p>
+    </div>
+    
+    <!-- Hidden Message for Curious Developers -->
+    <div class="mt-12 text-xs text-text-tertiary opacity-50">
+      <p>
+        <!-- If you're reading this in the source code, you're my kind of person! 
+             Send me a message with "I found the hidden message" for bonus points 🕵️ -->
+        View source for a special message 👀
+      </p>
+    </div>
+  </div>
+</section>

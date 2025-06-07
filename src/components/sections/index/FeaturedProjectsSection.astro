@@ -1,0 +1,83 @@
+---
+// Featured Projects Section for Index page
+const featuredProjects = [
+  {
+    title: "AI Interview App",
+    description: "Real-time AI interviewer with voice analysis and feedback",
+    tech: ["Next.js", "Prisma", "AWS", "Ultravox"],
+    status: "🚀 Live"
+  },
+  {
+    title: "Cloud Portfolio API",
+    description: "Serverless portfolio backend with dynamic content management", 
+    tech: ["Node.js", "AWS Lambda", "DynamoDB"],
+    status: "⚡ In Progress"
+  },
+  {
+    title: "DevOps Dashboard",
+    description: "Monitoring and deployment management for multiple projects",
+    tech: ["React", "Docker", "Kubernetes", "Grafana"],
+    status: "🛠 Building"
+  }
+];
+---
+
+<section class="py-20 px-4 sm:px-6 lg:px-8">
+  <div class="max-w-7xl mx-auto">
+    
+    <!-- Section Header -->
+    <div class="text-center mb-16">
+      <h2 class="font-display text-3xl sm:text-4xl font-bold text-black mb-4">
+        Featured Projects
+      </h2>
+      <p class="font-body text-lg text-text-muted max-w-2xl mx-auto">
+        Some things I've built that I'm actually proud of
+      </p>
+    </div>
+    
+    <!-- Projects Grid -->
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
+      {featuredProjects.map((project, index) => (
+        <div class="project-card group">
+          <div class="space-y-4">
+            <!-- Status badge -->
+            <div class="flex justify-between items-start">
+              <span class="project-status-badge">
+                {project.status}
+              </span>
+            </div>
+            
+            <!-- Project info -->
+            <div>
+              <h3 class="font-display text-xl font-bold text-black mb-2">
+                {project.title}
+              </h3>
+              <p class="font-body text-text-secondary mb-4">
+                {project.description}
+              </p>
+              
+              <!-- Tech stack -->
+              <div class="flex flex-wrap gap-2">
+                {project.tech.map((tech, techIndex) => (
+                  <span class="tech-tag">
+                    {tech}
+                  </span>
+                ))}
+              </div>
+            </div>
+          </div>
+        </div>
+      ))}
+    </div>
+    
+    <!-- CTA Button -->
+    <div class="text-center">
+      <a 
+        href="/projects" 
+        class="section-cta-btn"
+      >
+        🔎 See All Projects
+      </a>
+    </div>
+  </div>
+</section>

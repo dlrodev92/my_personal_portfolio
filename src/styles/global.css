@@ -1,0 +1,392 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    /* Primary Colors - INVERTED TO LIGHT THEME */
+    --color-background: #ffffff;
+    --color-background-alt: #f8f8f8;
+    --color-text-primary: #0f0f0f;
+    --color-text-muted: #555555;
+    
+    /* Accent Colors - ADJUSTED FOR LIGHT THEME */
+    --color-border: #e5e5e5;
+    --color-border-light: #cccccc;
+    --color-interactive: #f5f5f5;
+    --color-interactive-hover: #e8e8e8;
+    
+    /* Additional Utility Colors - ADJUSTED FOR LIGHT THEME */
+    --color-surface: #fafafa;
+    --color-surface-elevated: #ffffff;
+    --color-text-secondary: #333333;
+    --color-text-tertiary: #777777;
+    
+    /* Status Colors (keeping them as is) */
+    --color-success: #22c55e;
+    --color-warning: #f59e0b;
+    --color-error: #ef4444;
+    --color-info: #3b82f6;
+  }
+  
+  /* Base styles */
+  html {
+    background-color: var(--color-background);
+    color: var(--color-text-primary);
+  }
+  
+  body {
+    background-color: var(--color-background);
+    color: var(--color-text-primary);
+    font-family: 'Inter', sans-serif;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+  
+  /* Selection styles */
+  ::selection {
+    background-color: var(--color-interactive);
+    color: var(--color-text-primary);
+  }
+  
+  /* Scrollbar styles for webkit browsers */
+  ::-webkit-scrollbar {
+    width: 8px;
+  }
+  
+  ::-webkit-scrollbar-track {
+    background: var(--color-background);
+  }
+  
+  ::-webkit-scrollbar-thumb {
+    background: var(--color-border);
+    border-radius: 4px;
+  }
+  
+  ::-webkit-scrollbar-thumb:hover {
+    background: var(--color-interactive);
+  }
+}
+
+@layer components {
+  /* Common component classes */
+  .text-gradient {
+    background: linear-gradient(135deg, var(--color-text-primary) 0%, var(--color-text-muted) 100%);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+  
+  .border-subtle {
+    border-color: var(--color-border);
+  }
+  
+  .surface {
+    background-color: var(--color-surface);
+  }
+  
+  .surface-elevated {
+    background-color: var(--color-surface-elevated);
+  }
+  
+  .interactive-hover {
+    transition: all 0.2s ease-in-out;
+  }
+  
+  .interactive-hover:hover {
+    background-color: var(--color-interactive-hover);
+    transform: translateY(-1px);
+  }
+}
+
+@layer utilities {
+  /* Typography utilities */
+  .font-display {
+    font-family: 'Bespoke Stencil', cursive;
+  }
+  
+  .font-body {
+    font-family: 'Inter', sans-serif;
+  }
+  
+  /* Styles for Navigation */
+  .nav-container {
+    @apply bg-white/80 border-border;
+  }
+  
+  .nav-link {
+    @apply font-display font-bold text-black px-3 py-2 rounded-md text-sm transition-all duration-300 relative overflow-hidden;
+  }
+  
+  .nav-link::after {
+    content: '';
+    @apply absolute bottom-0 left-1/2 w-0 h-0.5 bg-black transition-all duration-300 transform -translate-x-1/2;
+  }
+  
+  .nav-link:hover {
+    @apply text-text-muted;
+  }
+  
+  .nav-link:hover::after {
+    @apply w-full;
+  }
+  
+  .mobile-nav-link {
+    @apply font-display font-bold text-black hover:text-text-muted hover:bg-interactive block px-3 py-2 rounded-md text-base transition-colors duration-200;
+  }
+  
+  /* Styles for Hero Section */
+  .hero-btn {
+    @apply font-display font-bold px-6 py-3 rounded-lg transition-all duration-300 transform hover:scale-105;
+  }
+  
+  .hero-btn-primary {
+    @apply bg-black text-white hover:bg-text-secondary;
+  }
+  
+  .hero-btn-secondary {
+    @apply bg-surface border-2 border-border text-black hover:bg-interactive;
+  }
+  
+  .hero-btn-tertiary {
+    @apply bg-transparent border-2 border-black text-black hover:bg-black hover:text-white;
+  }
+  
+  /* Styles for What I Do Section */
+  .focus-card {
+    @apply bg-white/50 backdrop-blur-sm rounded-xl p-8 border border-border transition-all duration-300 hover:shadow-lg hover:scale-105 cursor-pointer;
+  }
+  
+  /* Styles for Featured Projects Section */
+  .project-card {
+    @apply bg-white/80 backdrop-blur-sm rounded-xl p-6 border border-border transition-all duration-300 hover:shadow-lg hover:scale-105;
+  }
+  
+  .project-status-badge {
+    @apply font-body text-xs bg-surface px-3 py-1 rounded-full text-text-secondary font-medium;
+  }
+  
+  .tech-tag {
+    @apply font-body text-xs bg-interactive px-2 py-1 rounded text-text-secondary;
+  }
+  
+  .section-cta-btn {
+    @apply font-display font-bold bg-black text-white px-8 py-4 rounded-lg hover:bg-text-secondary transition-all duration-300 transform hover:scale-105;
+  }
+  
+  /* Styles for Currently Building Section */
+  .currently-building-item {
+    @apply bg-white/60 backdrop-blur-sm rounded-lg p-4 border border-border;
+  }
+  
+  /* Styles for Meme Section */
+  .meme-container {
+    @apply transform hover:scale-105 transition-transform duration-300;
+  }
+  
+  /* Styles for Contact CTA Section */
+  .contact-cta-btn {
+    @apply font-display font-bold text-xl bg-black text-white px-8 py-4 rounded-lg hover:bg-text-secondary transition-all duration-300 transform hover:scale-105;
+  }
+  
+  .social-link {
+    @apply font-body text-text-secondary hover:text-black transition-colors duration-200;
+  }
+  
+  /* Styles for About Page */
+  .about-btn {
+    @apply font-display font-bold px-6 py-3 rounded-lg transition-all duration-300 transform hover:scale-105;
+  }
+  
+  .about-btn-primary {
+    @apply bg-black text-white hover:bg-text-secondary;
+  }
+  
+  .about-btn-secondary {
+    @apply bg-surface border-2 border-border text-black hover:bg-interactive;
+  }
+  
+  .bio-code {
+    @apply bg-surface px-2 py-1 rounded text-sm font-mono text-black;
+  }
+  
+  .meme-card {
+    @apply bg-surface/50 rounded-xl p-6 border border-border transition-all duration-300 hover:shadow-lg hover:scale-105;
+  }
+  
+  .doing-now-item {
+    @apply pb-6 border-b border-border last:border-b-0 last:pb-0;
+  }
+  
+  .tech-category-card {
+    @apply bg-white/60 backdrop-blur-sm rounded-xl p-6 border border-border transition-all duration-300 hover:shadow-lg;
+  }
+  
+  .tech-stack-tag {
+    @apply font-body text-sm bg-interactive px-3 py-1 rounded-full text-text-secondary;
+  }
+  
+  .learning-tag {
+    @apply font-body text-sm bg-surface px-3 py-1 rounded-full text-black border border-border;
+  }
+  
+  .timeline-item {
+    @apply relative;
+  }
+  
+  .timeline-dot {
+    @apply relative z-10 flex items-center justify-center w-16 h-16 bg-white rounded-full border-4 border-border shadow-lg;
+  }
+  
+  .timeline-year {
+    @apply font-display font-bold text-sm bg-black text-white px-3 py-1 rounded-full;
+  }
+  
+  .quote-card {
+    @apply bg-white/60 backdrop-blur-sm rounded-xl p-6 border border-border transition-all duration-300 hover:shadow-lg;
+  }
+  
+  .quote-category {
+    @apply font-body text-xs bg-surface px-2 py-1 rounded text-text-tertiary uppercase tracking-wider;
+  }
+  
+  .about-link-card {
+    @apply group bg-white/80 backdrop-blur-sm rounded-xl p-6 border border-border transition-all duration-300 hover:shadow-lg hover:scale-105 cursor-pointer;
+  }
+  
+  .about-cta-btn {
+    @apply font-display font-bold bg-black text-white px-6 py-3 rounded-lg hover:bg-text-secondary transition-all duration-300 transform hover:scale-105 inline-block;
+  }
+  
+  /* Styles for Projects Page */
+  .project-filter-btn {
+    @apply font-display font-bold px-4 py-2 rounded-full border-2 border-border text-black transition-all duration-300 hover:border-black;
+  }
+  
+  .project-filter-btn.active {
+    @apply bg-black text-white border-black;
+  }
+  
+  .tech-search-input {
+    @apply w-full font-body px-4 py-3 rounded-lg border border-border bg-white/80 backdrop-blur-sm focus:outline-none focus:ring-2 focus:ring-black focus:border-black transition-all duration-300;
+  }
+  
+  .project-card {
+    @apply bg-white/80 backdrop-blur-sm rounded-xl p-6 border border-border transition-all duration-300 hover:shadow-lg hover:scale-105 cursor-pointer;
+  }
+  
+  .project-category-badge {
+    @apply font-body text-xs bg-surface px-3 py-1 rounded-full text-text-secondary font-medium uppercase tracking-wider;
+  }
+  
+  .project-date {
+    @apply font-body text-sm text-text-muted;
+  }
+  
+  .tech-tag-small {
+    @apply font-body text-xs bg-interactive px-2 py-1 rounded text-text-secondary;
+  }
+  
+  .project-status-small {
+    @apply font-body text-xs bg-green-100 text-green-800 px-2 py-1 rounded-full font-medium;
+  }
+  
+  .project-view-btn {
+    @apply font-display font-bold text-sm bg-black text-white px-4 py-2 rounded-lg hover:bg-text-secondary transition-all duration-300 transform hover:scale-105;
+  }
+  
+  .load-more-btn {
+    @apply font-display font-bold bg-surface border-2 border-border text-black px-8 py-3 rounded-lg hover:bg-interactive hover:border-black transition-all duration-300;
+  }
+  
+  /* Styles for Contact Page */
+  .contact-form {
+    @apply bg-white/80 backdrop-blur-sm rounded-2xl p-8 border border-border shadow-lg space-y-6;
+  }
+  
+  .form-group {
+    @apply space-y-2;
+  }
+  
+  .form-label {
+    @apply font-display font-bold text-black block text-sm;
+  }
+  
+  .form-input {
+    @apply w-full font-body px-4 py-3 rounded-lg border border-border bg-white/80 focus:outline-none focus:ring-2 focus:ring-black focus:border-black transition-all duration-300;
+  }
+  
+  .form-textarea {
+    @apply w-full font-body px-4 py-3 rounded-lg border border-border bg-white/80 focus:outline-none focus:ring-2 focus:ring-black focus:border-black transition-all duration-300 resize-y;
+  }
+  
+  .form-checkbox {
+    @apply w-4 h-4 rounded border-border focus:ring-2 focus:ring-black mt-1;
+  }
+  
+  .contact-submit-btn {
+    @apply w-full font-display font-bold bg-black text-white py-4 rounded-lg hover:bg-text-secondary transition-all duration-300 transform hover:scale-105 flex items-center justify-center;
+  }
+  
+  .contact-submit-btn.disabled {
+    @apply bg-text-muted cursor-not-allowed transform-none hover:scale-100;
+  }
+  
+  .success-message {
+    @apply text-center p-6 bg-green-50 border border-green-200 rounded-lg;
+  }
+  
+  .error-message {
+    @apply text-center p-6 bg-red-50 border border-red-200 rounded-lg;
+  }
+  
+  .contact-link-card {
+    @apply bg-white/80 backdrop-blur-sm rounded-xl p-6 border border-border transition-all duration-300 hover:shadow-lg hover:scale-105 cursor-pointer;
+  }
+  
+  /* Custom utility classes */
+  .text-primary {
+    color: var(--color-text-primary);
+  }
+  
+  .text-secondary {
+    color: var(--color-text-secondary);
+  }
+  
+  .text-muted {
+    color: var(--color-text-muted);
+  }
+  
+  .text-tertiary {
+    color: var(--color-text-tertiary);
+  }
+  
+  .bg-main {
+    background-color: var(--color-background);
+  }
+  
+  .bg-alt {
+    background-color: var(--color-background-alt);
+  }
+  
+  .bg-surface {
+    background-color: var(--color-surface);
+  }
+  
+  .bg-elevated {
+    background-color: var(--color-surface-elevated);
+  }
+  
+  .bg-interactive {
+    background-color: var(--color-interactive);
+  }
+  
+  .border-main {
+    border-color: var(--color-border);
+  }
+  
+  .border-light {
+    border-color: var(--color-border-light);
+  }
+}

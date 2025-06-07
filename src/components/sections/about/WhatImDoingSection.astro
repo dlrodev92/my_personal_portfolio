@@ -1,0 +1,68 @@
+---
+// What I'm Doing Section for About page
+const currentActivities = [
+  {
+    emoji: "🎓",
+    text: "Studying Computing @ University of Wales Trinity Saint David"
+  },
+  {
+    emoji: "🚀", 
+    text: "Building an AI interview app with Next.js + Prisma + RAG"
+  },
+  {
+    emoji: "☁️",
+    text: "Learning AWS, Docker, and yelling at YAML"
+  },
+  {
+    emoji: "🎯",
+    text: "Freelancing and turning coffee into code"
+  },
+  {
+    emoji: "📚",
+    text: "Reading about system design (and anime recommendations)"
+  }
+];
+---
+
+<section class="py-20 px-4 sm:px-6 lg:px-8 bg-surface/30">
+  <div class="max-w-4xl mx-auto">
+    
+    <!-- Section Header -->
+    <div class="text-center mb-12">
+      <h2 class="font-display text-3xl sm:text-4xl font-bold text-black mb-4">
+        💼 What I'm Doing Now
+      </h2>
+      <p class="font-body text-lg text-text-muted">
+        Current state of controlled chaos
+      </p>
+    </div>
+    
+    <!-- Activities List -->
+    <div class="bg-white/80 backdrop-blur-sm rounded-2xl p-8 border border-border shadow-lg">
+      <div class="space-y-6">
+        {currentActivities.map((activity, index) => (
+          <div class="doing-now-item">
+            <div class="flex items-start space-x-4">
+              <div class="text-2xl mt-1 flex-shrink-0">
+                {activity.emoji}
+              </div>
+              <p class="font-body text-lg text-text-secondary leading-relaxed">
+                {activity.text}
+              </p>
+            </div>
+          </div>
+        ))}
+      </div>
+      
+      <!-- Status indicator -->
+      <div class="mt-8 pt-6 border-t border-border">
+        <div class="flex items-center justify-center space-x-2">
+          <div class="w-3 h-3 bg-green-500 rounded-full animate-pulse"></div>
+          <p class="font-body text-sm text-text-muted">
+            Status: Actively procrastinating productively
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,14 @@
+---
+import Layout from '../layouts/Layout.astro';
+import ContactHeroSection from '../components/sections/contact/ContactHeroSection.astro';
+import ContactForm from '../components/sections/contact/ContactForm.tsx';
+import DirectLinksSection from '../components/sections/contact/DirectLinksSection.astro';
+import FunEasterEggSection from '../components/sections/contact/FunEasterEggSection.astro';
+---
+
+<Layout>
+	<ContactHeroSection />
+	<ContactForm client:load />
+	<DirectLinksSection />
+	<FunEasterEggSection />
+</Layout>

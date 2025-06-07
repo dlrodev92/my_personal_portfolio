@@ -1,0 +1,59 @@
+---
+// Contact CTA Section for Index page
+const socialLinks = [
+  { label: "GitHub", url: "https://github.com", icon: "⚡" },
+  { label: "LinkedIn", url: "https://linkedin.com", icon: "💼" },
+  { label: "Email", url: "mailto:hello@example.com", icon: "📧" },
+  { label: "TikTok", url: "https://tiktok.com", icon: "🎵" }
+];
+---
+
+<section class="py-20 px-4 sm:px-6 lg:px-8 bg-surface/30">
+  <div class="max-w-4xl mx-auto text-center">
+    
+    <!-- Main CTA -->
+    <div class="mb-12">
+      <h2 class="font-display text-3xl sm:text-4xl font-bold text-black mb-6">
+        Let's build something.
+      </h2>
+      <p class="font-body text-xl text-text-secondary mb-2">
+        Or just talk tech + anime.
+      </p>
+      <div class="text-2xl mb-8">👇👇👇</div>
+      
+      <a 
+        href="/contact" 
+        class="contact-cta-btn"
+      >
+        📬 Get in Touch
+      </a>
+    </div>
+    
+    <!-- Social Links -->
+    <div class="border-t border-border pt-12">
+      <p class="font-body text-text-muted mb-6">
+        Find me on the internet:
+      </p>
+      <div class="flex flex-wrap justify-center gap-6">
+        {socialLinks.map((link, index) => (
+          <a 
+            href={link.url}
+            class="social-link"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <span class="mr-2">{link.icon}</span>
+            {link.label}
+          </a>
+        ))}
+      </div>
+    </div>
+    
+    <!-- Footer note -->
+    <div class="mt-12 pt-8 border-t border-border">
+      <p class="font-body text-sm text-text-tertiary">
+        Built with Astro, React, and way too much coffee ☕
+      </p>
+    </div>
+  </div>
+</section>

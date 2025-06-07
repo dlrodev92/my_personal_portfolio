@@ -1,0 +1,241 @@
+import { useState } from 'react';
+
+// Mock project data - in real app this would come from API/CMS
+const projects = [
+  {
+    id: 1,
+    slug: 'ai-interview-assistant',
+    title: 'AI Interview Assistant',
+    date: 'Apr 2025',
+    category: 'Personal',
+    categoryIcon: '🛠',
+    tech: ['Next.js', 'Prisma', 'AWS RDS', 'OpenAI'],
+    summary: 'A platform to practice coding, system design, and behavioral interviews with AI. Real-time feedback and scoring system.',
+    status: 'Live',
+    featured: true
+  },
+  {
+    id: 2,
+    slug: 'ecommerce-dashboard',
+    title: 'E-commerce Analytics Dashboard',
+    date: 'Mar 2025',
+    category: 'Freelance',
+    categoryIcon: '👨‍💻',
+    tech: ['React', 'Node.js', 'PostgreSQL', 'Chart.js'],
+    summary: 'Custom analytics dashboard for online store. Real-time sales tracking, inventory management, and customer insights.',
+    status: 'Delivered',
+    featured: true
+  },
+  {
+    id: 3,
+    slug: 'kubernetes-deployment-pipeline',
+    title: 'Kubernetes Deployment Pipeline',
+    date: 'Feb 2025',
+    category: 'DevOps',
+    categoryIcon: '☁️',
+    tech: ['Kubernetes', 'Docker', 'GitHub Actions', 'AWS EKS'],
+    summary: 'Automated CI/CD pipeline for microservices deployment. Zero-downtime deployments with rollback capabilities.',
+    status: 'In Use',
+    featured: true
+  },
+  {
+    id: 4,
+    slug: 'recipe-sharing-app',
+    title: 'Recipe Sharing Community',
+    date: 'Jan 2025',
+    category: 'Personal',
+    categoryIcon: '🛠',
+    tech: ['Astro', 'Tailwind', 'Supabase', 'TypeScript'],
+    summary: 'Social platform for sharing and discovering recipes. Features rating system and meal planning tools.',
+    status: 'Building',
+    featured: false
+  },
+  {
+    id: 5,
+    slug: 'portfolio-cms',
+    title: 'Portfolio CMS API',
+    date: 'Dec 2024',
+    category: 'Personal',
+    categoryIcon: '🛠',
+    tech: ['Node.js', 'Express', 'MongoDB', 'Railway'],
+    summary: 'Headless CMS for managing portfolio content. RESTful API with authentication and file upload support.',
+    status: 'Live',
+    featured: false
+  },
+  {
+    id: 6,
+    slug: 'saas-monitoring-stack',
+    title: 'SaaS Monitoring Stack',
+    date: 'Nov 2024',
+    category: 'DevOps',
+    categoryIcon: '☁️',
+    tech: ['Grafana', 'Prometheus', 'Docker', 'AWS'],
+    summary: 'Complete monitoring solution for SaaS applications. Custom dashboards and alerting system.',
+    status: 'Deployed',
+    featured: false
+  }
+];
+
+const categories = [
+  { id: 'all', label: 'All', icon: '🎯' },
+  { id: 'personal', label: 'Personal', icon: '🛠' },
+  { id: 'freelance', label: 'Freelance', icon: '👨‍💻' },
+  { id: 'devops', label: 'DevOps', icon: '☁️' }
+];
+
+const ProjectsGrid = () => {
+  const [activeCategory, setActiveCategory] = useState('all');
+  const [searchTech, setSearchTech] = useState('');
+
+  // Filter projects based on category and tech search
+  const filteredProjects = projects.filter(project => {
+    const matchesCategory = activeCategory === 'all' || 
+                           project.category.toLowerCase() === activeCategory;
+    const matchesTech = searchTech === '' || 
+                       project.tech.some(tech => 
+                         tech.toLowerCase().includes(searchTech.toLowerCase())
+                       );
+    return matchesCategory && matchesTech;
+  });
+
+  // Get all unique tech tags for autocomplete suggestions
+  const allTechTags = [...new Set(projects.flatMap(p => p.tech))];
+
+  return (
+    <section className="py-12 px-4 sm:px-6 lg:px-8">
+      <div className="max-w-6xl mx-auto">
+        
+        {/* Category Filters */}
+        <div className="mb-8">
+          <div className="flex flex-wrap justify-center gap-2 mb-6">
+            {categories.map((category) => (
+              <button
+                key={category.id}
+                onClick={() => setActiveCategory(category.id)}
+                className={`project-filter-btn ${
+                  activeCategory === category.id ? 'active' : ''
+                }`}
+              >
+                <span className="mr-2">{category.icon}</span>
+                {category.label}
+              </button>
+            ))}
+          </div>
+          
+          {/* Tech Search */}
+          <div className="max-w-md mx-auto">
+            <div className="relative">
+              <input
+                type="text"
+                placeholder="Search by tech stack (e.g., React, AWS)..."
+                value={searchTech}
+                onChange={(e) => setSearchTech(e.target.value)}
+                className="tech-search-input"
+              />
+              <div className="absolute right-3 top-1/2 transform -translate-y-1/2 text-text-muted">
+                🔍
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* Results count */}
+        <div className="text-center mb-8">
+          <p className="font-body text-text-muted">
+            Showing {filteredProjects.length} project{filteredProjects.length !== 1 ? 's' : ''}
+            {activeCategory !== 'all' && ` in ${categories.find(c => c.id === activeCategory)?.label}`}
+            {searchTech && ` with "${searchTech}"`}
+          </p>
+        </div>
+
+        {/* Projects Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          {filteredProjects.map((project) => (
+            <div key={project.id} className="project-card group">
+              <div className="space-y-4">
+                
+                {/* Header */}
+                <div className="flex justify-between items-start">
+                  <div className="flex items-center space-x-2">
+                    <span className="text-lg">{project.categoryIcon}</span>
+                    <span className="project-category-badge">
+                      {project.category}
+                    </span>
+                  </div>
+                  <span className="project-date">
+                    {project.date}
+                  </span>
+                </div>
+
+                {/* Title */}
+                <h3 className="font-display text-xl font-bold text-black group-hover:text-text-secondary transition-colors">
+                  {project.title}
+                </h3>
+
+                {/* Tech Stack */}
+                <div className="flex flex-wrap gap-2">
+                  {project.tech.map((tech, index) => (
+                    <span key={index} className="tech-tag-small">
+                      {tech}
+                    </span>
+                  ))}
+                </div>
+
+                {/* Summary */}
+                <p className="font-body text-text-secondary leading-relaxed">
+                  {project.summary}
+                </p>
+
+                {/* Status & CTA */}
+                <div className="flex justify-between items-center pt-4 border-t border-border">
+                  <span className="project-status-small">
+                    {project.status}
+                  </span>
+                  <a 
+                    href={`/projects/${project.slug}`}
+                    className="project-view-btn"
+                  >
+                    🔎 View Project
+                  </a>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+
+        {/* Empty state */}
+        {filteredProjects.length === 0 && (
+          <div className="text-center py-16">
+            <div className="text-6xl mb-4">🔍</div>
+            <h3 className="font-display text-xl font-bold text-black mb-2">
+              No projects found
+            </h3>
+            <p className="font-body text-text-muted">
+              Try adjusting your filters or search terms
+            </p>
+            <button 
+              onClick={() => {
+                setActiveCategory('all');
+                setSearchTech('');
+              }}
+              className="mt-4 font-body text-black hover:text-text-secondary transition-colors underline"
+            >
+              Clear all filters
+            </button>
+          </div>
+        )}
+
+        {/* Load More (placeholder for future) */}
+        {filteredProjects.length > 0 && filteredProjects.length >= 6 && (
+          <div className="text-center mt-12">
+            <button className="load-more-btn">
+              Load More Projects
+            </button>
+          </div>
+        )}
+      </div>
+    </section>
+  );
+};
+
+export default ProjectsGrid;
