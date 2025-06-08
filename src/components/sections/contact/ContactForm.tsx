@@ -6,32 +6,34 @@ const ContactForm = () => {
     email: '',
     message: '',
     isHuman: false,
-    mentionedToby: false
+    mentionedToby: false,
   });
-  
+
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitStatus, setSubmitStatus] = useState('');
 
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+  const handleInputChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
     const { name, value, type } = e.target;
-    
+
     if (type === 'checkbox') {
       const { checked } = e.target as HTMLInputElement;
-      setFormData(prev => ({
+      setFormData((prev) => ({
         ...prev,
-        [name]: checked
+        [name]: checked,
       }));
     } else {
-      setFormData(prev => ({
+      setFormData((prev) => ({
         ...prev,
-        [name]: value
+        [name]: value,
       }));
-      
+
       // Check if user mentioned Toby
       if (name === 'message' && value.toLowerCase().includes('toby')) {
-        setFormData(prev => ({
+        setFormData((prev) => ({
           ...prev,
-          mentionedToby: true
+          mentionedToby: true,
         }));
       }
     }
@@ -60,7 +62,7 @@ const ContactForm = () => {
           email: '',
           message: '',
           isHuman: false,
-          mentionedToby: false
+          mentionedToby: false,
         });
       } else {
         setSubmitStatus('error');
@@ -75,7 +77,6 @@ const ContactForm = () => {
   return (
     <section className="py-20 px-4 sm:px-6 lg:px-8">
       <div className="max-w-2xl mx-auto">
-        
         {/* Form Header */}
         <div className="text-center mb-12">
           <h2 className="font-display text-3xl font-bold text-black mb-4">
@@ -88,7 +89,6 @@ const ContactForm = () => {
 
         {/* Contact Form */}
         <form onSubmit={handleSubmit} className="contact-form">
-          
           {/* Name Field */}
           <div className="form-group">
             <label htmlFor="name" className="form-label">
@@ -140,12 +140,15 @@ const ContactForm = () => {
 
 💡 Pro tip: Mention my cat Toby for faster replies 🐾"
             />
-            
+
             {/* Toby Easter Egg */}
             {formData.mentionedToby && (
               <div className="mt-2 p-3 bg-green-50 border border-green-200 rounded-lg">
                 <p className="text-sm text-green-800 flex items-center">
-                  🐾 <span className="ml-2">Toby approves! You just unlocked 2x faster reply speed.</span>
+                  🐾{' '}
+                  <span className="ml-2">
+                    Toby approves! You just unlocked 2x faster reply speed.
+                  </span>
                 </p>
               </div>
             )}
@@ -198,10 +201,9 @@ const ContactForm = () => {
                 Message sent successfully!
               </p>
               <p className="font-body text-sm text-green-600">
-                {formData.mentionedToby 
-                  ? "Thanks for mentioning Toby! I'll reply extra fast 🐾" 
-                  : "I'll get back to you within a day!"
-                }
+                {formData.mentionedToby
+                  ? "Thanks for mentioning Toby! I'll reply extra fast 🐾"
+                  : "I'll get back to you within a day!"}
               </p>
             </div>
           )}

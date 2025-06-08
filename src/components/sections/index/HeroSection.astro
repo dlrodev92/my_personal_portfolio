@@ -1,66 +1,59 @@
 ---
 // Hero Section for Index page
 ---
+<section class="relative min-h-screen bg-white overflow-hidden flex items-center justify-start ">
+  <!-- Background image -->
+  <div
+    class="absolute inset-0 w-full h-full bg-center bg-cover animate-slow-zoom"
+    style="background-image: url('/BM.webp');"
+  ></div>
 
-<section class="min-h-screen flex items-center justify-center px-4 sm:px-6 lg:px-8">
-  <div class="max-w-7xl mx-auto w-full">
-    <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-      
-      <!-- Left side - Text content -->
-      <div class="space-y-8">
-        <div class="space-y-4">
-          <h1 class="font-display text-4xl sm:text-5xl lg:text-6xl font-bold text-black">
-            Hi, I'm David 👋
-          </h1>
-          <p class="font-body text-xl sm:text-2xl text-text-secondary leading-relaxed">
-            I build cloud-native apps and ship them with style.
-          </p>
-          <p class="font-body text-lg text-text-muted">
-            Full-stack dev · DevOps · Anime-powered
-          </p>
-        </div>
-        
-        <!-- CTA Buttons -->
-        <div class="flex flex-wrap gap-4">
-          <a 
-            href="/projects" 
-            class="hero-btn hero-btn-primary"
-          >
-            🚀 View Projects
-          </a>
-          <a 
-            href="/about" 
-            class="hero-btn hero-btn-secondary"
-          >
-            📄 About Me
-          </a>
-          <a 
-            href="/contact" 
-            class="hero-btn hero-btn-tertiary"
-          >
-            📬 Contact
-          </a>
-        </div>
-      </div>
-      
-      <!-- Right side - Video/Stats -->
-      <div class="space-y-6">
-        <!-- Video placeholder - will add actual video later -->
-        <div class="aspect-[9/16] max-w-sm mx-auto bg-surface rounded-2xl border border-border flex items-center justify-center">
-          <div class="text-center space-y-4">
-            <div class="text-6xl">🎬</div>
-            <p class="font-body text-text-muted">TikTok-style intro video</p>
-            <p class="font-body text-sm text-text-tertiary">(Coming soon)</p>
-          </div>
-        </div>
-        
-        <!-- Fun stat -->
-        <div class="text-center bg-surface/50 rounded-lg p-4 border border-border">
-          <p class="font-body text-sm text-text-muted">
-            ⚙️ Last thing I broke: <span class="text-black font-medium">Docker config</span> (fixed it though)
-          </p>
-        </div>
-      </div>
-    </div>
+  <!-- Triangle overlay -->
+  <div
+    class="absolute inset-0 w-full h-full bg-text-secondary/85 clip-triangle"
+  ></div>
+
+  <!-- Hero Text (uses flex now, no relative/pt-xx) -->
+  <div class="z-20 flex flex-col items-start max-w-xl px-6 text-white mb-20 ml-10">
+    <h1 class="text-5xl sm:text-7xl font-display font-extrabold uppercase leading-none">
+      I code <span class="text-yellow-400">ridiculous</span> shit
+    </h1>
+    <p class="mt-4 text-white/80 text-xl sm:text-2xl">
+      Based in Granada & London — full-stack builder, cloud hustler, indie hacker.
+    </p>
+  </div>
+
+  <!-- LONDON -->
+  <div class="absolute z-20 flex items-center gap-2 animate-dots font-display
+    top-[28%] left-[24%]
+    sm:top-[30%] sm:left-[26%]
+    min-[700px]:top-[29%] min-[700px]:left-[31%]
+    md:top-[29%] md:left-[32%]
+    min-[880px]:top-[28%] min-[880px]:left-[36%]
+    lg:top-[25%] lg:left-[37%]
+    min-[1150px]:top-[29%] min-[1150px]:left-[38%]
+    xl:top-[22%] xl:left-[40%]
+  ">
+    <div class="w-4 h-4 md:w-6 md:h-6 bg-red-500 rounded-full animate-pulse border-2 border-white"></div>
+    <span class="text-sm text-white font-medium flex items-center gap-1">
+      🇬🇧 <span>London</span>
+    </span>
+  </div>
+
+  <!-- GRANADA -->
+  <div class="absolute z-20 flex items-center gap-2 animate-dots font-display
+    top-[40%] left-[23%]
+    sm:top-[40%] sm:left-[26%]
+    min-[700px]:top-[40%] min-[700px]:left-[30%]
+    md:top-[41%] md:left-[32%]
+    min-[880px]:top-[40%] min-[880px]:left-[35%]
+    lg:top-[40%] lg:left-[37%]
+    min-[1150px]:top-[40%] min-[1150px]:left-[39%]
+    xl:top-[38%] xl:left-[40%]
+  ">
+    <div class="w-4 h-4 md:w-6 md:h-6 bg-yellow-400 rounded-full animate-pulse border-2 border-white"></div>
+    <span class="text-sm text-white font-medium flex items-center gap-1">
+      🇪🇸 <span>Granada</span>
+    </span>
   </div>
 </section>

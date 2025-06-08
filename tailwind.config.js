@@ -1,6 +1,6 @@
 /** @type {import('tailwindcss').Config} */
 export default {
-  content: ["./src/**/*.{astro,html,js,jsx,ts,tsx,mdx}"],
+  content: ['./src/**/*.{astro,html,js,jsx,ts,tsx,mdx}'],
   theme: {
     extend: {
       colors: {
@@ -36,15 +36,9 @@ export default {
         info: '#3b82f6',
       },
       fontFamily: {
-        sans: [
-          'Inter',
-        ],
-        display: [
-          'Bespoke Stencil',
-        ],
-        body: [
-          'Inter'
-        ],
+        sans: ['Inter'],
+        display: ['Bespoke Stencil'],
+        body: ['Inter'],
       },
       animation: {
         'fade-in': 'fadeIn 0.5s ease-in-out',
@@ -66,9 +60,9 @@ export default {
         },
       },
       spacing: {
-        '18': '4.5rem',
-        '88': '22rem',
-        '128': '32rem',
+        18: '4.5rem',
+        88: '22rem',
+        128: '32rem',
       },
       maxWidth: {
         '8xl': '88rem',
@@ -77,4 +71,4 @@ export default {
     },
   },
   plugins: [],
-}
+};

@@ -4,7 +4,7 @@ const categories = [
   { id: 'all', label: 'All', icon: '🎯' },
   { id: 'personal', label: 'Personal', icon: '🛠' },
   { id: 'freelance', label: 'Freelance', icon: '👨‍💻' },
-  { id: 'devops', label: 'DevOps', icon: '☁️' }
+  { id: 'devops', label: 'DevOps', icon: '☁️' },
 ];
 
 const ProjectsFilter = () => {
@@ -22,17 +22,19 @@ const ProjectsFilter = () => {
     const projectCount = document.getElementById('project-count');
     const resultsCount = document.getElementById('results-count');
     const loadMoreSection = document.getElementById('load-more-section');
-    
+
     let visibleCount = 0;
 
-    projectCards.forEach(card => {
+    projectCards.forEach((card) => {
       const cardCategory = card.getAttribute('data-category');
       const cardTech = card.getAttribute('data-tech');
-      
-      const matchesCategory = activeCategory === 'all' || cardCategory === activeCategory;
-      const matchesTech = searchTech === '' || 
-                         cardTech?.toLowerCase().includes(searchTech.toLowerCase());
-      
+
+      const matchesCategory =
+        activeCategory === 'all' || cardCategory === activeCategory;
+      const matchesTech =
+        searchTech === '' ||
+        cardTech?.toLowerCase().includes(searchTech.toLowerCase());
+
       if (matchesCategory && matchesTech) {
         card.style.display = 'block';
         visibleCount++;
@@ -60,16 +62,18 @@ const ProjectsFilter = () => {
       const resultsText = resultsCount.querySelector('p');
       if (resultsText) {
         let description = `Showing ${visibleCount} project${visibleCount !== 1 ? 's' : ''}`;
-        
+
         if (activeCategory !== 'all') {
-          const categoryName = categories.find(c => c.id === activeCategory)?.label;
+          const categoryName = categories.find(
+            (c) => c.id === activeCategory
+          )?.label;
           description += ` in ${categoryName}`;
         }
-        
+
         if (searchTech) {
           description += ` with "${searchTech}"`;
         }
-        
+
         resultsText.textContent = description;
       }
     }
@@ -108,7 +112,7 @@ const ProjectsFilter = () => {
           </button>
         ))}
       </div>
-      
+
       {/* Tech Search */}
       <div className="max-w-md mx-auto">
         <div className="relative">
