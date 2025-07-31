@@ -1,0 +1,207 @@
+---
+// Contact Form Section - Card Style with Glassmorphism
+---
+
+<section id="contact" class="py-20 px-4 lg:px-8 bg-gradient-to-br from-gray-50 to-white">
+  <div class="max-w-2xl mx-auto">
+    <div class="text-center mb-12">
+      <h2 class="font-display text-4xl font-bold mb-4">
+        <span class="text-yellow-400">Start</span> a Conversation
+      </h2>
+      <p class="text-gray-600">
+        Whether it's a project, collaboration, or job opportunity - let's chat.
+      </p>
+    </div>
+
+    <div class="bg-white/80 backdrop-blur-sm rounded-3xl p-8 shadow-xl border border-white/20">
+      <form 
+        id="contact-form"
+        class="space-y-6"
+      >
+        <!-- Name -->
+        <div class="space-y-2">
+          <label class="text-sm font-medium text-gray-700">What's your name?</label>
+          <input
+            type="text"
+            name="name"
+            required
+            class="w-full px-4 py-4 bg-gray-50 border-0 rounded-2xl focus:bg-white focus:ring-2 focus:ring-yellow-400/20 transition-all text-gray-900 placeholder-gray-400"
+            placeholder="John Doe"
+          />
+        </div>
+
+        <!-- Email -->
+        <div class="space-y-2">
+          <label class="text-sm font-medium text-gray-700">How can I reach you?</label>
+          <input
+            type="email"
+            name="email"
+            required
+            class="w-full px-4 py-4 bg-gray-50 border-0 rounded-2xl focus:bg-white focus:ring-2 focus:ring-yellow-400/20 transition-all text-gray-900 placeholder-gray-400"
+            placeholder="john@company.com"
+          />
+        </div>
+
+        <!-- What do you need -->
+        <div class="space-y-2">
+          <label class="text-sm font-medium text-gray-700">What do you need?</label>
+          <div class="relative">
+            <select
+              name="inquiry-type"
+              class="w-full px-4 py-4 pr-12 bg-gray-50 border-0 rounded-2xl focus:bg-white focus:ring-2 focus:ring-yellow-400/20 transition-all text-gray-900 appearance-none cursor-pointer"
+            >
+              <option value="">Choose one...</option>
+              <option value="quick-website">Quick Website (3 days)</option>
+              <option value="full-stack-app">Full-Stack Application</option>
+              <option value="ai-integration">AI Business Solution</option>
+              <option value="job-offer">Job Opportunity</option>
+              <option value="collaboration">Collaboration</option>
+              <option value="consultation">Just want to chat</option>
+            </select>
+            
+            <div class="absolute right-4 top-1/2 transform -translate-y-1/2 pointer-events-none">
+              <svg class="w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+              </svg>
+            </div>
+          </div>
+        </div>
+
+        <!-- Message -->
+        <div class="space-y-2">
+          <label class="text-sm font-medium text-gray-700">Tell me more</label>
+          <textarea
+            name="message"
+            required
+            rows="4"
+            class="w-full px-4 py-4 bg-gray-50 border-0 rounded-2xl focus:bg-white focus:ring-2 focus:ring-yellow-400/20 transition-all text-gray-900 placeholder-gray-400 resize-none"
+            placeholder="Describe your project, timeline, or whatever's on your mind..."
+          ></textarea>
+        </div>
+
+        <!-- Submit Button -->
+        <button
+          type="submit"
+          id="submit-btn"
+          class="w-full bg-yellow-400 text-black font-semibold py-4 rounded-2xl hover:bg-yellow-500 hover:shadow-lg transform hover:-translate-y-0.5 transition-all duration-200"
+        >
+          <span id="btn-text">Send Message</span>
+          <span id="btn-loading" class="hidden">Sending...</span>
+        </button>
+      </form>
+
+      <!-- Success Message -->
+      <div id="success-message" class="hidden space-y-4">
+        <div class="text-center py-8">
+          <div class="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
+            <svg class="w-8 h-8 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+            </svg>
+          </div>
+          <h3 class="text-xl font-bold text-gray-900 mb-2">Message Sent!</h3>
+          <p class="text-gray-600">Thanks for reaching out. I'll get back to you within 24 hours.</p>
+          <button 
+            onclick="resetForm()" 
+            class="mt-4 text-yellow-400 hover:text-yellow-500 font-medium"
+          >
+            Send Another Message
+          </button>
+        </div>
+      </div>
+
+      <!-- Error Message -->
+      <div id="error-message" class="hidden mt-4 p-4 bg-red-50 border border-red-200 rounded-2xl">
+        <p class="text-red-800">Something went wrong. Please try again or email me directly.</p>
+      </div>
+    </div>
+
+    <!-- Contact Details -->
+    <div class="text-center mt-12 space-y-2">
+      <p class="text-gray-500 text-sm">Or reach me directly at</p>
+      <a 
+        href="mailto:dlro92trader@gmail.com" 
+        class="text-lg font-medium text-gray-900 hover:text-yellow-400 transition-colors"
+      >
+        dlro92trader@gmail.com
+      </a>
+      <p class="text-gray-400 text-sm">London, UK • Usually respond within 4-6 hours</p>
+    </div>
+  </div>
+</section>
+
+<script>
+  // Type-safe element selection with null checks
+  const form = document.getElementById('contact-form') as HTMLFormElement | null;
+  const submitBtn = document.getElementById('submit-btn') as HTMLButtonElement | null;
+  const btnText = document.getElementById('btn-text') as HTMLElement | null;
+  const btnLoading = document.getElementById('btn-loading') as HTMLElement | null;
+  const successMessage = document.getElementById('success-message') as HTMLElement | null;
+  const errorMessage = document.getElementById('error-message') as HTMLElement | null;
+
+  // Only add event listener if form exists
+  if (form && submitBtn && btnText && btnLoading && successMessage && errorMessage) {
+    form.addEventListener('submit', async (e: Event) => {
+      e.preventDefault();
+      
+      // Loading state
+      submitBtn.disabled = true;
+      btnText.classList.add('hidden');
+      btnLoading.classList.remove('hidden');
+      
+      try {
+        const formData = new FormData(form);
+        
+        const response = await fetch('https://formspree.io/f/xgvzzlbd', {
+          method: 'POST',
+          body: formData,
+          headers: {
+            'Accept': 'application/json'
+          }
+        });
+
+        if (response.ok) {
+          // Success - show success message
+          form.classList.add('hidden');
+          successMessage.classList.remove('hidden');
+          errorMessage.classList.add('hidden');
+        } else {
+          throw new Error('Form submission failed');
+        }
+      } catch (error) {
+        // Error - show error message
+        errorMessage.classList.remove('hidden');
+        console.error('Form submission error:', error);
+      } finally {
+        // Reset button state
+        submitBtn.disabled = false;
+        btnText.classList.remove('hidden');
+        btnLoading.classList.add('hidden');
+      }
+    });
+  }
+
+  // Reset form function with proper typing
+  (window as any).resetForm = function(): void {
+    const form = document.getElementById('contact-form') as HTMLFormElement | null;
+    const successMessage = document.getElementById('success-message') as HTMLElement | null;
+    const errorMessage = document.getElementById('error-message') as HTMLElement | null;
+    
+    if (form && successMessage && errorMessage) {
+      form.classList.remove('hidden');
+      successMessage.classList.add('hidden');
+      errorMessage.classList.add('hidden');
+      form.reset();
+    }
+  }
+
+  // Handle success parameter from URL
+  if (typeof window !== 'undefined' && window.location.search.includes('success=true')) {
+    const successMsg = document.getElementById('success-message') as HTMLElement | null;
+    const contactForm = document.getElementById('contact-form') as HTMLElement | null;
+    
+    if (successMsg && contactForm) {
+      successMsg.classList.remove('hidden');
+      contactForm.classList.add('hidden');
+    }
+  }
+</script>

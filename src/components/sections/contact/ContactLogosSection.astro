@@ -1,0 +1,60 @@
+---
+const companies = [
+  {
+    name: "Netflix",
+    logo: "https://cdn.worldvectorlogo.com/logos/netflix-4.svg",
+    alt: "Netflix logo"
+  },
+  {
+    name: "Spotify",
+    logo: "https://cdn.worldvectorlogo.com/logos/spotify-2.svg", 
+    alt: "Spotify logo"
+  },
+  {
+    name: "Airbnb",
+    logo: "https://cdn.worldvectorlogo.com/logos/airbnb-2.svg",
+    alt: "Airbnb logo"
+  },
+  {
+    name: "Stripe",
+    logo: "https://cdn.worldvectorlogo.com/logos/stripe-4.svg",
+    alt: "Stripe logo"
+  },
+  {
+    name: "Figma",
+    logo: "https://cdn.worldvectorlogo.com/logos/figma-5.svg",
+    alt: "Figma logo"
+  },
+  {
+    name: "Vercel",
+    logo: "https://cdn.worldvectorlogo.com/logos/vercel.svg",
+    alt: "Vercel logo"
+  }
+];
+---
+
+<section class="py-12 px-4 lg:px-8 bg-gray-50/50">
+  <div class="max-w-6xl mx-auto">
+    <div class="text-center mb-8">
+      <p class="text-sm uppercase tracking-widest text-gray-500 font-medium">
+        Inspired by industry leaders
+      </p>
+    </div>
+    
+    <!-- Logo Grid -->
+    <div class="flex items-center justify-center flex-wrap gap-8 lg:gap-12 opacity-60 hover:opacity-80 transition-opacity duration-300">
+      {companies.map((company, index) => (
+        <div 
+          class="grayscale hover:grayscale-0 transition-all duration-300 hover:scale-105"
+        >
+          <img 
+            src={company.logo}
+            alt={company.alt}
+            class="h-8 lg:h-10 w-auto object-contain filter"
+            loading="lazy"
+          />
+        </div>
+      ))}
+    </div>
+  </div>
+</section>

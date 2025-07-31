@@ -1,0 +1,33 @@
+---
+import FocusAreas from '../index/FocusAreas.astro';
+---
+
+<section class="py-20 min-h-[calc(100vh-2vh)] h-auto px-4 sm:px-6 lg:px-8 bg-text-secondary/85">
+  <div class="max-w-7xl mx-auto flex flex-col items-start justify-start h-full">
+         
+    <div 
+      id="header-text"
+      class="flex flex-col items-start gap-4 mb-16 opacity-0 transform transition-all duration-1000 ease-out"
+    >
+      <p class="uppercase text-sm tracking-widest text-text-primary">Intro</p>
+      <h2 class="font-display text-3xl sm:text-4xl font-bold text-black">
+        This is <span class="text-yellow-400">what</span> I do
+      </h2>
+      <p class="font-body text-sm md:text-lg md:w-2/3 tracking-tight leading-snug text-pretty">
+        Lorem ipsum dolor sit, amet consectetur adipisicing elit. Debitis sapiente ipsum dolorum dicta eaque cumque inventore molestias, beatae ea quaerat alias accusamus voluptas autem! Alias odit voluptates in totam vitae dignissimos minus eaque culpa unde tempore dolore aperiam obcaecati voluptatum aliquam corrupti, suscipit accusamus! Odit unde veniam dolorum ipsum doloribus.
+      </p>
+    </div>
+    
+    <FocusAreas />
+       
+  </div>
+</section>
+
+<script>
+ 
+import { addElementToObserver } from '../../../helpers/observerHelper';
+
+ addElementToObserver('header-text', 'slide-in-left-animate');
+
+ 
+</script>

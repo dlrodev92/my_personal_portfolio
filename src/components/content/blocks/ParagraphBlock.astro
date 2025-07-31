@@ -1,0 +1,25 @@
+---
+export interface Props {
+  block: {
+    id: string;
+    type: 'paragraph';
+    content: string;
+    style?: 'lead' | 'normal';
+  };
+}
+
+const { block } = Astro.props;
+
+// Función para procesar markdown básico inline
+function processInlineMarkdown(text: string): string {
+  return text
+    .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
+    .replace(/\*(.*?)\*/g, '<em>$1</em>')
+    .replace(/`(.*?)`/g, '<code>$1</code>');
+}
+
+const processedContent = processInlineMarkdown(block.content);
+const paragraphClass = block.style === 'lead' ? 'lead' : '';
+---
+
+<p class={paragraphClass} set:html={processedContent} />

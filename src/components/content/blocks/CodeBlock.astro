@@ -1,0 +1,24 @@
+---
+export interface Props {
+  block: {
+    id: string;
+    type: 'code';
+    language: string;
+    content: string;
+    title?: string;
+  };
+}
+
+const { block } = Astro.props;
+---
+
+<div class="code-block-container my-6 rounded-lg overflow-hidden  shadow-md shadow-surface">
+  {/* Optional title and language label */}
+  {block.title && (
+    <div class="code-block-header bg-gray-50 px-4 py-2 border-b border-gray-200 flex justify-between items-center">
+      <span class="code-block-title font-medium text-gray-900">{block.title}</span>
+      <span class="code-block-language text-xs text-gray-500 uppercase tracking-wide">{block.language}</span>
+    </div>
+  )}
+  <pre class="p-4 m-0 bg-gray-900 text-gray-100 overflow-x-auto"><code class={`language-${block.language} text-sm`}>{block.content}</code></pre>
+</div>

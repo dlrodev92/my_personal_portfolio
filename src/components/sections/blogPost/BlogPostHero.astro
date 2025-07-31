@@ -1,0 +1,25 @@
+---
+// Hero image component
+const { post } = Astro.props;
+---
+
+{post.heroImage && (
+  <section class="px-4 sm:px-6 lg:px-8 mb-12">
+    <div class="max-w-4xl mx-auto">
+      <div class="relative rounded-xl overflow-hidden">
+        <img 
+          src={post.heroImage.url} 
+          alt={post.heroImage.alt}
+          class="w-full h-64 sm:h-80 lg:h-96 object-cover"
+          loading="eager"
+        />
+        
+        {post.heroImage.caption && (
+          <div class="absolute bottom-0 left-0 right-0 bg-black/60 text-white p-4">
+            <p class="text-sm">{post.heroImage.caption}</p>
+          </div>
+        )}
+      </div>
+    </div>
+  </section>
+)}

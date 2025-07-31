@@ -1,40 +1,137 @@
 ---
-// Mini Bio Section for About page
+const values = [
+  {
+    title: "Code Quality",
+    icon: `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>`,
+    description: "Writing clean, maintainable code that tells a story. Prioritizing readability and long-term sustainability over quick fixes.",
+    id: "value1"
+  },
+  {
+    title: "Collaborative Development",
+    icon: `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="m22 21-3-3m0 0a3 3 0 1 0-4.24-4.24 3 3 0 0 0 4.24 4.24Z"/></svg>`,
+    description: "Believing in pair programming, thorough code reviews, and the power of collective knowledge sharing within teams.",
+    id: "value2"
+  },
+  {
+    title: "Problem-First Thinking",
+    icon: `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9.937 15.5A2 2 0 0 0 8.5 14.063l-6.135-1.582a.5.5 0 0 1 0-.962L8.5 9.936A2 2 0 0 0 9.937 8.5l1.582-6.135a.5.5 0 0 1 .963 0L14.063 8.5A2 2 0 0 0 15.5 9.937l6.135 1.581a.5.5 0 0 1 0 .964L15.5 14.063a2 2 0 0 0-1.437 1.437l-1.582 6.135a.5.5 0 0 1-.963 0z"/></svg>`,
+    description: "Understanding the problem deeply before writing code. Breaking down complex challenges into manageable, testable components.",
+    id: "value3"
+  },
+  {
+    title: "Continuous Learning",
+    icon: `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1 0-5H20"/></svg>`,
+    description: "Staying current with technology trends, experimenting with new tools, and learning from both successes and failures.",
+    id: "value4"
+  }
+];
+
+const metrics = [
+  { label: "GitHub Repositories", value: "42", icon: `<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4"/><path d="M9 18c-4.51 2-5-2-7-2"/></svg>`, id: "metric1" },
+  { label: "Code Commits", value: "2.8K+", icon: `<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="18" r="3"/><circle cx="6" cy="6" r="3"/><path d="m13 6 3 3-3 3-1-1"/><path d="m11 18-3-3 3-3 1 1"/></svg>`, id: "metric2" },
+  { label: "Technologies Used", value: "20+", icon: `<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="18" x="3" y="4" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>`, id: "metric3" },
+  { label: "Coffee Consumed", value: "∞", icon: `<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 8h1a4 4 0 1 1 0 8h-1"/><path d="M3 8h14v9a4 4 0 0 1-4 4H7a4 4 0 0 1-4-4Z"/><line x1="6" y1="2" x2="6" y2="4"/><line x1="10" y1="2" x2="10" y2="4"/><line x1="14" y1="2" x2="14" y2="4"/></svg>`, id: "metric4" }
+];
 ---
 
-<section class="py-20 px-4 sm:px-6 lg:px-8 bg-surface/30">
+
+<!-- Values & Approach Section -->
+<section class="py-20 px-4 sm:px-6 lg:px-8">
   <div class="max-w-4xl mx-auto">
+    <div 
+      id="values-header-text"
+      class="flex flex-col items-start gap-4 mb-16 opacity-0 transform transition-all duration-1000 ease-out"
+    >
+      <p class="uppercase text-sm tracking-widest text-text-secondary">Philosophy</p>
+      <h2 class="font-display text-3xl sm:text-4xl font-bold text-black">
+        Values & <span class="text-yellow-400">Approach</span>
+      </h2>
+      <p class="font-body text-sm md:text-lg md:w-full tracking-tight leading-snug text-text-secondary">
+        How I think about code, collaboration, and building meaningful solutions.
+      </p>
+    </div>
     
-    <!-- Bio content -->
-    <div class="prose prose-lg max-w-none">
-      <div class="bg-white/80 backdrop-blur-sm rounded-2xl p-8 md:p-12 border border-border shadow-lg">
-        
-        <h2 class="font-display text-2xl sm:text-3xl font-bold text-black mb-6">
-          Hey! I'm David 👨‍💻
-        </h2>
-        
-        <div class="space-y-6 font-body text-text-secondary leading-relaxed">
-          <p class="text-lg">
-            Born in southern Spain, based in London, raised by bugs and <code class="bio-code">console.log</code>.
-          </p>
-          
-          <p class="text-lg">
-            I build web apps, manage cloud infra, and love turning random ideas into real tools.
-            Currently studying Computing + building cool stuff full-time (some of it on purpose).
-          </p>
-          
-          <div class="bg-surface/60 rounded-lg p-4 border-l-4 border-black">
-            <p class="text-black font-medium mb-0">
-              ⚠️ Warning: I speak fluent Bash and sarcasm.
-            </p>
+    <div class="space-y-6">
+      {values.map((value, index) => (
+        <div 
+          id={value.id}
+          class={`group opacity-0 bg-white/80 backdrop-blur-sm rounded-xl p-6 border border-gray-200 transition-all duration-500 hover:shadow-lg hover:scale-105 hover:bg-white/90 ${
+            index % 2 === 0 ? 'hover:-rotate-1' : 'hover:rotate-1'
+          } hover:z-10 relative`}
+        >
+          <div class="flex items-start space-x-4">
+            <div 
+              class="w-12 h-12 mt-1 flex-shrink-0 text-gray-700 group-hover:text-black transition-all duration-500 group-hover:scale-110"
+              set:html={value.icon}
+            />
+            <div>
+              <h3 class="font-display font-bold text-black text-xl mb-3 group-hover:translate-x-1 transition-transform duration-300">{value.title}</h3>
+              <p class="font-body text-text-secondary leading-relaxed group-hover:text-gray-800 transition-colors duration-300">{value.description}</p>
+            </div>
           </div>
           
-          <p class="text-lg">
-            When I'm not coding, you'll find me watching anime, trying to understand Kubernetes, 
-            or explaining why "it works on my machine" is a perfectly valid argument.
-          </p>
+          <!-- Background Pattern -->
+          <div class="absolute inset-0 bg-gradient-to-br from-transparent to-gray-50/50 rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"></div>
         </div>
-      </div>
+      ))}
     </div>
   </div>
 </section>
+
+<!-- Development Metrics Section -->
+<section class="py-20 px-4 sm:px-6 lg:px-8 bg-gray-50/50">
+  <div class="max-w-6xl mx-auto">
+    <div 
+      id="metrics-header-text"
+      class="flex flex-col items-start gap-4 mb-16 opacity-0 transform transition-all duration-1000 ease-out"
+    >
+      <p class="uppercase text-sm tracking-widest text-text-secondary">Metrics</p>
+      <h2 class="font-display text-3xl sm:text-4xl font-bold text-black">
+        Development <span class="text-yellow-400">Stats</span>
+      </h2>
+      <p class="font-body text-sm md:text-lg md:w-2/3 tracking-tight leading-snug text-text-secondary">
+        Some numbers that reflect my development journey and current activity.
+      </p>
+    </div>
+    
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+      {metrics.map((metric, index) => (
+        <div 
+          id={metric.id}
+          class={`group opacity-0 bg-white/80 backdrop-blur-sm rounded-xl p-6 border border-gray-200 transition-all duration-500 hover:shadow-lg hover:scale-105 hover:bg-white/90 text-center`}
+        >
+          <div class="space-y-4">
+            <div 
+              class="w-10 h-10 mx-auto text-gray-700 group-hover:text-black transition-all duration-500 group-hover:scale-110"
+              set:html={metric.icon}
+            />
+            <h3 class="font-display font-bold text-black text-sm">{metric.label}</h3>
+            <p class="font-body text-3xl font-bold text-text-secondary group-hover:text-black transition-colors duration-300">{metric.value}</p>
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<script>
+  import { addElementToObserver } from '../../../helpers/observerHelper';
+  
+  addElementToObserver('facts-header-text', 'slide-in-left-animate');
+  addElementToObserver('fact1', 'slide-down-blur-animate');
+  addElementToObserver('fact2', 'slide-down-blur-animate-2');
+  addElementToObserver('fact3', 'slide-down-blur-animate-3');
+  addElementToObserver('fact4', 'slide-down-blur-animate-4');
+  
+  addElementToObserver('values-header-text', 'slide-in-left-animate');
+  addElementToObserver('value1', 'blur-fade-in-2');
+  addElementToObserver('value2', 'blur-fade-in-3');
+  addElementToObserver('value3', 'blur-fade-in-4');
+  addElementToObserver('value4', 'blur-fade-in-5');
+  
+  addElementToObserver('metrics-header-text', 'slide-in-left-animate');
+  addElementToObserver('metric1', 'slide-down-blur-animate');
+  addElementToObserver('metric2', 'slide-down-blur-animate-2');
+  addElementToObserver('metric3', 'slide-down-blur-animate-3');
+  addElementToObserver('metric4', 'slide-down-blur-animate-4');
+</script>

@@ -1,0 +1,119 @@
+---
+// Main content component
+const { post } = Astro.props;
+---
+
+<section class="px-4 sm:px-6 lg:px-8 mb-16">
+  <div class="max-w-4xl mx-auto">
+    <article class="prose prose-lg max-w-none">
+      <div set:html={post.content} />
+    </article>
+  </div>
+</section>
+
+<style>
+  /* Blog post content styles */
+  .prose {
+    @apply text-gray-900 leading-relaxed;
+  }
+  
+  .prose h2 {
+    @apply font-display text-2xl font-bold text-black mt-12 mb-6;
+  }
+  
+  .prose h3 {
+    @apply font-display text-xl font-bold text-black mt-8 mb-4;
+  }
+  
+  .prose h4 {
+    @apply font-display text-lg font-bold text-black mt-6 mb-3;
+  }
+  
+  .prose p {
+    @apply mb-6 text-gray-700 leading-relaxed;
+  }
+  
+  .prose .lead {
+    @apply text-xl text-gray-800 font-medium mb-8;
+  }
+  
+  .prose ul, .prose ol {
+    @apply mb-6 ml-6;
+  }
+  
+  .prose li {
+    @apply mb-2;
+  }
+  
+  .prose strong {
+    @apply font-semibold text-black;
+  }
+  
+  .prose code {
+    @apply bg-gray-100 text-gray-900 px-1 py-0.5 rounded text-sm font-mono;
+  }
+  
+  .prose pre {
+    @apply bg-gray-900 text-gray-100 p-6 rounded-lg overflow-x-auto my-8;
+  }
+  
+  .prose pre code {
+    @apply bg-transparent text-gray-100 p-0;
+  }
+  
+  .prose blockquote {
+    @apply border-l-4 border-yellow-400 pl-6 py-2 italic text-gray-700 my-8 bg-gray-50 rounded-r-lg;
+  }
+  
+  .prose blockquote cite {
+    @apply text-sm text-gray-600 not-italic block mt-2;
+  }
+  
+  .prose .callout {
+    @apply p-6 rounded-lg border-l-4 mb-8 bg-white border border-gray-200;
+  }
+  
+  .prose .callout h4 {
+    @apply text-base font-bold mb-3 mt-0;
+  }
+  
+  .prose .callout p {
+    @apply mb-0 text-sm;
+  }
+  
+  .prose .callout-info {
+    @apply bg-blue-50 border-blue-400;
+  }
+  
+  .prose .callout-info h4 {
+    @apply text-blue-900;
+  }
+  
+  .prose .callout-info p {
+    @apply text-blue-800;
+  }
+  
+  .prose .callout-warning {
+    @apply bg-yellow-50 border-yellow-400;
+  }
+  
+  .prose .callout-warning h4 {
+    @apply text-yellow-900;
+  }
+  
+  .prose .callout-warning p {
+    @apply text-yellow-800;
+  }
+  
+  .prose .callout-tip {
+    @apply bg-green-50 border-green-400;
+  }
+  
+  .prose .callout-tip h4 {
+    @apply text-green-900;
+  }
+  
+  .prose .callout-tip p {
+    @apply text-green-800;
+  }
+</style>

@@ -1,0 +1,110 @@
+---
+// Enhanced Project Overview Component with subtle improvements
+const { project } = Astro.props;
+---
+
+<section class="py-20 px-4 sm:px-6 lg:px-8 bg-gray-50">
+  <div class="max-w-4xl mx-auto">
+    <!-- Section Header -->
+    <div 
+      id="overview-header"
+      class="flex flex-col items-start gap-4 mb-12 opacity-0 transform transition-all duration-1000 ease-out"
+    >
+      <p class="uppercase text-sm tracking-widest text-text-secondary">Overview</p>
+      <h2 class="font-display text-3xl font-bold text-black">
+        Project <span class="text-yellow-400">Overview</span>
+      </h2>
+    </div>
+
+    <!-- Content Grid -->
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+      
+      <!-- Problem Card -->
+      <div 
+        id="problem-card"
+        class="opacity-0 bg-white/80 backdrop-blur-sm rounded-xl p-8 border border-gray-200 transition-all duration-500 hover:shadow-lg hover:bg-white/90 relative group"
+      >
+        <div class="flex items-center space-x-3 mb-6">
+          <div class="w-8 h-8 bg-gray-100 rounded-lg flex items-center justify-center">
+            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-gray-600">
+              <circle cx="12" cy="12" r="10"/>
+              <line x1="12" y1="8" x2="12" y2="12"/>
+              <line x1="12" y1="16" x2="12.01" y2="16"/>
+            </svg>
+          </div>
+          <h3 class="font-display text-xl font-bold text-black">Problem</h3>
+        </div>
+        <p class="text-gray-600 leading-relaxed">{project.problem}</p>
+        <div class="absolute inset-0 bg-gradient-to-br from-transparent to-gray-50/30 rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"></div>
+      </div>
+
+      <!-- Solution Card -->
+      <div 
+        id="solution-card"
+        class="opacity-0 bg-white/80 backdrop-blur-sm rounded-xl p-8 border border-gray-200 transition-all duration-500 hover:shadow-lg hover:bg-white/90 relative group"
+      >
+        <div class="flex items-center space-x-3 mb-6">
+          <div class="w-8 h-8 bg-gray-100 rounded-lg flex items-center justify-center">
+            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-gray-600">
+              <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+            </svg>
+          </div>
+          <h3 class="font-display text-xl font-bold text-black">Solution</h3>
+        </div>
+        <p class="text-gray-600 leading-relaxed">{project.solution}</p>
+        <div class="absolute inset-0 bg-gradient-to-br from-transparent to-gray-50/30 rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"></div>
+      </div>
+
+    </div>
+
+    <!-- Role & Impact Section -->
+    <div class="mt-12 grid grid-cols-1 md:grid-cols-2 gap-8">
+      
+      <!-- Role Card -->
+      <div 
+        id="role-card"
+        class="opacity-0 bg-white/80 backdrop-blur-sm rounded-xl p-8 border border-gray-200 transition-all duration-500 hover:shadow-lg hover:bg-white/90 relative group"
+      >
+        <div class="flex items-center space-x-3 mb-6">
+          <div class="w-8 h-8 bg-gray-100 rounded-lg flex items-center justify-center">
+            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-gray-600">
+              <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
+              <circle cx="12" cy="7" r="4"/>
+            </svg>
+          </div>
+          <h3 class="font-display text-xl font-bold text-black">My Role</h3>
+        </div>
+        <p class="text-gray-600 leading-relaxed">{project.role}</p>
+        <div class="absolute inset-0 bg-gradient-to-br from-transparent to-gray-50/30 rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"></div>
+      </div>
+
+      <!-- Impact Card -->
+      <div 
+        id="impact-card"
+        class="opacity-0 bg-white/80 backdrop-blur-sm rounded-xl p-8 border border-gray-200 transition-all duration-500 hover:shadow-lg hover:bg-white/90 relative group"
+      >
+        <div class="flex items-center space-x-3 mb-6">
+          <div class="w-8 h-8 bg-gray-100 rounded-lg flex items-center justify-center">
+            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-gray-600">
+              <polyline points="22,12 18,12 15,21 9,3 6,12 2,12"/>
+            </svg>
+          </div>
+          <h3 class="font-display text-xl font-bold text-black">Impact</h3>
+        </div>
+        <p class="text-gray-600 leading-relaxed">{project.impact}</p>
+        <div class="absolute inset-0 bg-gradient-to-br from-transparent to-gray-50/30 rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"></div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<script>
+  import { addElementToObserver } from '../../../helpers/observerHelper';
+  
+  addElementToObserver('overview-header', 'slide-in-left-animate');
+  addElementToObserver('problem-card', 'blur-fade-in');
+  addElementToObserver('solution-card', 'blur-fade-in-2');
+  addElementToObserver('role-card', 'blur-fade-in-3');
+  addElementToObserver('impact-card', 'blur-fade-in-4');
+</script>

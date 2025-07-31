@@ -1,0 +1,104 @@
+---
+import FeaturedBlogCard from './FeaturedBlogCard.astro';
+import type { BlogPost } from '../../../lib/types';
+
+interface Props {
+  latestBlog?: BlogPost | null;
+}
+
+const { latestBlog } = Astro.props;
+
+// Transform API data to component format
+const blog = latestBlog ? {
+  title: latestBlog.title,
+  excerpt: latestBlog.excerpt,
+  date: latestBlog.publishedAt || latestBlog.createdAt,
+  category: latestBlog.category?.name || 'Uncategorized',
+  readTime: latestBlog.readTime || 5,
+  slug: latestBlog.slug,
+  image: latestBlog.heroImage,
+  tags: latestBlog.blogPostTags?.slice(0, 3).map(tag => tag.blogTag.name) || []
+} : null;
+---
+
+<section class="py-16 px-4 sm:px-6 lg:px-8">
+  <div class="max-w-4xl mx-auto">
+    
+    {blog ? (
+      <div>
+        
+        <div 
+          id="blog-header"
+          class="text-center mb-10 opacity-0"
+        >
+          <p class="font-body text-sm uppercase tracking-widest text-gray-500 mb-3">
+            Latest from the journal
+          </p>
+          <h2 class="font-display text-2xl sm:text-3xl font-bold text-gray-900">
+            Recent <span class="text-yellow-500">Posts</span>
+          </h2>
+        </div>
+        
+        <!-- Featured Blog Card -->
+        <FeaturedBlogCard 
+          blog={blog}
+          class="opacity-0"
+          id="featured-blog-card"
+        />
+        
+      </div>
+      
+    ) : (
+      <!-- No blog state -->
+      <div 
+        id="no-blog"
+        class="text-center opacity-0"
+      >
+        <div class="mb-8">
+          <p class="font-body text-sm uppercase tracking-widest text-gray-500 mb-3">
+            Latest from the journal
+          </p>
+          <h2 class="font-display text-2xl sm:text-3xl font-bold text-gray-900">
+            Recent Thoughts
+          </h2>
+        </div>
+        
+        <div class="bg-white rounded-xl p-12 border border-gray-200 shadow-sm">
+          <div class="w-16 h-16 mx-auto mb-4 text-gray-400">
+            <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+              <polyline points="14,2 14,8 20,8"/>
+              <line x1="16" y1="13" x2="8" y2="13"/>
+              <line x1="16" y1="17" x2="8" y2="17"/>
+            </svg>
+          </div>
+          <h3 class="font-display text-xl font-bold text-gray-900 mb-3">
+            Coming Soon
+          </h3>
+          <p class="font-body text-gray-600 mb-4">
+            🖋️ Working on some great content, check back soon!
+          </p>
+          <a 
+            href="/blog"
+            class="font-body text-gray-900 hover:text-yellow-600 transition-colors duration-300"
+          >
+            Visit the blog →
+          </a>
+        </div>
+      </div>
+    )}
+    
+  </div>
+</section>
+
+<script>
+  import { addElementToObserver } from '../../../helpers/observerHelper';
+  
+  // Conditional observers
+  if (document.getElementById('blog-header')) {
+    addElementToObserver('blog-header', 'slide-in-left-animate');
+    addElementToObserver('featured-blog-card', 'blur-fade-in-2');
+  } else {
+    addElementToObserver('no-blog', 'slide-in-left-animate');
+  }
+</script>

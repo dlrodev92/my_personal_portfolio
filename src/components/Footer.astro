@@ -1,0 +1,43 @@
+---
+// Minimal Footer component
+const currentYear = new Date().getFullYear();
+
+const socialLinks = [
+  { label: "GitHub", url: "https://github.com" },
+  { label: "LinkedIn", url: "https://linkedin.com" },
+  { label: "Email", url: "mailto:hello@example.com" }
+];
+---
+
+<footer class="bg-white border-t border-gray-200 py-6 px-4 sm:px-6 lg:px-8 ">
+  <div class="max-w-6xl mx-auto">
+    <div class="flex flex-col sm:flex-row justify-between items-center gap-4">
+      
+      <!-- Left: Copyright -->
+      <div class="text-center sm:text-left">
+        <p class="font-body text-sm text-text-muted">
+          © {currentYear} David Lopez Rodriguez
+        </p>
+      </div>
+      
+      <!-- Center: Yellow accent dot -->
+      <div class="hidden sm:block">
+        <div class="w-2 h-2 bg-yellow-500 rounded-full animate-pulse"></div>
+      </div>
+      
+      <!-- Right: Social Links -->
+      <div class="flex items-center gap-6">
+        {socialLinks.map((link) => (
+          <a 
+            href={link.url}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="font-body text-sm text-text-muted hover:text-black transition-colors duration-300"
+          >
+            {link.label}
+          </a>
+        ))}
+      </div>
+    </div>
+  </div>
+</footer>

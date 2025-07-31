@@ -1,0 +1,86 @@
+---
+// Blog Hero Section - Personal Journal Style
+interface Props {
+  stats?: {
+    totalPosts: number;
+    totalReadTime: number;
+    categories: number;
+  };
+}
+
+const { stats = { totalPosts: 0, totalReadTime: 0, categories: 0 } } = Astro.props;
+---
+
+<section class="pt-24 pb-12 px-4 sm:px-6 lg:px-8">
+    <div class="max-w-6xl mx-auto">
+      
+      <!-- Page Header -->
+      <div 
+        id="blog-header-text"
+        class="flex flex-col items-start gap-4 mb-16 opacity-0 transform transition-all duration-1000 ease-out"
+      >
+        <p class="uppercase text-sm tracking-widest text-text-secondary">Digital Journal</p>
+        <h1 class="font-display text-4xl sm:text-5xl lg:text-6xl font-bold text-black">
+          Code, Coffee & <span class="text-yellow-400">Thoughts</span>
+        </h1>
+        <p class="font-body text-xl sm:text-2xl text-text-secondary leading-relaxed max-w-4xl">
+          Welcome to my digital journal where I share technical insights, development experiences, and personal reflections from my journey as a developer.
+        </p>
+        <p class="font-body text-lg text-text-muted">
+          Usually posting 2-3 times a week about tech, life, and everything in between.
+        </p>
+      </div>
+      
+      <!-- Journal Stats -->
+      <div 
+        id="blog-stats"
+        class="grid grid-cols-3 gap-6 opacity-0"
+      >
+        <div class="group bg-white/80 backdrop-blur-sm rounded-xl p-6 border border-gray-200 transition-all duration-300 hover:shadow-lg hover:scale-105 text-center">
+          <div class="w-10 h-10 mx-auto mb-3 text-gray-700 group-hover:text-black transition-colors duration-300">
+            <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+              <polyline points="14,2 14,8 20,8"/>
+              <line x1="16" y1="13" x2="8" y2="13"/>
+              <line x1="16" y1="17" x2="8" y2="17"/>
+              <polyline points="10,9 9,9 8,9"/>
+            </svg>
+          </div>
+          <div class="font-display text-2xl font-bold text-black">{stats.totalPosts}</div>
+          <div class="font-body text-sm text-text-muted">Journal Entries</div>
+        </div>
+        
+        <div class="group bg-white/80 backdrop-blur-sm rounded-xl p-6 border border-gray-200 transition-all duration-300 hover:shadow-lg hover:scale-105 text-center">
+          <div class="w-10 h-10 mx-auto mb-3 text-gray-700 group-hover:text-black transition-colors duration-300">
+            <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/>
+              <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/>
+            </svg>
+          </div>
+          <div class="font-display text-2xl font-bold text-black">{stats.totalReadTime}</div>
+          <div class="font-body text-sm text-text-muted">Minutes Read</div>
+        </div>
+        
+        <div class="group bg-white/80 backdrop-blur-sm rounded-xl p-6 border border-gray-200 transition-all duration-300 hover:shadow-lg hover:scale-105 text-center">
+          <div class="w-10 h-10 mx-auto mb-3 text-gray-700 group-hover:text-black transition-colors duration-300">
+            <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M20 7h-9"/>
+              <path d="M14 17H5"/>
+              <circle cx="17" cy="17" r="3"/>
+              <circle cx="7" cy="7" r="3"/>
+            </svg>
+          </div>
+          <div class="font-display text-2xl font-bold text-black">{stats.categories}</div>
+          <div class="font-body text-sm text-text-muted">Topics</div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+  
+  <script>
+    import { addElementToObserver } from '../../../helpers/observerHelper';
+    
+    addElementToObserver('blog-header-text', 'slide-in-left-animate');
+    addElementToObserver('blog-stats', 'slide-down-blur-animate-2');
+  </script>

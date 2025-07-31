@@ -1,83 +1,46 @@
 ---
 // Featured Projects Section for Index page
-const featuredProjects = [
-  {
-    title: "AI Interview App",
-    description: "Real-time AI interviewer with voice analysis and feedback",
-    tech: ["Next.js", "Prisma", "AWS", "Ultravox"],
-    status: "🚀 Live"
-  },
-  {
-    title: "Cloud Portfolio API",
-    description: "Serverless portfolio backend with dynamic content management", 
-    tech: ["Node.js", "AWS Lambda", "DynamoDB"],
-    status: "⚡ In Progress"
-  },
-  {
-    title: "DevOps Dashboard",
-    description: "Monitoring and deployment management for multiple projects",
-    tech: ["React", "Docker", "Kubernetes", "Grafana"],
-    status: "🛠 Building"
-  }
-];
+import FeaturedProjectContainer from "./FeaturedProjectContainer.astro"
+import type { Project } from '../../../lib/types';
+
+interface Props {
+  projects?: Project[];
+}
+
+const { projects = [] } = Astro.props;
 ---
 
-<section class="py-20 px-4 sm:px-6 lg:px-8">
-  <div class="max-w-7xl mx-auto">
-    
-    <!-- Section Header -->
-    <div class="text-center mb-16">
-      <h2 class="font-display text-3xl sm:text-4xl font-bold text-black mb-4">
-        Featured Projects
+<section class="py-20 min-h-[calc(100vh-2vh)] h-auto px-4 sm:px-6 lg:px-8 flex flex-col items-start justify-start">
+   <div class="max-w-7xl mx-auto flex flex-col items-start justify-start h-full">
+              
+       <div
+       id="projects-header-text"
+      class="flex flex-col items-start gap-4 mb-16 opacity-0 transform transition-all duration-1000 ease-out"
+    >
+      <p class="uppercase text-sm tracking-widest text-text-secondary">Case Studies</p>
+      <h2 class="font-display text-3xl sm:text-4xl font-bold text-black">
+        Projects, a  <span class="text-yellow-400">Showcase</span> of My Work
       </h2>
-      <p class="font-body text-lg text-text-muted max-w-2xl mx-auto">
-        Some things I've built that I'm actually proud of
+      <p class="font-body text-sm md:text-lg md:w-full tracking-tight text-text-secondary">
+        Some of my projects that showcase my skills and interests in software development, AI, and cloud technologies. Each project reflects my passion for building innovative solutions that solve real-world problems.
       </p>
     </div>
-    
-    <!-- Projects Grid -->
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
-      {featuredProjects.map((project, index) => (
-        <div class="project-card group">
-          <div class="space-y-4">
-            <!-- Status badge -->
-            <div class="flex justify-between items-start">
-              <span class="project-status-badge">
-                {project.status}
-              </span>
-            </div>
-            
-            <!-- Project info -->
-            <div>
-              <h3 class="font-display text-xl font-bold text-black mb-2">
-                {project.title}
-              </h3>
-              <p class="font-body text-text-secondary mb-4">
-                {project.description}
-              </p>
-              
-              <!-- Tech stack -->
-              <div class="flex flex-wrap gap-2">
-                {project.tech.map((tech, techIndex) => (
-                  <span class="tech-tag">
-                    {tech}
-                  </span>
-                ))}
-              </div>
-            </div>
-          </div>
-        </div>
-      ))}
-    </div>
-    
-    <!-- CTA Button -->
-    <div class="text-center">
-      <a 
-        href="/projects" 
-        class="section-cta-btn"
-      >
-        🔎 See All Projects
+      
+      <FeaturedProjectContainer projects={projects} />
+       
+      <a
+       href="/projects"
+       class="section-cta-btn mt-4 lg:mt-0"
+       >
+        See All Projects
       </a>
-    </div>
   </div>
+      
 </section>
+
+<script>
+    import { addElementToObserver } from '../../../helpers/observerHelper';
+
+    addElementToObserver('projects-header-text', 'slide-in-left-animate');
+         
+</script>

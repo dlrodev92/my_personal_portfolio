@@ -1,0 +1,159 @@
+---
+// Related Projects Component with ProjectCard
+export interface RelatedProject {
+  title: string;
+  slug: string;
+  description?: string;
+  image?: string;
+  status?: string;
+  tech?: string[];
+}
+
+export interface RelatedProjectsProps {
+  relatedProjects: RelatedProject[];
+  nextSteps: string[];
+  futureTools: string[];
+}
+
+export interface Props {
+  project: RelatedProjectsProps;
+}
+
+const { project } = Astro.props;
+
+// Enhanced related projects with fallback data
+const enhancedRelatedProjects = project.relatedProjects.map((related, index) => ({
+  title: related.title,
+  description: related.description || "Explore this project to see innovative solutions and technical implementations.",
+  image: related.image || `https://images.pexels.com/photos/${3184360 + index}/pexels-photo-${3184360 + index}.jpeg?auto=compress&cs=tinysrgb&w=800`,
+  status: related.status || "🚀 Live",
+  tech: related.tech || ["React", "Node.js", "PostgreSQL"],
+  link: `/projects/${related.slug}`
+}));
+---
+
+<!-- Related Projects -->
+<section class="py-20 px-4 sm:px-6 lg:px-8 bg-gray-50/50">
+  <div class="max-w-6xl mx-auto">
+    <div 
+      id="related-header"
+      class="flex flex-col items-start gap-4 mb-16 opacity-0 transform transition-all duration-1000 ease-out"
+    >
+      <p class="uppercase text-sm tracking-widest text-text-secondary">Next Steps</p>
+      <h2 class="font-display text-3xl sm:text-4xl font-bold text-black">
+        Related <span class="text-yellow-400">Projects</span>
+      </h2>
+    </div>
+
+    <!-- Related Projects Grid -->
+    {enhancedRelatedProjects.length > 0 && (
+      <div class="mb-16">
+        <h3 class="font-display text-xl font-bold text-black mb-8">More Projects</h3>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {enhancedRelatedProjects.map((related, index) => (
+            <div 
+              id={`related-project-${index}`}
+              class="opacity-0"
+              style={`animation-delay: ${index * 0.2}s`}
+            >
+              <article
+                class="relative h-[300px] rounded-xl overflow-hidden bg-black shadow-xl group mobile-project-hover"
+              >
+                <div
+                  class="absolute inset-0 bg-cover bg-center brightness-75 grayscale group-hover:brightness-50 group-hover:grayscale-0 transition-all duration-300"
+                  style={`background-image: url('${related.image}')`}
+                ></div>
+
+                <!-- Default State -->
+                <div class="absolute inset-0 flex items-end justify-end p-4 opacity-100 group-hover:opacity-0 transition-opacity duration-300 z-10">
+                  <h3 class="text-white text-lg font-bold writing-vertical border-t-4 border-yellow-400 p-2 mr-6">
+                    {related.title}
+                  </h3>
+                </div>
+
+                <!-- Hover State -->
+                <div class="absolute inset-0 flex flex-col justify-end p-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-20 bg-gradient-to-t from-black/90 via-black/60 to-transparent text-white space-y-2">
+                  <span class="bg-yellow-400 text-black text-xs font-bold px-3 py-1 rounded-full w-fit">{related.status}</span>
+                  <h3 class="text-xl font-bold">{related.title}</h3>
+                  <p class="text-sm text-gray-200">{related.description}</p>
+                  <div class="flex flex-wrap gap-2 text-xs">
+                    {related.tech.map((tech) => (
+                      <span class="px-2 py-1 border border-white/30 rounded bg-white/10 backdrop-blur">{tech}</span>
+                    ))}
+                  </div>
+                  <a href={related.link} class="text-yellow-400 text-sm font-bold hover:text-white transition">
+                    View Project →
+                  </a>
+                </div>
+              </article>
+            </div>
+          ))}
+        </div>
+      </div>
+    )}
+
+    <!-- Back to Projects -->
+    <div class="text-center mt-16">
+      <a 
+        href="/projects"
+        class="inline-flex items-center font-display font-bold bg-black text-white px-6 py-3 rounded-lg hover:bg-text-secondary transition-all duration-300 transform hover:scale-105"
+      >
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mr-2">
+          <path d="M19 12H5"/>
+          <path d="m12 19-7-7 7-7"/>
+        </svg>
+        Back to Projects
+      </a>
+    </div>
+  </div>
+</section>
+
+<style>
+  /* Writing vertical text */
+  .writing-vertical {
+    writing-mode: vertical-rl;
+    text-orientation: mixed;
+  }
+
+  /* Mobile project hover */
+  .mobile-project-hover {
+    transition: transform 0.4s ease;
+  }
+  
+  .mobile-project-hover:hover {
+    transform: translateY(-8px);
+  }
+
+  /* Project cards animations */
+  #related-project-0,
+  #related-project-1,
+  #related-project-2 {
+    animation: slideInUp 0.8s ease-out forwards;
+  }
+
+  @keyframes slideInUp {
+    from {
+      opacity: 0;
+      transform: translateY(30px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+</style>
+
+<script>
+  import { addElementToObserver } from '../../../helpers/observerHelper';
+  
+  addElementToObserver('related-header', 'slide-in-left-animate');
+  
+  // Animate project cards
+  const projectCards = document.querySelectorAll('[id^="related-project-"]');
+  projectCards.forEach((card, index) => {
+    addElementToObserver(card.id, 'slideInUp');
+  });
+  
+  addElementToObserver('next-steps-card', 'blur-fade-in-2');
+  addElementToObserver('future-tech-card', 'blur-fade-in-3');
+</script>

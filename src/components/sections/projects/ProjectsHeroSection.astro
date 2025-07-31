@@ -1,41 +1,97 @@
 ---
-// Projects Hero Section
+// Projects Hero Section - Clean Professional Design
+interface Props {
+  stats?: {
+    totalProjects: number;
+    techStacks: number;
+    categories: number;
+  };
+}
+
+const { stats = { totalProjects: 15, techStacks: 8, categories: 3 } } = Astro.props;
 ---
 
 <section class="pt-24 pb-12 px-4 sm:px-6 lg:px-8">
   <div class="max-w-6xl mx-auto">
     
-    <!-- Page Title + Description -->
-    <div class="text-center mb-16">
-      <h1 class="font-display text-4xl sm:text-5xl lg:text-6xl font-bold text-black mb-6">
-        🚀 Projects
+    <!-- Page Header -->
+    <div 
+      id="projects-header-text"
+      class="flex flex-col items-start gap-4 mb-16 opacity-0 transform transition-all duration-1000 ease-out"
+    >
+      <p class="uppercase text-sm tracking-widest text-text-secondary">Portfolio</p>
+      <h1 class="font-display text-4xl sm:text-5xl lg:text-6xl font-bold text-black">
+        Featured <span class="text-yellow-400">Projects</span>
       </h1>
-      <p class="font-body text-xl sm:text-2xl text-text-secondary leading-relaxed max-w-4xl mx-auto">
-        A collection of everything I've built — from solo side projects to freelance work and DevOps infrastructure.
+      <p class="font-body text-xl sm:text-2xl text-text-secondary leading-relaxed max-w-4xl">
+        A collection of web applications, infrastructure projects, and client solutions that showcase my technical skills and problem-solving approach.
       </p>
-      <p class="font-body text-lg text-text-muted mt-4">
-        Filter by category or tech stack below.
+      <p class="font-body text-lg text-text-muted">
+        Filter by category or technology to explore specific areas of work.
       </p>
     </div>
     
-    <!-- Stats (optional bonus) -->
-    <div class="grid grid-cols-2 md:grid-cols-4 gap-6 mb-8">
-      <div class="text-center bg-surface/50 rounded-lg p-4 border border-border">
-        <div class="font-display text-2xl font-bold text-black">12+</div>
+    <!-- Professional Stats -->
+    <div 
+      id="projects-stats"
+      class="grid grid-cols-2 md:grid-cols-4 gap-6 opacity-0"
+    >
+      <div class="group bg-white/80 backdrop-blur-sm rounded-xl p-6 border border-gray-200 transition-all duration-300 hover:shadow-lg hover:scale-105 text-center">
+        <div class="w-10 h-10 mx-auto mb-3 text-gray-700 group-hover:text-black transition-colors duration-300">
+          <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <rect width="18" height="18" x="3" y="4" rx="2" ry="2"/>
+            <line x1="16" y1="2" x2="16" y2="6"/>
+            <line x1="8" y1="2" x2="8" y2="6"/>
+            <line x1="3" y1="10" x2="21" y2="10"/>
+          </svg>
+        </div>
+        <div class="font-display text-2xl font-bold text-black">{stats.totalProjects}+</div>
         <div class="font-body text-sm text-text-muted">Projects Built</div>
       </div>
-      <div class="text-center bg-surface/50 rounded-lg p-4 border border-border">
-        <div class="font-display text-2xl font-bold text-black">8</div>
+      
+      <div class="group bg-white/80 backdrop-blur-sm rounded-xl p-6 border border-gray-200 transition-all duration-300 hover:shadow-lg hover:scale-105 text-center">
+        <div class="w-10 h-10 mx-auto mb-3 text-gray-700 group-hover:text-black transition-colors duration-300">
+          <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/>
+            <circle cx="9" cy="7" r="4"/>
+            <path d="m22 21-3-3m0 0a3 3 0 1 0-4.24-4.24 3 3 0 0 0 4.24 4.24Z"/>
+          </svg>
+        </div>
+        <div class="font-display text-2xl font-bold text-black">{stats.techStacks}</div>
         <div class="font-body text-sm text-text-muted">Tech Stacks</div>
       </div>
-      <div class="text-center bg-surface/50 rounded-lg p-4 border border-border">
-        <div class="font-display text-2xl font-bold text-black">3</div>
+      
+      <div class="group bg-white/80 backdrop-blur-sm rounded-xl p-6 border border-gray-200 transition-all duration-300 hover:shadow-lg hover:scale-105 text-center">
+        <div class="w-10 h-10 mx-auto mb-3 text-gray-700 group-hover:text-black transition-colors duration-300">
+          <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M3 6h18l-1.5 9H4.5L3 6Z"/>
+            <path d="M20 4H4"/>
+          </svg>
+        </div>
+        <div class="font-display text-2xl font-bold text-black">{stats.categories}</div>
         <div class="font-body text-sm text-text-muted">Categories</div>
       </div>
-      <div class="text-center bg-surface/50 rounded-lg p-4 border border-border">
+      
+      <div class="group bg-white/80 backdrop-blur-sm rounded-xl p-6 border border-gray-200 transition-all duration-300 hover:shadow-lg hover:scale-105 text-center">
+        <div class="w-10 h-10 mx-auto mb-3 text-gray-700 group-hover:text-black transition-colors duration-300">
+          <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M17 8h1a4 4 0 1 1 0 8h-1"/>
+            <path d="M3 8h14v9a4 4 0 0 1-4 4H7a4 4 0 0 1-4-4Z"/>
+            <line x1="6" y1="2" x2="6" y2="4"/>
+            <line x1="10" y1="2" x2="10" y2="4"/>
+            <line x1="14" y1="2" x2="14" y2="4"/>
+          </svg>
+        </div>
         <div class="font-display text-2xl font-bold text-black">∞</div>
         <div class="font-body text-sm text-text-muted">Coffee Consumed</div>
       </div>
     </div>
   </div>
 </section>
+
+<script>
+  import { addElementToObserver } from '../../../helpers/observerHelper';
+  
+  addElementToObserver('projects-header-text', 'slide-in-left-animate');
+  addElementToObserver('projects-stats', 'slide-down-blur-animate-2');
+</script>

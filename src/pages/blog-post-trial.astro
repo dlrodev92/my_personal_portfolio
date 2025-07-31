@@ -1,0 +1,378 @@
+---
+// blog-post-trial.astro - Mock blog post page with flexible content blocks
+// Mock data para el blog post trial con sistema de bloques
+const mockPost = {
+  // Core content
+  id: "1",
+  slug: "building-kubernetes-cluster",
+  title: "Building My First Kubernetes Cluster",
+  subtitle: "A journey through complexity, confusion, and eventual understanding",
+  excerpt: "Yesterday I spent 6 hours setting up a k8s cluster from scratch. Here's what I learned the hard way, the gotchas I encountered, and why the documentation sometimes feels like it's written in ancient Greek.",
+  
+  // Metadata
+  publishedAt: "2025-06-17T10:00:00Z",
+  updatedAt: "2025-06-18T15:30:00Z",
+  readTime: 8,
+  wordCount: 2847,
+  views: 1203,
+  
+  // Organization
+  category: "tech",
+  tags: ["kubernetes", "devops", "learning", "infrastructure", "docker"],
+  series: {
+    name: "Kubernetes Journey",
+    part: 1,
+    total: 5,
+    nextPost: "kubernetes-networking-deep-dive"
+  },
+  
+  // Media
+  heroImage: {
+    url: "https://images.pexels.com/photos/1181263/pexels-photo-1181263.jpeg?auto=compress&cs=tinysrgb&w=1200",
+    alt: "Kubernetes cluster visualization",
+    caption: "My first successful k8s cluster setup"
+  },
+  
+  videoEmbed: {
+    type: "youtube",
+    id: "dQw4w9WgXcQ",
+    title: "Kubernetes Setup Walkthrough"
+  },
+  
+  // Content blocks (nuevo sistema flexible)
+  contentBlocks: [
+    {
+      id: "intro-1",
+      type: "paragraph",
+      order: 1,
+      content: "Setting up Kubernetes for the first time feels like trying to assemble IKEA furniture without the manual, in the dark, while the instructions are in Swedish.",
+      style: "lead"
+    },
+    {
+      id: "heading-1",
+      type: "heading",
+      order: 2,
+      content: "Why Kubernetes?",
+      level: 2
+    },
+    {
+      id: "para-1",
+      type: "paragraph",
+      order: 3,
+      content: "After years of Docker Compose serving me well, I finally decided it was time to take the plunge into container orchestration. The promise was tempting: automatic scaling, self-healing applications, and declarative infrastructure."
+    },
+    {
+      id: "callout-1",
+      type: "callout",
+      order: 4,
+      variant: "info",
+      title: "Pro Tip",
+      content: "Before diving into Kubernetes, make sure you're comfortable with Docker basics. K8s will amplify both your Docker knowledge and your Docker confusion."
+    },
+    {
+      id: "heading-2",
+      type: "heading",
+      order: 5,
+      content: "The Setup Journey",
+      level: 2
+    },
+    {
+      id: "para-2",
+      type: "paragraph",
+      order: 6,
+      content: "I decided to go with **kubeadm** for a vanilla Kubernetes experience. Looking back, this was both the best and worst decision I could have made."
+    },
+    {
+      id: "heading-3",
+      type: "heading",
+      order: 7,
+      content: "Installing the Prerequisites",
+      level: 3
+    },
+    {
+      id: "para-3",
+      type: "paragraph",
+      order: 8,
+      content: "First things first, I needed to install the Kubernetes tools:"
+    },
+    {
+      id: "code-1",
+      type: "code",
+      order: 9,
+      language: "bash",
+      title: "Installing Kubernetes Components",
+      content: "# Update system packages\nsudo apt update && sudo apt upgrade -y\n\n# Install Docker\ncurl -fsSL https://get.docker.com -o get-docker.sh\nsudo sh get-docker.sh\n\n# Add Kubernetes repository\ncurl -s https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo apt-key add -\necho \"deb https://apt.kubernetes.io/ kubernetes-xenial main\" | sudo tee /etc/apt/sources.list.d/kubernetes.list\n\n# Install Kubernetes components\nsudo apt update\nsudo apt install -y kubelet kubeadm kubectl\nsudo apt-mark hold kubelet kubeadm kubectl"
+    },
+    {
+      id: "heading-4",
+      type: "heading",
+      order: 10,
+      content: "The First Attempt (Spoiler: It Failed)",
+      level: 3
+    },
+    {
+      id: "para-4",
+      type: "paragraph",
+      order: 11,
+      content: "With confidence that only comes from ignorance, I ran my first kubeadm init:"
+    },
+    {
+      id: "code-2",
+      type: "code",
+      order: 12,
+      language: "bash",
+      content: "sudo kubeadm init --pod-network-cidr=10.244.0.0/16"
+    },
+    {
+      id: "para-5",
+      type: "paragraph",
+      order: 13,
+      content: "And promptly got my first taste of Kubernetes error messages:"
+    },
+    {
+      id: "image-1",
+      type: "image",
+      order: 13.5,
+      url: "https://images.pexels.com/photos/1181271/pexels-photo-1181271.jpeg?auto=compress&cs=tinysrgb&w=800",
+      alt: "Terminal with kubectl commands",
+      caption: "The moment everything finally worked - kubectl showing all pods running successfully",
+      alignment: "center"
+    },
+    {
+      id: "callout-2",
+      type: "callout",
+      order: 14,
+      variant: "warning",
+      title: "Common Gotcha",
+      content: "`[ERROR CRI]`: container runtime is not running. This cryptic message actually means Docker isn't configured properly for Kubernetes."
+    },
+    {
+      id: "heading-5",
+      type: "heading",
+      order: 15,
+      content: "The Breakthrough Moment",
+      level: 2
+    },
+    {
+      id: "para-6",
+      type: "paragraph",
+      order: 16,
+      content: "After about 4 hours of troubleshooting, I finally had my 'aha!' moment. The issue wasn't with Kubernetes itself, but with how I had configured the container runtime."
+    },
+    {
+      id: "quote-1",
+      type: "quote",
+      order: 17,
+      content: "Kubernetes doesn't make simple things simple. It makes complex things possible.",
+      author: "Every DevOps Engineer's Internal Monologue"
+    },
+    {
+      id: "para-7",
+      type: "paragraph",
+      order: 18,
+      content: "The fix was updating the Docker daemon configuration:"
+    },
+    {
+      id: "code-3",
+      type: "code",
+      order: 19,
+      language: "json",
+      title: "Docker Daemon Configuration",
+      content: "{\n  \"exec-opts\": [\"native.cgroupdriver=systemd\"],\n  \"log-driver\": \"json-file\",\n  \"log-opts\": {\n    \"max-size\": \"100m\"\n  },\n  \"storage-driver\": \"overlay2\"\n}"
+    },
+    {
+      id: "image-2",
+      type: "image",
+      order: 19.5,
+      url: "https://images.pexels.com/photos/1181346/pexels-photo-1181346.jpeg?auto=compress&cs=tinysrgb&w=800",
+      alt: "Kubernetes dashboard showing healthy cluster",
+      caption: "Success! The Kubernetes dashboard showing a healthy cluster with all nodes ready",
+      alignment: "full"
+    },
+    {
+      id: "heading-6",
+      type: "heading",
+      order: 20,
+      content: "What I Learned",
+      level: 2
+    },
+    {
+      id: "para-8",
+      type: "paragraph",
+      order: 21,
+      content: "This experience taught me several valuable lessons:"
+    },
+    {
+      id: "list-1",
+      type: "list",
+      order: 22,
+      style: "bullet",
+      items: [
+        "**Start small:** Don't try to understand everything at once",
+        "**Read the errors carefully:** Kubernetes error messages are verbose but informative",
+        "**Keep notes:** You'll forget the exact steps that worked",
+        "**Practice patience:** K8s has a steep learning curve, and that's okay"
+      ]
+    },
+    {
+      id: "callout-3",
+      type: "callout",
+      order: 23,
+      variant: "tip",
+      title: "Key Takeaway",
+      content: "Kubernetes isn't just a tool—it's a paradigm shift in how you think about application deployment and management. Embrace the complexity; it's there for good reasons."
+    },
+    {
+      id: "heading-7",
+      type: "heading",
+      order: 24,
+      content: "Next Steps",
+      level: 2
+    },
+    {
+      id: "para-9",
+      type: "paragraph",
+      order: 25,
+      content: "Now that I have a working cluster, the real fun begins. In the next post of this series, I'll dive into networking, services, and why pod-to-pod communication isn't as straightforward as it seems."
+    }
+  ],
+  
+  // Author
+  author: {
+    name: "David Rodriguez",
+    bio: "Full-stack developer passionate about cloud infrastructure and developer experience. Currently exploring the intersection of AI and DevOps.",
+    avatar: "/author-avatar.jpg",
+    social: {
+      twitter: "https://twitter.com/yourhandle",
+      github: "https://github.com/yourusername",
+      linkedin: "https://linkedin.com/in/yourprofile"
+    }
+  },
+  
+  // Related content
+  relatedPosts: [
+    {
+      slug: "docker-compose-workflow",
+      title: "My Docker Compose Workflow",
+      excerpt: "How I streamlined my local development environment with Docker Compose and why it worked so well before Kubernetes.",
+      image: "https://images.pexels.com/photos/1181346/pexels-photo-1181346.jpeg?auto=compress&cs=tinysrgb&w=400",
+      readTime: 5,
+      category: "tech",
+      publishedAt: "2025-06-10"
+    },
+    {
+      slug: "debugging-production-3am",
+      title: "3 AM Production Debugging",
+      excerpt: "Tales from the trenches of production incident response and why monitoring is your best friend.",
+      image: "https://images.pexels.com/photos/1181472/pexels-photo-1181472.jpeg?auto=compress&cs=tinysrgb&w=400",
+      readTime: 10,
+      category: "tech",
+      publishedAt: "2025-06-13"
+    },
+    {
+      slug: "remote-work-setup",
+      title: "My Remote Work Setup",
+      excerpt: "Two years of remote work taught me a lot about productivity, focus, and the importance of a good chair.",
+      readTime: 6,
+      category: "life",
+      publishedAt: "2025-06-08"
+    }
+  ],
+  
+  // Engagement
+  reactions: {
+    likes: 47,
+    loves: 12,
+    bookmarks: 23
+  },
+  
+  // SEO
+  metaDescription: "Learn how to set up your first Kubernetes cluster from scratch, including common pitfalls, solutions, and lessons learned from 6 hours of troubleshooting.",
+  socialImage: "https://images.pexels.com/photos/1181263/pexels-photo-1181263.jpeg?auto=compress&cs=tinysrgb&w=1200"
+};
+
+import Layout from '../layouts/Layout.astro';
+import BlogPostHeader from '../components/sections/blogPost/BlogPostHeader.astro';
+import BlogPostHero from '../components/sections/blogPost/BlogPostHero.astro';
+import ContentRenderer from '../components/content/ContentRenderer.astro';
+import BlogPostAuthor from '../components/sections/blogPost/BlogPostAuthor.astro';
+import BlogPostEngagement from '../components/sections/blogPost/BlogPostEngagement.astro';
+import BlogPostRelated from '../components/sections/blogPost/BlogPostRelated.astro';
+---
+
+<Layout>
+  <!-- Reading Progress Bar -->
+  <div id="reading-progress" class="fixed top-0 left-0 w-full h-1 bg-gray-200 z-50">
+    <div id="progress-bar" class="h-full bg-yellow-400 transition-all duration-300" style="width: 0%"></div>
+  </div>
+
+  <!-- Navigation -->
+  <nav class="fixed top-0 left-0 right-0 z-40 bg-white/80 backdrop-blur-sm border-b border-gray-200 mt-1">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex items-center justify-between h-16">
+        <!-- Back to Blog -->
+        <a 
+          href="/blog" 
+          class="inline-flex items-center text-sm font-medium text-gray-600 hover:text-black transition-colors duration-300"
+        >
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mr-2">
+            <path d="M19 12H5"/>
+            <path d="m12 19-7-7 7-7"/>
+          </svg>
+          Back to Blog
+        </a>
+
+        <!-- Reading Info -->
+        <div class="hidden sm:flex items-center space-x-4 text-xs text-gray-500">
+          <span>{mockPost.readTime} min read</span>
+          <span>•</span>
+          <span>{mockPost.views.toLocaleString()} views</span>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Main Content -->
+  <main class="pt-16">
+    <!-- Header Section -->
+    <BlogPostHeader post={mockPost} />
+    
+    <!-- Hero Image Section -->
+    <BlogPostHero post={mockPost} />
+    
+    <!-- Content Section - Nuevo sistema de bloques -->
+    <section class="px-4 sm:px-6 lg:px-8 mb-16">
+      <div class="max-w-4xl mx-auto">
+        <ContentRenderer blocks={mockPost.contentBlocks} />
+      </div>
+    </section>
+    
+    <!-- Author Section -->
+    <BlogPostAuthor author={mockPost.author} />
+    
+    <!-- Engagement Section -->
+    <BlogPostEngagement post={mockPost} />
+    
+    <!-- Related Posts -->
+    <BlogPostRelated posts={mockPost.relatedPosts} series={mockPost.series} />
+  </main>
+</Layout>
+
+<script>
+  // Reading Progress Bar
+  function updateReadingProgress() {
+    const article = document.querySelector('main');
+    const progressBar = document.getElementById('progress-bar');
+    
+    if (!article || !progressBar) return;
+    
+    const scrollTop = window.pageYOffset;
+    const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+    const scrollPercent = (scrollTop / docHeight) * 100;
+    
+    progressBar.style.width = Math.min(100, Math.max(0, scrollPercent)) + '%';
+  }
+  
+  window.addEventListener('scroll', updateReadingProgress);
+  window.addEventListener('resize', updateReadingProgress);
+</script>

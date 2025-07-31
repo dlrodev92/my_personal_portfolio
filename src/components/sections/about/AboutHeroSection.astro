@@ -1,57 +1,88 @@
 ---
-// About Hero Section
+import VideoPlayer from './VideoPlayer';
 ---
 
-<section class="min-h-screen flex items-center justify-center px-4 sm:px-6 lg:px-8 pt-16">
+<section class="relative min-h-screen flex items-center justify-center px-4 sm:px-6 lg:px-8 pt-16 bg-white overflow-hidden">
   <div class="max-w-6xl mx-auto w-full">
     <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
       
-      <!-- Left side - Video -->
-      <div class="order-2 lg:order-1">
-        <!-- TikTok-style video placeholder -->
-        <div class="aspect-[9/16] max-w-md mx-auto bg-surface rounded-3xl border border-border flex items-center justify-center shadow-2xl">
-          <div class="text-center space-y-4 p-8">
-            <div class="text-8xl">🎬</div>
-            <p class="font-display font-bold text-black text-lg">TikTok-style Intro</p>
-            <p class="font-body text-text-muted">Coming soon...</p>
-            <div class="space-y-2 text-sm text-text-tertiary">
-              <p>• Quick intro</p>
-              <p>• Coding vibes</p>
-              <p>• Anime references</p>
+      <!-- Left side - Video Component -->
+      <div class="order-2 lg:order-1 blur-fade-in">
+        <VideoPlayer client:load />
+      </div>
+      
+      <!-- Right side - Hero Text -->
+      <div class="order-1 lg:order-2 space-y-8 blur-fade-in-2">
+        <div class="space-y-6">
+          <div class="space-y-4">
+            <p class="uppercase text-sm tracking-widest text-gray-500 font-medium">About Me</p>
+            <h1 class="font-display text-4xl sm:text-5xl lg:text-6xl font-bold text-black leading-tight">
+              Hey, I'm <span class="text-yellow-400">David</span>
+            </h1>
+          </div>
+          
+          <div class="space-y-4">
+            <p class="text-xl sm:text-2xl text-gray-700 leading-relaxed">
+              A full-stack developer who moved from Spain to London to chase bigger opportunities in tech.
+            </p>
+            <p class="text-lg text-gray-600 max-w-lg leading-relaxed">
+              I build modern web applications, love clean code, and believe great software comes from understanding both the technical and human sides of problems.
+            </p>
+          </div>
+          
+          <!-- Key Points -->
+          <div class="flex flex-wrap gap-4 pt-4">
+            <div class="flex items-center gap-2 px-4 py-2 bg-gray-100 rounded-full">
+              <div class="w-2 h-2 bg-green-500 rounded-full"></div>
+              <span class="text-sm font-medium text-gray-700">Available for work</span>
+            </div>
+            <div class="flex items-center gap-2 px-4 py-2 bg-gray-100 rounded-full">
+              <svg class="w-4 h-4 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/>
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/>
+              </svg>
+              <span class="text-sm font-medium text-gray-700">London, UK</span>
             </div>
           </div>
         </div>
-      </div>
-      
-      <!-- Right side - Text content -->
-      <div class="order-1 lg:order-2 space-y-8">
-        <div class="space-y-6">
-          <h1 class="font-display text-4xl sm:text-5xl lg:text-6xl font-bold text-black">
-            About Me
-          </h1>
-          <p class="font-body text-xl sm:text-2xl text-text-secondary leading-relaxed">
-            👋 Hola, I'm David. I code, deploy, and occasionally sleep.
-          </p>
-          <p class="font-body text-lg text-text-muted max-w-lg">
-            Full-stack developer, cloud enthusiast, and professional debugger of my own mistakes.
-          </p>
-        </div>
         
-        <!-- CTA Buttons -->
-        <div class="flex flex-wrap gap-4">
+        <!-- CTA Buttons - Más elegantes y pequeños -->
+        <div class="flex items-center gap-6 pt-4">
+          <!-- Primary CTA -->
           <a 
-            href="/resume.pdf" 
-            class="about-btn about-btn-primary"
-            target="_blank"
-            rel="noopener noreferrer"
+            href="/contact" 
+            class="inline-flex items-center gap-2 text-black font-medium hover:text-yellow-400 transition-colors duration-200 group"
           >
-            📄 See Resume
+            <span>Get in touch</span>
+            <svg class="w-4 h-4 group-hover:translate-x-1 transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
+            </svg>
           </a>
+          
+          <!-- Divider -->
+          <div class="w-px h-6 bg-gray-300"></div>
+          
+          <!-- Download CV -->
+          <a 
+            href="/cv-david-lopez.pdf" 
+            target="_blank"
+            class="inline-flex items-center gap-2 text-gray-600 font-medium hover:text-black transition-colors duration-200 group"
+          >
+            <svg class="w-4 h-4 group-hover:scale-110 transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
+            </svg>
+            <span>Download CV</span>
+          </a>
+          
+          <!-- View Work -->
           <a 
             href="/projects" 
-            class="about-btn about-btn-secondary"
+            class="inline-flex items-center gap-2 text-gray-600 font-medium hover:text-black transition-colors duration-200 group"
           >
-            💻 View Projects
+            <svg class="w-4 h-4 group-hover:scale-110 transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"/>
+            </svg>
+            <span>View work</span>
           </a>
         </div>
       </div>

@@ -1,10 +1,21 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import ProjectsHeroSection from '../components/sections/projects/ProjectsHeroSection.astro';
-import ProjectsGridSection from '../components/sections/projects/ProjectsGridSection.astro';
+import ProjectsGridSection from '../components/sections/projects/ProjectsGridSection';
+import { portfolioAPI } from '../lib/api';
+
+// Fetch all projects for the grid
+const projectsResponse = await portfolioAPI.getProjects();
+const allProjects = projectsResponse.success && Array.isArray(projectsResponse.data) ? projectsResponse.data : [];
+
+const stats = {
+  totalProjects: allProjects.length,
+  techStacks: [...new Set(allProjects.flatMap(p => p.technologies?.map(t => t.name) || []))].length,
+  categories: [...new Set(allProjects.map(p => p.type))].length,
+};
 ---
 
 <Layout>
-	<ProjectsHeroSection />
-	<ProjectsGridSection />
+	<ProjectsHeroSection stats={stats} />
+	<ProjectsGridSection projects={allProjects} client:load />
 </Layout>

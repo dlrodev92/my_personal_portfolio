@@ -1,0 +1,28 @@
+---
+import Layout from '../layouts/Layout.astro';
+import BlogHeroSection from '../components/sections/blog/BlogHeroSection.astro';
+import BlogGridSection from '../components/sections/blog/BlogGridSection';
+import LatestBlog from '../components/sections/blog/LatestBlog.tsx';
+import { portfolioAPI } from '../lib/api';
+
+// Fetch all blog posts from API
+const blogPostsResponse = await portfolioAPI.getBlogPosts();
+const allBlogPosts = blogPostsResponse.success && Array.isArray(blogPostsResponse.data) ? blogPostsResponse.data : [];
+
+// Get latest blog post
+const latestBlogResponse = await portfolioAPI.getLatestBlogPosts(1);
+const latestBlogPost = latestBlogResponse.success && latestBlogResponse.data.length > 0 ? latestBlogResponse.data[0] : null;
+
+// Generate blog statistics
+const stats = {
+  totalPosts: allBlogPosts.length,
+  totalReadTime: allBlogPosts.reduce((sum, post) => sum + (post.readTime || 0), 0),
+  categories: [...new Set(allBlogPosts.map(post => post.category?.name).filter(Boolean))].length,
+};
+---
+
+<Layout>
+	<BlogHeroSection stats={stats} />
+	<LatestBlog latestPost={latestBlogPost} client:load />
+	<BlogGridSection blogPosts={allBlogPosts} client:load/>
+</Layout>

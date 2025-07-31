@@ -1,80 +1,79 @@
 ---
-// Fun Easter Egg Section
-const funFacts = [
-  "I debug faster when listening to anime openings",
-  "My rubber duck is actually a cat named Toby",
-  "I once spent 6 hours debugging... a missing semicolon",
-  "Coffee consumption directly correlates with code quality"
+const opportunities = [
+ {
+   title: 'Full-Time Positions',
+   description: 'Junior Developer, Junior DevOps Engineer, Quality Assurance Tester.',
+   details: [
+     'Remote or London-based',
+     'Product-focused companies',
+     'Modern tech stack'
+   ],
+   icon: 'M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2-2v2m8 0H8m8 0v2a2 2 0 01-2 2H10a2 2 0 01-2-2V6',
+   bgColor: 'bg-yellow-400',
+   textColor: 'text-black'
+ },
+ {
+   title: 'Freelance Projects',
+   description: 'Short to medium-term projects for startups and established businesses.',
+   details: [
+     'MVP development',
+     'System migrations',
+     'Performance optimization'
+   ],
+   icon: 'M13 10V3L4 14h7v7l9-11h-7z',
+   bgColor: 'bg-text-primary',
+   textColor: 'text-black'
+ }
 ];
 
-const randomFact = funFacts[Math.floor(Math.random() * funFacts.length)];
 ---
 
-<section class="py-20 px-4 sm:px-6 lg:px-8">
-  <div class="max-w-3xl mx-auto text-center">
-    
-    <!-- Easter Egg Header -->
-    <div class="mb-12">
-      <h2 class="font-display text-2xl font-bold text-black mb-6">
-        🐱 Easter Egg Zone
-      </h2>
-      
-      <!-- Toby the Cat -->
-      <div class="bg-surface/50 rounded-2xl p-8 border border-border mb-8">
-        <div class="text-6xl mb-4">🐾</div>
-        <p class="font-body text-lg text-text-secondary mb-4">
-          <strong>PS:</strong> If you mention my cat Toby in your message, I'll reply 2x faster!
-        </p>
-        <p class="font-body text-sm text-text-muted italic">
-          Toby is my unofficial project manager and debugging assistant
-        </p>
-      </div>
-    </div>
-    
-    <!-- Random Fun Fact -->
-    <div class="bg-white/60 backdrop-blur-sm rounded-xl p-6 border border-border mb-8">
-      <div class="text-2xl mb-3">💡</div>
-      <h3 class="font-display text-lg font-bold text-black mb-3">
-        Random Dev Fact
-      </h3>
-      <p class="font-body text-text-secondary italic">
-        "{randomFact}"
-      </p>
-    </div>
-    
-    <!-- Developer Bingo Bonus -->
-    <div class="grid grid-cols-2 sm:grid-cols-3 gap-3 text-sm mb-8">
-      {[
-        "✅ Coded at 3 AM",
-        "✅ Blamed it on caching", 
-        "✅ 'Works on my machine'",
-        "✅ Stack Overflow MVP",
-        "✅ Git commit -m 'fix'",
-        "✅ Toby approved code"
-      ].map((item, index) => (
-        <div class="bg-surface/40 rounded-lg p-3 border border-border font-body text-text-muted">
-          {item}
-        </div>
-      ))}
-    </div>
-    
-    <!-- Fun Quote -->
-    <div class="max-w-md mx-auto">
-      <blockquote class="font-body text-text-secondary italic">
-        "Code is like humor. When you have to explain it, it's bad."
-      </blockquote>
-      <p class="font-body text-sm text-text-muted mt-2">
-        — Cory House (probably)
-      </p>
-    </div>
-    
-    <!-- Hidden Message for Curious Developers -->
-    <div class="mt-12 text-xs text-text-tertiary opacity-50">
-      <p>
-        <!-- If you're reading this in the source code, you're my kind of person! 
-             Send me a message with "I found the hidden message" for bonus points 🕵️ -->
-        View source for a special message 👀
-      </p>
-    </div>
-  </div>
+<!-- Open Opportunities Section -->
+<section class="py-20 px-4 lg:px-8" style="background-color: #f9f9f9;">
+ <div class="max-w-6xl mx-auto">
+   <div class="text-center mb-16 slide-down-blur-animate">
+     <h2 class="font-display text-4xl font-bold mb-6">
+       <span class="text-yellow-400">Open </span> to Opportunities
+     </h2>
+     <p class="text-text-muted text-xl leading-relaxed">
+       Currently exploring new challenges and collaborations
+     </p>
+   </div>
+
+   <div class="grid md:grid-cols-2 gap-8">
+     {opportunities.map((opportunity, index) => (
+       <div class={`about-link-card p-8 hover:scale-105 transition-all duration-300 slide-down-blur-animate-${index + 2} opacity-0`}>
+         <div class={`w-16 h-16 ${opportunity.bgColor} rounded-lg flex items-center justify-center mb-6`}>
+           <svg class={`w-8 h-8 ${opportunity.textColor}`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d={opportunity.icon}></path>
+           </svg>
+         </div>
+
+         <h3 class="font-display text-2xl font-bold  mb-4">
+           {opportunity.title}
+         </h3>
+         
+         <p class="text-text-muted text-base mb-6 leading-relaxed">
+           {opportunity.description}
+         </p>
+
+         <div class="mb-6">
+           <h4 class="font-display font-bold text-text-primary mb-3 text-sm">Key Requirements:</h4>
+           <div class="space-y-2">
+             {opportunity.details.map((detail) => (
+               <div class="flex items-center gap-2 text-text-secondary">
+                 <div class="w-1.5 h-1.5 bg-yellow-400 rounded-full"></div>
+                 <span class="text-sm">{detail}</span>
+               </div>
+             ))}
+           </div>
+         </div>
+
+         <a href="#contact" class="about-cta-btn bg-yellow-400 hover:bg-yellow-500 text-black text-center w-full">
+           Get in Touch
+         </a>
+       </div>
+     ))}
+   </div>
+ </div>
 </section>

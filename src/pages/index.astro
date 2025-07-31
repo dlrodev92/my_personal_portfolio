@@ -1,18 +1,27 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import HeroSection from '../components/sections/index/HeroSection.astro';
-import WhatIDoSection from '../components/sections/index/WhatIDoSection.astro';
+import Overview from '../components/sections/index/Overview.astro';
 import FeaturedProjectsSection from '../components/sections/index/FeaturedProjectsSection.astro';
-import CurrentlyBuildingSection from '../components/sections/index/CurrentlyBuildingSection.astro';
-import MemeSection from '../components/sections/index/MemeSection.astro';
+import Timeline from '../components/sections/index/Timeline.astro';
+import FeaturedBlogSection from '../components/sections/index/FeaturedBlogSection.astro';  // ← Nuevo
 import ContactCTASection from '../components/sections/index/ContactCTASection.astro';
+import Footer from '../components/Footer.astro';
+import { portfolioAPI } from '../lib/api';
+
+const featuredProjectsResponse = await portfolioAPI.getProjectCards({ limit: 6 });
+const featuredProjects = featuredProjectsResponse.success ? featuredProjectsResponse.data : [];
+
+// Fetch latest blog post for featured section
+const latestBlogResponse = await portfolioAPI.getLatestBlogPosts(1);
+const latestBlog = latestBlogResponse.success && Array.isArray(latestBlogResponse.data) && latestBlogResponse.data.length > 0 ? latestBlogResponse.data[0] : null;
 ---
 
 <Layout>
 	<HeroSection />
-	<WhatIDoSection />
-	<FeaturedProjectsSection />
-	<CurrentlyBuildingSection />
-	<MemeSection />
+	<Overview />
+	<FeaturedProjectsSection projects={featuredProjects} />
+	<Timeline />
+	<FeaturedBlogSection latestBlog={latestBlog} />  {/* ← Nueva sección */}
 	<ContactCTASection />
 </Layout>

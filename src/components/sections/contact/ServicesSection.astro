@@ -1,0 +1,133 @@
+---
+const services = [
+ {
+   id: 'quick-websites',
+   title: 'Quick Websites',
+   subtitle: '3-Day Delivery',
+   description: 'Need a professional website fast? Perfect for small businesses, personal brands, or launching your idea quickly.',
+   explanation: 'Get a complete, modern website delivered in just 3 days. Includes design, development, and deployment.',
+   features: [
+     'Modern responsive design',
+     'SEO optimized',
+     'Contact forms & analytics',
+     'Ready to launch'
+   ],
+   icon: 'M13 10V3L4 14h7v7l9-11h-7z',
+   bgColor: 'bg-yellow-400',
+   textColor: 'text-black',
+   delivery: '3 days',
+   pricing: 'Very affordable'
+ },
+ {
+   id: 'full-stack-apps',
+   title: 'Complete Web Applications',
+   subtitle: 'Full-Stack Solutions',
+   description: 'Custom web applications that handle everything - from user accounts to payments, data management, and beyond.',
+   explanation: 'Think Netflix, Airbnb, or your banking app. Complete systems where users can sign up, interact, and manage data.',
+   features: [
+     'User authentication & accounts',
+     'Database & data management',
+     'Payment processing',
+     'Admin dashboards'
+   ],
+   icon: 'M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4',
+   bgColor: 'bg-text-primary',
+   textColor: 'text-black',
+   delivery: '2-8 weeks',
+   pricing: 'Custom quote'
+ },
+ {
+   id: 'ai-integration',
+   title: 'AI Business Solutions',
+   subtitle: 'Smart Automation',
+   description: 'Add AI superpowers to your business. Automate tasks, analyze data, or create intelligent customer experiences.',
+   explanation: 'From chatbots that answer customer questions to AI that analyzes your sales data and suggests improvements.',
+   features: [
+     'Custom chatbots',
+     'Data analysis & insights',
+     'Process automation',
+     'Customer service AI'
+   ],
+   icon: 'M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z',
+   bgColor: 'bg-surface-elevated border-2 border-border',
+   textColor: 'text-text-primary',
+   delivery: '1-4 weeks',
+   pricing: 'Flexible packages'
+ }
+];
+---
+
+<section id="services" class="py-20 px-4 lg:px-8 bg-main">
+ <div class="max-w-7xl mx-auto">
+   <div class="text-center mb-20 slide-down-blur-animate">
+     <h2 class="font-display text-4xl lg:text-5xl font-bold mb-6">
+       How can I <span class="text-yellow-400">help</span> you?
+     </h2>
+     <p class="text-text-muted text-xl max-w-3xl mx-auto leading-relaxed">
+       From quick websites to complex applications and AI solutions - I help businesses get online and stay competitive.
+     </p>
+   </div>
+
+   <div class="grid lg:grid-cols-3 gap-8">
+     {services.map((service, index) => (
+       <div class={`about-link-card p-8 hover:scale-105 transition-all duration-300 slide-down-blur-animate-${index + 2} opacity-0`}>
+         <div class={`w-16 h-16 ${service.bgColor} rounded-lg flex items-center justify-center mb-6`}>
+           <svg class={`w-8 h-8 ${service.textColor}`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d={service.icon}></path>
+           </svg>
+         </div>
+
+         <h3 class="font-display text-2xl font-bold  mb-2">
+           {service.title}
+         </h3>
+         <p class="text-yellow-400 font-display font-bold text-sm mb-4">
+           {service.subtitle}
+         </p>
+
+         <p class="text-text-muted text-base mb-6 leading-relaxed">
+           {service.description}
+         </p>
+
+         <div class="bg-yellow-400/10 rounded-lg p-4 mb-6 border border-yellow-400/20">
+           <p class="text-text-secondary text-sm">
+             <span class="font-bold ">What this means:</span> {service.explanation}
+           </p>
+         </div>
+
+         <div class="mb-6">
+           <h4 class="font-display font-bold  mb-3 text-sm">What's Included:</h4>
+           <div class="space-y-2">
+             {service.features.map((feature) => (
+               <div class="flex items-center gap-2 text-text-secondary">
+                 <div class="w-1.5 h-1.5 bg-yellow-400 rounded-full"></div>
+                 <span class="text-sm">{feature}</span>
+               </div>
+             ))}
+           </div>
+         </div>
+
+         <div class="mb-6">
+           <h4 class="font-display font-bold  mb-3 text-sm">Timeline & Pricing:</h4>
+           <div class="space-y-2 text-sm text-text-secondary">
+             <div class="flex items-center gap-2">
+               <div class="w-1.5 h-1.5 bg-yellow-400 rounded-full"></div>
+               <span>Delivery: {service.delivery}</span>
+             </div>
+             <div class="flex items-center gap-2">
+               <div class="w-1.5 h-1.5 bg-yellow-400 rounded-full"></div>
+               <span>Pricing: {service.pricing}</span>
+             </div>
+           </div>
+         </div>
+
+         <div class="flex flex-col gap-3">
+           <a href="#contact" class="about-cta-btn bg-yellow-400 hover:bg-yellow-500 text-black text-center">
+             Get Started
+           </a>
+           
+         </div>
+       </div>
+     ))}
+   </div>
+ </div>
+</section>

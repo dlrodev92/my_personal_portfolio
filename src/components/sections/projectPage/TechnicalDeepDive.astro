@@ -1,0 +1,438 @@
+---
+// Technical Deep Dive - Simple 3x3 Grid
+const { project } = Astro.props;
+
+// Ensure we have exactly 8 technologies with fallbacks
+const technologies = [...project.technologies];
+const fallbacks = [
+  { name: "HTML/CSS", reason: "Essential frontend markup and styling for web interfaces." },
+  { name: "JavaScript", reason: "Core programming language for interactive web experiences." },
+  { name: "Git", reason: "Version control system for collaborative development workflow." },
+  { name: "Docker", reason: "Containerization platform for consistent deployment environments." },
+  { name: "Testing", reason: "Quality assurance through automated testing frameworks." },
+  { name: "CI/CD", reason: "Continuous integration and deployment for streamlined releases." },
+  { name: "Monitoring", reason: "Application performance monitoring and error tracking." },
+  { name: "Security", reason: "Authentication, authorization, and data protection measures." }
+];
+
+// Fill to exactly 8 technologies
+while (technologies.length < 8) {
+  technologies.push(fallbacks[technologies.length - project.technologies.length]);
+}
+
+// Take only first 8 if more than 8
+const finalTechnologies = technologies.slice(0, 8);
+---
+
+<section class="py-20 px-4 sm:px-6 lg:px-8">
+  <div class="max-w-6xl mx-auto">
+    <!-- Section Header -->
+    <div 
+      id="tech-header"
+      class="flex flex-col items-start gap-4 mb-16 opacity-0 transform transition-all duration-1000 ease-out"
+    >
+      <p class="uppercase text-sm tracking-widest text-text-secondary">Technology</p>
+      <h2 class="font-display text-3xl sm:text-4xl font-bold text-black">
+        Tech <span class="text-yellow-400">Stack</span>
+      </h2>
+    </div>
+
+    <!-- Tech Grid 3x3 -->
+    <div class="tech-grid">
+      
+      <!-- Row 1 -->
+      <div class="tech-card tech-1">
+        <div class="card-content">
+          <h4 class="tech-name">{finalTechnologies[0].name}</h4>
+          <p class="tech-description">{finalTechnologies[0].reason}</p>
+        </div>
+      </div>
+
+      <div class="tech-card tech-2">
+        <div class="card-content">
+          <h4 class="tech-name">{finalTechnologies[1].name}</h4>
+          <p class="tech-description">{finalTechnologies[1].reason}</p>
+        </div>
+      </div>
+
+      <div class="tech-card tech-3">
+        <div class="card-content">
+          <h4 class="tech-name">{finalTechnologies[2].name}</h4>
+          <p class="tech-description">{finalTechnologies[2].reason}</p>
+        </div>
+      </div>
+
+      <!-- Row 2 -->
+      <div class="tech-card tech-4">
+        <div class="card-content">
+          <h4 class="tech-name">{finalTechnologies[3].name}</h4>
+          <p class="tech-description">{finalTechnologies[3].reason}</p>
+        </div>
+      </div>
+
+      <!-- Center Core -->
+      <div class="tech-core">
+        <div class="core-content">
+          <div class="core-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="12" cy="12" r="3"/>
+              <path d="M12 1v6m0 6v6"/>
+              <path d="m4.2 4.2 4.2 4.2m8.4 0 4.2-4.2"/>
+              <path d="M1 12h6m6 0h6"/>
+              <path d="m4.2 19.8 4.2-4.2m8.4 0 4.2 4.2"/>
+            </svg>
+          </div>
+          <h3 class="core-title">Tech Stack</h3>
+        </div>
+      </div>
+
+      <div class="tech-card tech-5">
+        <div class="card-content">
+          <h4 class="tech-name">{finalTechnologies[4].name}</h4>
+          <p class="tech-description">{finalTechnologies[4].reason}</p>
+        </div>
+      </div>
+
+      <!-- Row 3 -->
+      <div class="tech-card tech-6">
+        <div class="card-content">
+          <h4 class="tech-name">{finalTechnologies[5].name}</h4>
+          <p class="tech-description">{finalTechnologies[5].reason}</p>
+        </div>
+      </div>
+
+      <div class="tech-card tech-7">
+        <div class="card-content">
+          <h4 class="tech-name">{finalTechnologies[6].name}</h4>
+          <p class="tech-description">{finalTechnologies[6].reason}</p>
+        </div>
+      </div>
+
+      <div class="tech-card tech-8">
+        <div class="card-content">
+          <h4 class="tech-name">{finalTechnologies[7].name}</h4>
+          <p class="tech-description">{finalTechnologies[7].reason}</p>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Architecture & Performance Section -->
+    <div class="mt-20 grid grid-cols-1 lg:grid-cols-2 gap-8">
+      
+      <!-- Architecture -->
+      <div 
+        id="architecture-card"
+        class="opacity-0 bg-white/80 backdrop-blur-sm rounded-xl p-8 border border-gray-200 transition-all duration-500 hover:shadow-lg hover:bg-white/90 relative group"
+      >
+        <div class="flex items-center space-x-3 mb-6">
+          <div class="w-8 h-8 bg-gray-100 rounded-lg flex items-center justify-center">
+            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-gray-600">
+              <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/>
+              <polyline points="3.27,6.96 12,12.01 20.73,6.96"/>
+              <line x1="12" y1="22.08" x2="12" y2="12"/>
+            </svg>
+          </div>
+          <h3 class="font-display text-xl font-bold text-black">Architecture</h3>
+        </div>
+        
+        <div class="space-y-4">
+          <div>
+            <h4 class="font-bold text-sm text-gray-800 mb-2">Database</h4>
+            <p class="text-gray-600 text-sm leading-relaxed">{project.architecture.database}</p>
+          </div>
+          <div>
+            <h4 class="font-bold text-sm text-gray-800 mb-2">API</h4>
+            <p class="text-gray-600 text-sm leading-relaxed">{project.architecture.api}</p>
+          </div>
+          <div>
+            <h4 class="font-bold text-sm text-gray-800 mb-2">Components</h4>
+            <p class="text-gray-600 text-sm leading-relaxed">{project.architecture.components}</p>
+          </div>
+        </div>
+        
+        <div class="absolute inset-0 bg-gradient-to-br from-transparent to-gray-50/30 rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"></div>
+      </div>
+
+      <!-- Performance -->
+      <div 
+        id="performance-card"
+        class="opacity-0 bg-white/80 backdrop-blur-sm rounded-xl p-8 border border-gray-200 transition-all duration-500 hover:shadow-lg hover:bg-white/90 relative group"
+      >
+        <div class="flex items-center space-x-3 mb-6">
+          <div class="w-8 h-8 bg-gray-100 rounded-lg flex items-center justify-center">
+            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-gray-600">
+              <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/>
+            </svg>
+          </div>
+          <h3 class="font-display text-xl font-bold text-black">Performance</h3>
+        </div>
+        
+        <div class="space-y-4">
+          {project.performance.map((perf, index) => (
+            <div class="flex items-start space-x-3">
+              <div class="w-2 h-2 bg-yellow-400 rounded-full mt-2 flex-shrink-0"></div>
+              <p class="text-gray-600 text-sm leading-relaxed">{perf}</p>
+            </div>
+          ))}
+        </div>
+        
+        <div class="absolute inset-0 bg-gradient-to-br from-transparent to-gray-50/30 rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"></div>
+      </div>
+      
+    </div>
+  </div>
+</section>
+
+<style>
+  /* Tech Grid */
+  .tech-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 2rem 0;
+  }
+
+  /* Tech Cards */
+  .tech-card {
+    opacity: 0;
+    animation: cardAppear 0.8s ease-out forwards;
+  }
+
+  .card-content {
+    background: linear-gradient(135deg, #ffffff 0%, #f8f8f8 100%);
+    border: 2px solid #e5e5e5;
+    border-radius: 16px;
+    padding: 1.5rem;
+    height: 180px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+    backdrop-filter: blur(10px);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .card-content:hover {
+    transform: translateY(-4px) scale(1.02);
+    border-color: #fbbf24;
+    box-shadow: 0 12px 30px rgba(251, 191, 36, 0.15);
+    background: linear-gradient(135deg, #ffffff 0%, #fffbf0 100%);
+  }
+
+  .card-content::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(251, 191, 36, 0.1), transparent);
+    transition: left 0.5s ease;
+  }
+
+  .card-content:hover::before {
+    left: 100%;
+  }
+
+  .tech-name {
+    font-family: 'Bespoke Stencil', sans-serif;
+    font-weight: bold;
+    font-size: 1rem;
+    color: #000;
+    margin-bottom: 0.75rem;
+    position: relative;
+    z-index: 2;
+  }
+
+  .tech-description {
+    font-size: 0.75rem;
+    color: #666;
+    line-height: 1.4;
+    margin: 0;
+    position: relative;
+    z-index: 2;
+  }
+
+  /* Center Core */
+  .tech-core {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    animation: coreAppear 1s ease-out forwards 0.2s;
+    opacity: 0;
+  }
+
+  .core-content {
+    background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 50%, #fbbf24 100%);
+    border-radius: 20px;
+    padding: 2rem;
+    height: 180px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    text-align: center;
+    box-shadow: 
+      0 0 0 4px rgba(251, 191, 36, 0.2),
+      0 8px 25px rgba(251, 191, 36, 0.3);
+    position: relative;
+    overflow: hidden;
+    animation: corePulse 4s ease-in-out infinite;
+  }
+
+  .core-content::before {
+    content: '';
+    position: absolute;
+    inset: -2px;
+    border-radius: 20px;
+    background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+    animation: coreRotate 6s linear infinite;
+  }
+
+  .core-icon {
+    margin-bottom: 0.5rem;
+    position: relative;
+    z-index: 2;
+  }
+
+  .core-title {
+    font-family: 'Bespoke Stencil', sans-serif;
+    font-weight: bold;
+    font-size: 1.1rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    position: relative;
+    z-index: 2;
+  }
+
+  /* Staggered Animations */
+  .tech-1 { animation-delay: 0.1s; }
+  .tech-2 { animation-delay: 0.2s; }
+  .tech-3 { animation-delay: 0.3s; }
+  .tech-4 { animation-delay: 0.4s; }
+  .tech-5 { animation-delay: 0.5s; }
+  .tech-6 { animation-delay: 0.6s; }
+  .tech-7 { animation-delay: 0.7s; }
+  .tech-8 { animation-delay: 0.8s; }
+
+  /* Animations */
+  @keyframes cardAppear {
+    from {
+      opacity: 0;
+      transform: scale(0.8) translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: scale(1) translateY(0);
+    }
+  }
+
+  @keyframes coreAppear {
+    from {
+      opacity: 0;
+      transform: scale(0.5) rotate(-180deg);
+    }
+    to {
+      opacity: 1;
+      transform: scale(1) rotate(0deg);
+    }
+  }
+
+  @keyframes corePulse {
+    0%, 100% {
+      transform: scale(1);
+      box-shadow: 
+        0 0 0 4px rgba(251, 191, 36, 0.2),
+        0 8px 25px rgba(251, 191, 36, 0.3);
+    }
+    50% {
+      transform: scale(1.02);
+      box-shadow: 
+        0 0 0 8px rgba(251, 191, 36, 0.3),
+        0 12px 30px rgba(251, 191, 36, 0.4);
+    }
+  }
+
+  @keyframes coreRotate {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+  }
+
+  /* Responsive Design */
+  @media (max-width: 768px) {
+    .tech-grid {
+      gap: 1rem;
+      max-width: 600px;
+    }
+
+    .card-content,
+    .core-content {
+      height: 150px;
+      padding: 1rem;
+    }
+
+    .tech-name {
+      font-size: 0.9rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .tech-description {
+      font-size: 0.7rem;
+    }
+
+    .core-title {
+      font-size: 1rem;
+    }
+
+    .core-icon svg {
+      width: 28px;
+      height: 28px;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .tech-grid {
+      gap: 0.75rem;
+      max-width: 400px;
+    }
+
+    .card-content,
+    .core-content {
+      height: 120px;
+      padding: 0.75rem;
+    }
+
+    .tech-name {
+      font-size: 0.8rem;
+    }
+
+    .tech-description {
+      font-size: 0.65rem;
+    }
+
+    .core-title {
+      font-size: 0.9rem;
+    }
+
+    .core-icon svg {
+      width: 24px;
+      height: 24px;
+    }
+  }
+</style>
+
+<script>
+  import { addElementToObserver } from '../../../helpers/observerHelper';
+  
+  addElementToObserver('tech-header', 'slide-in-left-animate');
+  addElementToObserver('architecture-card', 'blur-fade-in-2');
+  addElementToObserver('performance-card', 'blur-fade-in-3');
+</script>

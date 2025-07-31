@@ -1,324 +1,118 @@
 ---
 import Layout from '../../layouts/Layout.astro';
+import ProjectHero from '../../components/sections/projectPage/ProjectHero.astro';
+import ProjectOverview from '../../components/sections/projectPage/ProjectOverview.astro';
+import TechnicalDeepDive from '../../components/sections/projectPage/TechnicalDeepDive.astro';
+import VisualShowcase from '../../components/sections/projectPage/VisualShowcase';
+import LessonsOutcomes from '../../components/sections/projectPage/LessonsOutcomes.astro';
+import RelatedProjects from '../../components/sections/projectPage/RelatedProjects.astro';
+import { portfolioAPI } from '../../lib/api';
 
-// Mock project data - in real app this would come from API/CMS based on slug
-const { slug } = Astro.params;
+export async function getStaticPaths() {
+  console.log('🔍 getStaticPaths ejecutándose...');
+  
+  try {
+    const projectsResponse = await portfolioAPI.getProjects();
+    console.log('📝 Respuesta de getProjects:', projectsResponse.success);
+    
+    const projects = projectsResponse.success ? projectsResponse.data : [];
+    console.log('📝 Proyectos encontrados:', projects.length);
+    
+    // NO hagas llamadas adicionales - usa los datos que ya tienes
+    const paths = projects.map((projectData) => ({
+      params: { slug: projectData.slug },
+      props: { projectData }  // Usa directamente los datos de getProjects()
+    }));
+    
+    console.log('🗂️ Paths generados:', paths.map(p => p.params.slug));
+    
+    return paths;
+  } catch (error) {
+    console.error('❌ Error en getStaticPaths:', error);
+    return [];
+  }
+}
 
-// Mock projects database
-const projects = {
-  'ai-interview-assistant': {
-    title: 'AI Interview Assistant',
-    subtitle: 'Practice coding interviews with AI-powered feedback',
-    date: 'April 2025',
-    category: 'Personal Project',
-    categoryIcon: '🛠',
-    status: 'Live',
-    statusColor: 'green',
-    tech: ['Next.js', 'Prisma', 'AWS RDS', 'OpenAI API', 'TypeScript', 'Tailwind CSS'],
-    links: {
-      live: 'https://ai-interview.example.com',
-      github: 'https://github.com/yourusername/ai-interview',
-      demo: 'https://www.youtube.com/watch?v=demo'
-    },
-    hero: {
-      description: 'An intelligent platform that simulates real coding interviews with AI-powered feedback, helping developers practice and improve their interview skills.',
-      keyFeatures: [
-        'Real-time code evaluation',
-        'AI-powered feedback system', 
-        'Multiple interview formats',
-        'Progress tracking'
-      ]
-    },
-    overview: 'Built to solve the problem of limited interview practice opportunities, this platform provides unlimited practice sessions with AI interviewers that adapt to your skill level.',
-    challenge: 'The main challenge was creating an AI system that could accurately evaluate code quality, provide meaningful feedback, and simulate realistic interview scenarios.',
-    solution: 'Leveraged OpenAI\'s GPT models combined with custom code analysis algorithms to create a comprehensive interview simulation system.',
-    features: [
-      {
-        title: 'Smart Code Evaluation',
-        description: 'AI analyzes your code for correctness, efficiency, and best practices',
-        icon: '🧠'
-      },
-      {
-        title: 'Real-time Feedback',
-        description: 'Get immediate suggestions and hints during your interview session',
-        icon: '⚡'
-      },
-      {
-        title: 'Progress Tracking',
-        description: 'Track your improvement over time with detailed analytics',
-        icon: '📊'
-      },
-      {
-        title: 'Multiple Formats',
-        description: 'Practice coding, system design, and behavioral interviews',
-        icon: '🎯'
-      }
-    ],
-    techDetails: {
-      frontend: ['Next.js 14', 'React', 'TypeScript', 'Tailwind CSS'],
-      backend: ['Node.js', 'Prisma ORM', 'PostgreSQL', 'OpenAI API'],
-      deployment: ['Vercel', 'AWS RDS', 'GitHub Actions'],
-      tools: ['VS Code', 'Figma', 'Postman', 'Git']
-    },
-    lessons: [
-      'Working with AI APIs requires careful prompt engineering and error handling',
-      'Real-time code evaluation needs efficient algorithms to avoid latency',
-      'User experience is crucial when dealing with complex AI interactions'
-    ]
-  },
-  // Add more projects here...
-};
+const { projectData } = Astro.props;
 
-const project = projects[slug as keyof typeof projects];
-
-if (!project) {
+if (!projectData) {
+  console.log('❌ No hay projectData, redirigiendo a 404');
   return Astro.redirect('/404');
 }
+
+console.log('✅ Proyecto cargado:', projectData.title);
+
+// Transformar los datos (tu código existente)
+const project = {
+  hero: {
+    title: projectData.title,
+    subtitle: projectData.subtitle,
+    status: projectData.status === 'LIVE' ? '🚀 Live' : 
+            projectData.status === 'IN_PROGRESS' ? '⚡ In Progress' : 
+            '🛠 Building',
+    image: projectData.heroImage,
+    liveDemo: projectData.liveDemo,
+    github: projectData.github,
+    caseStudy: projectData.caseStudy,
+    metrics: {
+      launchDate: projectData.metrics?.launchDate || 'Not specified',
+      duration: projectData.metrics?.duration || 'Not specified',
+      teamSize: projectData.metrics?.teamSize || 'Not specified'
+    }
+  },
+  overview: {
+    problem: projectData.overview?.problem || 'Problem description not available.',
+    solution: projectData.overview?.solution || 'Solution description not available.',
+    role: projectData.overview?.role || 'Role description not available.',
+    impact: projectData.overview?.impact || 'Impact description not available.'
+  },
+  technical: {
+    technologies: projectData.technologies?.map(tech => ({
+      name: tech.name,
+      reason: tech.reason || 'Technology choice reasoning not provided.'
+    })) || [],
+    architecture: {
+      database: projectData.technicalDetails?.database || 'Database architecture not specified.',
+      api: projectData.technicalDetails?.api || 'API architecture not specified.',
+      components: projectData.technicalDetails?.components || 'Component architecture not specified.'
+    },
+    performance: projectData.performanceMetrics?.map(metric => metric.description) || []
+  },
+  visual: {
+    screenshots: projectData.screenshots?.map(screenshot => ({
+      url: screenshot.url,
+      description: screenshot.description
+    })) || []
+  },
+  lessons: {
+    lessonsLearned: projectData.lessons?.map(lesson => lesson.description) || [],
+    businessOutcomes: projectData.businessOutcomes?.map(outcome => outcome.description) || [],
+    improvements: projectData.improvements?.map(improvement => improvement.description) || []
+  },
+  related: {
+    relatedProjects: [],
+    nextSteps: projectData.nextSteps?.map(step => step.description) || [],
+    futureTools: projectData.futureTools?.map(tool => tool.name) || []
+  }
+};
 ---
 
 <Layout>
-  <!-- Project Hero Section -->
-  <section class="pt-24 pb-12 px-4 sm:px-6 lg:px-8">
-    <div class="max-w-4xl mx-auto">
-      
-      <!-- Breadcrumb -->
-      <nav class="mb-8">
-        <a href="/projects" class="project-breadcrumb">
-          ← Back to Projects
-        </a>
-      </nav>
-      
-      <!-- Project Header -->
-      <div class="space-y-6 mb-12">
-        <div class="flex items-center space-x-4">
-          <span class="text-2xl">{project.categoryIcon}</span>
-          <span class="project-category-badge">
-            {project.category}
-          </span>
-          <span class={`project-status-badge ${project.statusColor}`}>
-            {project.status}
-          </span>
-        </div>
-        
-        <h1 class="font-display text-4xl sm:text-5xl font-bold text-black">
-          {project.title}
-        </h1>
-        
-        <p class="font-body text-xl text-text-secondary leading-relaxed">
-          {project.subtitle}
-        </p>
-        
-        <div class="flex items-center space-x-6 text-sm text-text-muted">
-          <span>📅 {project.date}</span>
-        </div>
-      </div>
-      
-      <!-- Project Links -->
-      <div class="flex flex-wrap gap-4 mb-12">
-        {project.links.live && (
-          <a href={project.links.live} class="project-link-btn primary" target="_blank" rel="noopener noreferrer">
-            🚀 View Live
-          </a>
-        )}
-        {project.links.github && (
-          <a href={project.links.github} class="project-link-btn secondary" target="_blank" rel="noopener noreferrer">
-            🐙 GitHub
-          </a>
-        )}
-        {project.links.demo && (
-          <a href={project.links.demo} class="project-link-btn tertiary" target="_blank" rel="noopener noreferrer">
-            🎬 Demo Video
-          </a>
-        )}
-      </div>
+  <ProjectHero project={project.hero} />
+  <ProjectOverview project={project.overview} />
+  <TechnicalDeepDive project={project.technical} />
+  <VisualShowcase project={project.visual} client:load/>
+  <LessonsOutcomes project={project.lessons} />
+  <div class="text-center mt-16">
+      <a 
+        href="/projects"
+        class="inline-flex items-center font-display font-bold bg-black text-white px-6 py-3 rounded-lg hover:bg-text-secondary transition-all duration-300 transform hover:scale-105"
+      >
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mr-2">
+          <path d="M19 12H5"/>
+          <path d="m12 19-7-7 7-7"/>
+        </svg>
+        Back to Projects
+      </a>
     </div>
-  </section>
-
-  <!-- Project Overview -->
-  <section class="py-12 px-4 sm:px-6 lg:px-8 bg-surface/30">
-    <div class="max-w-4xl mx-auto">
-      <div class="grid grid-cols-1 lg:grid-cols-3 gap-12">
-        
-        <!-- Main Content -->
-        <div class="lg:col-span-2 space-y-8">
-          
-          <!-- Description -->
-          <div>
-            <h2 class="font-display text-2xl font-bold text-black mb-4">
-              Overview
-            </h2>
-            <p class="font-body text-text-secondary leading-relaxed">
-              {project.overview}
-            </p>
-          </div>
-          
-          <!-- Challenge -->
-          <div>
-            <h3 class="font-display text-xl font-bold text-black mb-4">
-              The Challenge
-            </h3>
-            <p class="font-body text-text-secondary leading-relaxed">
-              {project.challenge}
-            </p>
-          </div>
-          
-          <!-- Solution -->
-          <div>
-            <h3 class="font-display text-xl font-bold text-black mb-4">
-              The Solution
-            </h3>
-            <p class="font-body text-text-secondary leading-relaxed">
-              {project.solution}
-            </p>
-          </div>
-        </div>
-        
-        <!-- Sidebar -->
-        <div class="space-y-8">
-          
-          <!-- Key Features -->
-          <div class="project-sidebar-card">
-            <h3 class="font-display text-lg font-bold text-black mb-4">
-              Key Features
-            </h3>
-            <ul class="space-y-2">
-              {project.hero.keyFeatures.map((feature, index) => (
-                <li class="font-body text-text-secondary flex items-start">
-                  <span class="mr-2 mt-1">✓</span>
-                  {feature}
-                </li>
-              ))}
-            </ul>
-          </div>
-          
-          <!-- Tech Stack -->
-          <div class="project-sidebar-card">
-            <h3 class="font-display text-lg font-bold text-black mb-4">
-              Tech Stack
-            </h3>
-            <div class="space-y-3">
-              {Object.entries(project.techDetails).map(([category, techs]) => (
-                <div>
-                  <h4 class="font-body text-sm font-medium text-text-muted uppercase tracking-wider mb-2">
-                    {category}
-                  </h4>
-                  <div class="flex flex-wrap gap-2">
-                    {techs.map((tech, index) => (
-                      <span class="tech-tag-small">
-                        {tech}
-                      </span>
-                    ))}
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Features Section -->
-  <section class="py-20 px-4 sm:px-6 lg:px-8">
-    <div class="max-w-6xl mx-auto">
-      <h2 class="font-display text-3xl font-bold text-black text-center mb-12">
-        Features & Functionality
-      </h2>
-      
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-        {project.features.map((feature, index) => (
-          <div class="feature-card">
-            <div class="text-3xl mb-4">{feature.icon}</div>
-            <h3 class="font-display text-xl font-bold text-black mb-3">
-              {feature.title}
-            </h3>
-            <p class="font-body text-text-secondary leading-relaxed">
-              {feature.description}
-            </p>
-          </div>
-        ))}
-      </div>
-    </div>
-  </section>
-
-  <!-- Lessons Learned -->
-  <section class="py-20 px-4 sm:px-6 lg:px-8 bg-surface/30">
-    <div class="max-w-4xl mx-auto">
-      <h2 class="font-display text-3xl font-bold text-black text-center mb-12">
-        Lessons Learned
-      </h2>
-      
-      <div class="space-y-6">
-        {project.lessons.map((lesson, index) => (
-          <div class="lesson-card">
-            <div class="flex items-start space-x-4">
-              <div class="text-2xl">💡</div>
-              <p class="font-body text-text-secondary leading-relaxed">
-                {lesson}
-              </p>
-            </div>
-          </div>
-        ))}
-      </div>
-    </div>
-  </section>
-
-  <!-- Next Project CTA -->
-  <section class="py-20 px-4 sm:px-6 lg:px-8">
-    <div class="max-w-4xl mx-auto text-center">
-      <h2 class="font-display text-2xl font-bold text-black mb-6">
-        Interested in working together?
-      </h2>
-      <p class="font-body text-text-secondary mb-8">
-        I'm always excited to take on new challenges and build amazing things.
-      </p>
-      <div class="flex flex-wrap justify-center gap-4">
-        <a href="/contact" class="project-link-btn primary">
-          📬 Get in Touch
-        </a>
-        <a href="/projects" class="project-link-btn secondary">
-          🔎 More Projects
-        </a>
-      </div>
-    </div>
-  </section>
 </Layout>
-
-<style>
-  /* Additional styles for project page */
-  .project-breadcrumb {
-    @apply font-body text-text-muted hover:text-black transition-colors;
-  }
-  
-  .project-status-badge.green {
-    @apply bg-green-100 text-green-800;
-  }
-  
-  .project-link-btn {
-    @apply font-display font-bold px-6 py-3 rounded-lg transition-all duration-300 transform hover:scale-105;
-  }
-  
-  .project-link-btn.primary {
-    @apply bg-black text-white hover:bg-text-secondary;
-  }
-  
-  .project-link-btn.secondary {
-    @apply bg-surface border-2 border-border text-black hover:bg-interactive;
-  }
-  
-  .project-link-btn.tertiary {
-    @apply bg-transparent border-2 border-black text-black hover:bg-black hover:text-white;
-  }
-  
-  .project-sidebar-card {
-    @apply bg-white/80 backdrop-blur-sm rounded-xl p-6 border border-border;
-  }
-  
-  .feature-card {
-    @apply bg-white/60 backdrop-blur-sm rounded-xl p-6 border border-border transition-all duration-300 hover:shadow-lg;
-  }
-  
-  .lesson-card {
-    @apply bg-white/60 backdrop-blur-sm rounded-lg p-6 border border-border;
-  }
-</style>

@@ -1,14 +1,18 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import ContactHeroSection from '../components/sections/contact/ContactHeroSection.astro';
-import ContactForm from '../components/sections/contact/ContactForm.tsx';
-import DirectLinksSection from '../components/sections/contact/DirectLinksSection.astro';
+import ServicesSection  from '../components/sections/contact/ServicesSection.astro';
+import ContactLogosSection from '../components/sections/contact/ContactLogosSection.astro'; 
 import FunEasterEggSection from '../components/sections/contact/FunEasterEggSection.astro';
+import ContactCTASection from '../components/sections/index/ContactCTASection.astro';
+import ContactFormSection from '../components/sections/contact/ContactFormSection.astro';
 ---
 
 <Layout>
 	<ContactHeroSection />
-	<ContactForm client:load />
-	<DirectLinksSection />
+	<ServicesSection />
+	<ContactLogosSection />
 	<FunEasterEggSection />
+	<ContactFormSection /> 
+	<ContactCTASection />
 </Layout>

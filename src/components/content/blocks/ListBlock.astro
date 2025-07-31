@@ -1,0 +1,36 @@
+---
+export interface Props {
+  block: {
+    id: string;
+    type: 'list';
+    style: 'bullet' | 'numbered' | 'checklist';
+    items: string[];
+  };
+}
+
+const { block } = Astro.props;
+
+function processInlineMarkdown(text: string): string {
+  return text
+    .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
+    .replace(/\*(.*?)\*/g, '<em>$1</em>')
+    .replace(/`(.*?)`/g, '<code>$1</code>');
+}
+
+const ListTag = block.style === 'numbered' ? 'ol' : 'ul';
+---
+
+<ListTag class={`my-6 ${block.style === 'checklist' ? 'list-none' : ''}`}>
+  {block.items.map((item) => (
+    <li class={`${block.style === 'checklist' ? 'flex items-start' : ''}`}>
+      {block.style === 'checklist' && (
+        <input 
+          type="checkbox" 
+          disabled 
+          class="mt-1 mr-2 flex-shrink-0"
+        />
+      )}
+      <span set:html={processInlineMarkdown(item)} />
+    </li>
+  ))}
+</ListTag>

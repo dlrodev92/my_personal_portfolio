@@ -25,7 +25,6 @@
     --color-info: #3b82f6;
   }
 
-
   html {
     background-color: var(--color-background);
     color: var(--color-text-primary);
@@ -40,14 +39,13 @@
     -moz-osx-font-smoothing: grayscale;
   }
 
-  @theme{
-    breakpoints{
+  @theme {
+    breakpoints {
       sm2: 480px;
       md2: 640px;
       lg2: 768px;
     }
   }
- 
 
   /* Selection styles */
   ::selection {
@@ -160,19 +158,63 @@
       transform: scale(1);
     }
   }
-  
+
   .animate-slow-zoom {
-    animation: slow-zoom 6s ease-in-out forwards;
+    animation: slow-zoom 3s ease-in-out forwards;
     transform-origin: center;
   }
 
-  .animate-dots{
-    animation: appears-dot 6s ease-in-out forwards; 
+  .animate-dots {
+    animation: appears-dot 3s ease-in-out forwards;
   }
 
-  /* Styles for What I Do Section */
-  .focus-card {
-    @apply bg-white/50 backdrop-blur-sm rounded-xl p-8 border border-border transition-all duration-300 hover:shadow-lg hover:scale-105 cursor-pointer;
+  /* Styles for overview */
+
+  @keyframes slide-in-left {
+    0% {
+      opacity: 0;
+      transform: translateX(-200px);
+    }
+    100% {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+
+  @keyframes slide-down-blur {
+    0% {
+      opacity: 0;
+      transform: translateY(50px);
+      filter: blur(10px);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0);
+      filter: blur(0);
+    }
+  }
+
+  .slide-in-left-animate {
+    animation: slide-in-left 0.8s ease-out forwards;
+  }
+
+  .slide-down-blur-animate {
+    animation: slide-down-blur 0.5s ease-out forwards;
+  }
+
+  .slide-down-blur-animate-2 {
+    animation: slide-down-blur 0.5s ease-out forwards;
+    animation-delay: 0.4s;
+  }
+
+  .slide-down-blur-animate-3 {
+    animation: slide-down-blur 0.5s ease-out forwards;
+    animation-delay: 0.6s;
+  }
+
+  .slide-down-blur-animate-4 {
+    animation: slide-down-blur 0.5s ease-out forwards;
+    animation-delay: 0.8s;
   }
 
   /* Styles for Featured Projects Section */
@@ -192,156 +234,121 @@
     @apply font-display font-bold bg-black text-white px-8 py-4 rounded-lg hover:bg-text-secondary transition-all duration-300 transform hover:scale-105;
   }
 
-  /* Styles for Currently Building Section */
-  .currently-building-item {
-    @apply bg-white/60 backdrop-blur-sm rounded-lg p-4 border border-border;
+  .writing-vertical {
+    writing-mode: vertical-rl;
+    text-orientation: mixed;
+  }
+  
+  .project-hover {
+    transition: transform 0.4s ease, z-index 0.2s;
+  }
+  
+  .project-hover:hover {
+    transform: translateX(16px) scale(1.05);
+    z-index: 50 !important;
+  }
+  
+  .mobile-project-hover{
+    transition: transform 0.4s ease;
+  }
+  .mobile-project-hover:hover {
+    transform: translateY(-8px);
   }
 
-  /* Styles for Meme Section */
-  .meme-container {
-    @apply transform hover:scale-105 transition-transform duration-300;
+  @keyframes blur-fade-in {
+    0% {
+      opacity: 0;
+      filter: blur(10px);
+    }
+    100% {
+      opacity: 1;
+      filter: blur(0);
+    }
   }
+  
+  .blur-fade-in {
+    animation: blur-fade-in 0.5s ease-out forwards;
+  }
+
+  .blur-fade-in-2 {
+    animation: blur-fade-in 0.5s ease-out forwards;
+    animation-delay: 0.2s;
+  }
+  .blur-fade-in-3 {
+    animation: blur-fade-in 0.5s ease-out forwards;
+    animation-delay: 0.4s;
+  }
+  .blur-fade-in-4 {
+    animation: blur-fade-in 0.5s ease-out forwards;
+    animation-delay: 0.6s;
+  }
+  .blur-fade-in-5 {
+    animation: blur-fade-in 0.5s ease-out forwards;
+    animation-delay: 0.8s;
+  }
+  
+  .blur-fade-in-6 {
+    animation: blur-fade-in 0.5s ease-out forwards;
+    animation-delay: 1s;
+  }
+
+    /* Styles for Timeline*/
+    @keyframes timeline-progress {
+      from { height: 0%; }
+      to { height: 100%; }
+    }
+    
+    .timeline-progress-animate {
+      animation: timeline-progress 2s ease-out forwards;
+    }
+    
+    /* Quick staggered animations */
+    .timeline-quick-1 { animation: slide-down-blur 0.4s ease-out forwards; }
+    .timeline-quick-2 { animation: slide-down-blur 0.4s ease-out forwards; }
+    .timeline-quick-3 { animation: slide-down-blur 0.4s ease-out forwards; }
+    .timeline-quick-4 { animation: slide-down-blur 0.4s ease-out forwards; }
+    .timeline-quick-5 { animation: slide-down-blur 0.4s ease-out forwards; }
+    .timeline-quick-6 { animation: slide-down-blur 0.4s ease-out forwards; }
+    .timeline-quick-7 { animation: slide-down-blur 0.4s ease-out forwards; }
+    .timeline-quick-8 { animation: slide-down-blur 0.4s ease-out forwards; }
+    .timeline-quick-9 { animation: slide-down-blur 0.4s ease-out forwards; }
+
+  /* Styles for blogs */
+  @keyframes slideInUp {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+    /* Styles for 404 animations */
+    @keyframes float {
+      0%, 100% { transform: translateY(0px); }
+      50% { transform: translateY(-10px); }
+    }
+    
+    .float-animation {
+      animation: float 3s ease-in-out infinite;
+    }
 
   /* Styles for Contact CTA Section */
   .contact-cta-btn {
     @apply font-display font-bold text-xl bg-black text-white px-8 py-4 rounded-lg hover:bg-text-secondary transition-all duration-300 transform hover:scale-105;
   }
 
-  .social-link {
-    @apply font-body text-text-secondary hover:text-black transition-colors duration-200;
-  }
-
-  /* Styles for About Page */
-  .about-btn {
-    @apply font-display font-bold px-6 py-3 rounded-lg transition-all duration-300 transform hover:scale-105;
-  }
-
-  .about-btn-primary {
-    @apply bg-black text-white hover:bg-text-secondary;
-  }
-
-  .about-btn-secondary {
-    @apply bg-surface border-2 border-border text-black hover:bg-interactive;
-  }
-
-  .bio-code {
-    @apply bg-surface px-2 py-1 rounded text-sm font-mono text-black;
-  }
-
-  .meme-card {
-    @apply bg-surface/50 rounded-xl p-6 border border-border transition-all duration-300 hover:shadow-lg hover:scale-105;
-  }
-
-  .doing-now-item {
-    @apply pb-6 border-b border-border last:border-b-0 last:pb-0;
-  }
-
-  .tech-category-card {
-    @apply bg-white/60 backdrop-blur-sm rounded-xl p-6 border border-border transition-all duration-300 hover:shadow-lg;
-  }
-
-  .tech-stack-tag {
-    @apply font-body text-sm bg-interactive px-3 py-1 rounded-full text-text-secondary;
-  }
-
-  .learning-tag {
-    @apply font-body text-sm bg-surface px-3 py-1 rounded-full text-black border border-border;
-  }
-
-  .timeline-item {
-    @apply relative;
-  }
-
-  .timeline-dot {
-    @apply relative z-10 flex items-center justify-center w-16 h-16 bg-white rounded-full border-4 border-border shadow-lg;
-  }
-
-  .timeline-year {
-    @apply font-display font-bold text-sm bg-black text-white px-3 py-1 rounded-full;
-  }
-
-  .quote-card {
-    @apply bg-white/60 backdrop-blur-sm rounded-xl p-6 border border-border transition-all duration-300 hover:shadow-lg;
-  }
-
-  .quote-category {
-    @apply font-body text-xs bg-surface px-2 py-1 rounded text-text-tertiary uppercase tracking-wider;
-  }
-
   .about-link-card {
-    @apply group bg-white/80 backdrop-blur-sm rounded-xl p-6 border border-border transition-all duration-300 hover:shadow-lg hover:scale-105 cursor-pointer;
+    @apply bg-white/80 backdrop-blur-sm rounded-xl p-6 border border-border transition-all duration-300 hover:shadow-lg hover:scale-105 cursor-pointer;
   }
 
   .about-cta-btn {
     @apply font-display font-bold bg-black text-white px-6 py-3 rounded-lg hover:bg-text-secondary transition-all duration-300 transform hover:scale-105 inline-block;
   }
 
-  /* Styles for Projects Page */
-  .project-filter-btn {
-    @apply font-display font-bold px-4 py-2 rounded-full border-2 border-border text-black transition-all duration-300 hover:border-black;
-  }
-
-  .project-filter-btn.active {
-    @apply bg-black text-white border-black;
-  }
-
-  .tech-search-input {
-    @apply w-full font-body px-4 py-3 rounded-lg border border-border bg-white/80 backdrop-blur-sm focus:outline-none focus:ring-2 focus:ring-black focus:border-black transition-all duration-300;
-  }
-
-  .project-card {
-    @apply bg-white/80 backdrop-blur-sm rounded-xl p-6 border border-border transition-all duration-300 hover:shadow-lg hover:scale-105 cursor-pointer;
-  }
-
-  .project-category-badge {
-    @apply font-body text-xs bg-surface px-3 py-1 rounded-full text-text-secondary font-medium uppercase tracking-wider;
-  }
-
-  .project-date {
-    @apply font-body text-sm text-text-muted;
-  }
-
-  .tech-tag-small {
-    @apply font-body text-xs bg-interactive px-2 py-1 rounded text-text-secondary;
-  }
-
-  .project-status-small {
-    @apply font-body text-xs bg-green-100 text-green-800 px-2 py-1 rounded-full font-medium;
-  }
-
-  .project-view-btn {
-    @apply font-display font-bold text-sm bg-black text-white px-4 py-2 rounded-lg hover:bg-text-secondary transition-all duration-300 transform hover:scale-105;
-  }
-
-  .load-more-btn {
-    @apply font-display font-bold bg-surface border-2 border-border text-black px-8 py-3 rounded-lg hover:bg-interactive hover:border-black transition-all duration-300;
-  }
-
-  /* Styles for Contact Page */
-  .contact-form {
-    @apply bg-white/80 backdrop-blur-sm rounded-2xl p-8 border border-border shadow-lg space-y-6;
-  }
-
-  .form-group {
-    @apply space-y-2;
-  }
-
-  .form-label {
-    @apply font-display font-bold text-black block text-sm;
-  }
-
-  .form-input {
-    @apply w-full font-body px-4 py-3 rounded-lg border border-border bg-white/80 focus:outline-none focus:ring-2 focus:ring-black focus:border-black transition-all duration-300;
-  }
-
-  .form-textarea {
-    @apply w-full font-body px-4 py-3 rounded-lg border border-border bg-white/80 focus:outline-none focus:ring-2 focus:ring-black focus:border-black transition-all duration-300 resize-y;
-  }
-
-  .form-checkbox {
-    @apply w-4 h-4 rounded border-border focus:ring-2 focus:ring-black mt-1;
-  }
-
+ 
   .contact-submit-btn {
     @apply w-full font-display font-bold bg-black text-white py-4 rounded-lg hover:bg-text-secondary transition-all duration-300 transform hover:scale-105 flex items-center justify-center;
   }
@@ -405,5 +412,30 @@
 
   .border-light {
     border-color: var(--color-border-light);
+  }
+
+  /* Timeline specific classes */
+  .text-text-secondary {
+    color: var(--color-text-secondary);
+  }
+
+  .text-text-muted {
+    color: var(--color-text-muted);
+  }
+
+  .bg-text-secondary {
+    background-color: var(--color-text-secondary);
+  }
+
+  .hover\:bg-text-secondary:hover {
+    background-color: var(--color-text-secondary);
+  }
+
+  .group-hover\:text-text-secondary {
+    transition: color 0.3s ease;
+  }
+  
+  .group:hover .group-hover\:text-text-secondary {
+    color: var(--color-text-secondary);
   }
 }

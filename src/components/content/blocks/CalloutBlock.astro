@@ -1,0 +1,70 @@
+---
+export interface Props {
+  block: {
+    id: string;
+    type: 'callout';
+    variant: 'info' | 'warning' | 'error' | 'success' | 'tip';
+    title?: string;
+    content: string;
+  };
+}
+
+const { block } = Astro.props;
+
+const calloutStyles = {
+  info: 'border-blue-200 bg-blue-50 text-blue-900',
+  warning: 'border-yellow-200 bg-yellow-50 text-yellow-900',
+  error: 'border-red-200 bg-red-50 text-red-900',
+  success: 'border-green-200 bg-green-50 text-green-900',
+  tip: 'border-purple-200 bg-purple-50 text-purple-900'
+};
+
+const iconStyles = {
+  info: 'text-blue-500',
+  warning: 'text-yellow-500',
+  error: 'text-red-500',
+  success: 'text-green-500',
+  tip: 'text-purple-500'
+};
+
+const defaultIcons = {
+  info: `<svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+    <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/>
+  </svg>`,
+  warning: `<svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+    <path d="M1 21h22L12 2 1 21zm12-3h-2v-2h2v2zm0-4h-2v-4h2v4z"/>
+  </svg>`,
+  error: `<svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+    <path d="M12 2C6.47 2 2 6.47 2 12s4.47 10 10 10 10-4.47 10-10S17.53 2 12 2zm5 13.59L15.59 17 12 13.41 8.41 17 7 15.59 10.59 12 7 8.41 8.41 7 12 10.59 15.59 7 17 8.41 13.41 12 17 15.59z"/>
+  </svg>`,
+  success: `<svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+    <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+  </svg>`,
+  tip: `<svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+    <path d="M9 21c0 .5.4 1 1 1h4c.6 0 1-.5 1-1v-1H9v1zm3-19C8.1 2 5 5.1 5 9c0 2.4 1.2 4.5 3 5.7V17c0 .5.4 1 1 1h6c.6 0 1-.5 1-1v-2.3c1.8-1.3 3-3.4 3-5.7 0-3.9-3.1-7-7-7z"/>
+  </svg>`
+};
+
+// Función para procesar markdown básico inline
+function processInlineMarkdown(text: string): string {
+  return text
+    .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
+    .replace(/\*(.*?)\*/g, '<em>$1</em>')
+    .replace(/`(.*?)`/g, '<code>$1</code>');
+}
+---
+
+<div class={`callout callout-${block.variant} ${calloutStyles[block.variant]} border-l-4 p-4 my-6 rounded-r-lg`}>
+  <div class="flex">
+    <div class={`flex-shrink-0 ${iconStyles[block.variant]}`}>
+      <span class="text-lg" set:html={defaultIcons[block.variant]} />
+    </div>
+    <div class="ml-3">
+      {block.title && (
+        <h4 class="font-medium mb-1">{block.title}</h4>
+      )}
+      <div class="text-sm" set:html={processInlineMarkdown(block.content)} />
+    </div>
+  </div>
+</div>
+

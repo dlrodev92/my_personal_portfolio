@@ -1,0 +1,85 @@
+---
+import ProjectCard from "./ProjectCard.astro";
+import type { Project } from '../../../lib/types';
+
+interface Props {
+  projects?: Project[];
+}
+
+const { projects = [] } = Astro.props;
+
+const featuredProjects = projects.map(project => ({
+  title: project.title,
+  description: project.subtitle || project.overview?.impact || 'No description available',
+  tech: project.technologies?.map(tech => tech.name) || [],
+  status: project.status === 'LIVE' ? ' Live' : 
+          project.status === 'IN_PROGRESS' ? '⚡ In Progress' : 
+          '🛠 Building',
+  image: project.heroImage,
+  link: project.liveDemo || `/projects/${project.slug}`,
+}));
+
+---
+
+<!-- Desktop (stacked cards) -->
+<div class="relative hidden min-[1350px]:block min-h-[400px] w-full">
+  {featuredProjects.map((project, index) => (
+    <article
+      id={`project-card-${index}`}
+      class="absolute opacity-0 top-0 min-w-[230px] h-[380px] rounded-xl overflow-hidden bg-black shadow-xl group project-hover"
+      style={`left: ${index * 200}px; z-index: ${10 + index}`}
+    >
+      <div
+        class="absolute inset-0 bg-cover bg-center brightness-75 grayscale group-hover:brightness-50 group-hover:grayscale-0 transition-all duration-300"
+        style={`background-image: url('${project.image}')`}
+      ></div>
+
+      <div class="absolute inset-0 flex items-end justify-end p-4 opacity-100 group-hover:opacity-0 transition-opacity duration-300 z-10">
+        <h3 class="text-white text-lg font-bold writing-vertical border-t-4 border-yellow-400 p-2 mr-6">
+          {project.title}
+        </h3>
+      </div>
+
+      <div class="absolute inset-0 flex flex-col justify-end p-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-20 bg-gradient-to-t from-black/90 via-black/60 to-transparent text-white space-y-2">
+        <span class="bg-yellow-400 text-black text-xs font-bold px-3 py-1 rounded-full w-fit">{project.status}</span>
+        <h3 class="text-xl font-bold">{project.title}</h3>
+        <p class="text-sm text-gray-200">{project.description}</p>
+        <div class="flex flex-wrap gap-2 text-xs">
+          {project.tech.map((tech) => (
+            <span class="px-2 py-1 border border-white/30 rounded bg-white/10 backdrop-blur">{tech}</span>
+          ))}
+        </div>
+        <a href={project.link} class="text-yellow-400 text-sm font-bold hover:text-white transition">
+          View Project →
+        </a>
+      </div>
+    </article>
+  ))}
+</div>
+
+<!-- Mobile -->
+<div class="block min-[1350px]:hidden w-full">
+  <div class="flex flex-wrap gap-4 justify-center">
+    {featuredProjects.map((project, index) => (
+      <ProjectCard project={project} class={`blur-fade-in-${index + 1}`} key={index} />
+    ))}
+  </div>
+</div>
+
+<!-- Fallback when no projects -->
+{featuredProjects.length === 0 && (
+  <div class="text-center py-8">
+    <p class="text-gray-500">No featured projects available at the moment.</p>
+  </div>
+)}
+
+<script>
+  import { addElementToObserver } from '../../../helpers/observerHelper';
+  
+  // Only add observers if projects exist
+  const projectCount = document.querySelectorAll('[id^="project-card-"]').length;
+  
+  for (let i = 0; i < projectCount; i++) {
+    addElementToObserver(`project-card-${i}`, `blur-fade-in${i === 0 ? '' : `-${i + 1}`}`);
+  }
+</script>
