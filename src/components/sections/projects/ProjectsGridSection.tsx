@@ -21,28 +21,33 @@ const ProjectsGrid = ({ projects: apiProjects }: Props) => {
   const [activeCategory, setActiveCategory] = useState('all');
   const [filteredProjects, setFilteredProjects] = useState<Project[]>([]);
 
-  const transformedProjects: Project[] = apiProjects.map(project => {
+  const transformedProjects: Project[] = apiProjects.map((project) => {
     const transformed = {
       title: project.title,
       description: project.subtitle || 'No description available',
-      tech: project.technologies?.map(tech => tech.name) || [],
-      status: project.status === 'LIVE' ? '🚀 Live' : 
-              project.status === 'IN_PROGRESS' ? '⚡ In Progress' : 
-              '🛠 Building',
+      tech: project.technologies?.map((tech) => tech.name) || [],
+      status:
+        project.status === 'LIVE'
+          ? '🚀 Live'
+          : project.status === 'IN_PROGRESS'
+            ? '⚡ In Progress'
+            : '🛠 Building',
       image: project.heroImage,
       slug: project.slug, // Make sure this is being passed
       category: project.type.toLowerCase(),
     };
-    
-    
+
     return transformed;
   });
 
   useEffect(() => {
-    const filtered = activeCategory === 'all' 
-      ? transformedProjects 
-      : transformedProjects.filter(project => project.category === activeCategory);
-    
+    const filtered =
+      activeCategory === 'all'
+        ? transformedProjects
+        : transformedProjects.filter(
+            (project) => project.category === activeCategory
+          );
+
     setFilteredProjects(filtered);
   }, [activeCategory, transformedProjects]);
 
@@ -53,8 +58,7 @@ const ProjectsGrid = ({ projects: apiProjects }: Props) => {
   return (
     <section className="p-2">
       <div className="w-full">
-        
-        <ProjectFilter 
+        <ProjectFilter
           activeCategory={activeCategory}
           onCategoryChange={handleCategoryChange}
           projectCount={filteredProjects.length}
@@ -64,9 +68,8 @@ const ProjectsGrid = ({ projects: apiProjects }: Props) => {
           {filteredProjects.length > 0 ? (
             <div className="flex flex-wrap gap-4 justify-center">
               {filteredProjects.map((project, index) => {
-              
                 return (
-                  <ProjectCard 
+                  <ProjectCard
                     key={`${project.slug}-${activeCategory}`} // Use slug for better keys
                     project={project}
                     index={index}
@@ -77,9 +80,19 @@ const ProjectsGrid = ({ projects: apiProjects }: Props) => {
           ) : (
             <div className="text-center py-16">
               <div className="w-16 h-16 mx-auto mb-4 text-gray-400">
-                <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-                  <circle cx="11" cy="11" r="8"/>
-                  <path d="m21 21-4.35-4.35"/>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="64"
+                  height="64"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="1.5"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                >
+                  <circle cx="11" cy="11" r="8" />
+                  <path d="m21 21-4.35-4.35" />
                 </svg>
               </div>
               <h3 className="font-display text-xl font-bold text-black mb-2">
@@ -88,7 +101,7 @@ const ProjectsGrid = ({ projects: apiProjects }: Props) => {
               <p className="font-body text-gray-600 mb-4">
                 👩🏻‍💻 Working on new stuff, check back later!
               </p>
-              <button 
+              <button
                 onClick={() => setActiveCategory('all')}
                 className="font-body text-black hover:text-yellow-600 transition-colors underline font-medium"
               >
@@ -97,7 +110,6 @@ const ProjectsGrid = ({ projects: apiProjects }: Props) => {
             </div>
           )}
         </div>
-
       </div>
     </section>
   );

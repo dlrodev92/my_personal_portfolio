@@ -36,7 +36,7 @@ export async function fetchApi<T>(
     return data;
   } catch (error) {
     console.error('API Error:', error);
-    
+
     if (error instanceof APIError) {
       return {
         success: false,
@@ -51,9 +51,11 @@ export async function fetchApi<T>(
   }
 }
 
-export function buildQueryString(params: Record<string, string | undefined>): string {
+export function buildQueryString(
+  params: Record<string, string | undefined>
+): string {
   const searchParams = new URLSearchParams();
-  
+
   Object.entries(params).forEach(([key, value]) => {
     if (value !== undefined && value !== '') {
       searchParams.append(key, value);

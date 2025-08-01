@@ -5,13 +5,13 @@ import type {
   ApiResponse,
   ProjectFilters,
   BlogFilters,
-  HealthStatus
+  HealthStatus,
 } from './types';
 
 import {
   fetchApi,
   buildQueryString,
-  getEnvironmentUrl
+  getEnvironmentUrl,
 } from '../helpers/apiHelpers';
 
 class PortfolioAPI {
@@ -25,7 +25,9 @@ class PortfolioAPI {
   // ─── PROJECTS ─────────────────────────────────────────────
   //
 
-  async getProjects(filters: ProjectFilters = {}): Promise<ApiResponse<Project[]>> {
+  async getProjects(
+    filters: ProjectFilters = {}
+  ): Promise<ApiResponse<Project[]>> {
     const query = buildQueryString(filters);
     const endpoint = `${this.baseUrl}/projects${query}`;
     return fetchApi<Project[]>(endpoint);
@@ -36,7 +38,9 @@ class PortfolioAPI {
     return fetchApi<Project>(endpoint);
   }
 
-  async getProjectCards(filters: ProjectFilters & { limit?: number; techLimit?: number } = {}): Promise<ApiResponse<Project[]>> {
+  async getProjectCards(
+    filters: ProjectFilters & { limit?: number; techLimit?: number } = {}
+  ): Promise<ApiResponse<Project[]>> {
     const query = buildQueryString({
       ...filters,
       limit: filters.limit?.toString(),
@@ -46,7 +50,9 @@ class PortfolioAPI {
     return fetchApi<Project[]>(endpoint);
   }
 
-  async getFeaturedProjects(limit: number = 3): Promise<ApiResponse<Project[]>> {
+  async getFeaturedProjects(
+    limit: number = 3
+  ): Promise<ApiResponse<Project[]>> {
     const query = buildQueryString({ status: 'LIVE' });
     const endpoint = `${this.baseUrl}/projects${query}`;
     const response = await fetchApi<Project[]>(endpoint);
@@ -64,14 +70,20 @@ class PortfolioAPI {
   async getProjectsByType(): Promise<ApiResponse<Record<string, Project[]>>> {
     const response = await this.getProjects();
     if (!response.success || !response.data) {
-      return { success: false, error: response.error || 'Failed to fetch projects' };
+      return {
+        success: false,
+        error: response.error || 'Failed to fetch projects',
+      };
     }
 
-    const grouped = response.data.reduce((acc, project) => {
-      acc[project.type] = acc[project.type] || [];
-      acc[project.type].push(project);
-      return acc;
-    }, {} as Record<string, Project[]>);
+    const grouped = response.data.reduce(
+      (acc, project) => {
+        acc[project.type] = acc[project.type] || [];
+        acc[project.type].push(project);
+        return acc;
+      },
+      {} as Record<string, Project[]>
+    );
 
     return { success: true, data: grouped };
   }
@@ -79,14 +91,20 @@ class PortfolioAPI {
   async getProjectsByStatus(): Promise<ApiResponse<Record<string, Project[]>>> {
     const response = await this.getProjects();
     if (!response.success || !response.data) {
-      return { success: false, error: response.error || 'Failed to fetch projects' };
+      return {
+        success: false,
+        error: response.error || 'Failed to fetch projects',
+      };
     }
 
-    const grouped = response.data.reduce((acc, project) => {
-      acc[project.status] = acc[project.status] || [];
-      acc[project.status].push(project);
-      return acc;
-    }, {} as Record<string, Project[]>);
+    const grouped = response.data.reduce(
+      (acc, project) => {
+        acc[project.status] = acc[project.status] || [];
+        acc[project.status].push(project);
+        return acc;
+      },
+      {} as Record<string, Project[]>
+    );
 
     return { success: true, data: grouped };
   }
@@ -95,7 +113,9 @@ class PortfolioAPI {
   // ─── BLOGS ────────────────────────────────────────────────
   //
 
-  async getBlogPosts(filters: BlogFilters = {}): Promise<ApiResponse<BlogPost[]>> {
+  async getBlogPosts(
+    filters: BlogFilters = {}
+  ): Promise<ApiResponse<BlogPost[]>> {
     const query = buildQueryString(filters);
     const endpoint = `${this.baseUrl}/blogs${query}`;
     return fetchApi<BlogPost[]>(endpoint);
@@ -106,15 +126,18 @@ class PortfolioAPI {
     return fetchApi<BlogPost>(endpoint);
   }
 
-  async getLatestBlogPosts(limit: number = 3): Promise<ApiResponse<BlogPost[]>> {
+  async getLatestBlogPosts(
+    limit: number = 3
+  ): Promise<ApiResponse<BlogPost[]>> {
     const response = await this.getBlogPosts();
 
     if (!response.success || !response.data) return response;
 
     const sorted = response.data
-      .sort((a, b) =>
-        new Date(b.publishedAt || b.createdAt).getTime() -
-        new Date(a.publishedAt || a.createdAt).getTime()
+      .sort(
+        (a, b) =>
+          new Date(b.publishedAt || b.createdAt).getTime() -
+          new Date(a.publishedAt || a.createdAt).getTime()
       )
       .slice(0, limit);
 

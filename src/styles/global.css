@@ -238,17 +238,19 @@
     writing-mode: vertical-rl;
     text-orientation: mixed;
   }
-  
+
   .project-hover {
-    transition: transform 0.4s ease, z-index 0.2s;
+    transition:
+      transform 0.4s ease,
+      z-index 0.2s;
   }
-  
+
   .project-hover:hover {
     transform: translateX(16px) scale(1.05);
     z-index: 50 !important;
   }
-  
-  .mobile-project-hover{
+
+  .mobile-project-hover {
     transition: transform 0.4s ease;
   }
   .mobile-project-hover:hover {
@@ -265,7 +267,7 @@
       filter: blur(0);
     }
   }
-  
+
   .blur-fade-in {
     animation: blur-fade-in 0.5s ease-out forwards;
   }
@@ -286,32 +288,54 @@
     animation: blur-fade-in 0.5s ease-out forwards;
     animation-delay: 0.8s;
   }
-  
+
   .blur-fade-in-6 {
     animation: blur-fade-in 0.5s ease-out forwards;
     animation-delay: 1s;
   }
 
-    /* Styles for Timeline*/
-    @keyframes timeline-progress {
-      from { height: 0%; }
-      to { height: 100%; }
+  /* Styles for Timeline*/
+  @keyframes timeline-progress {
+    from {
+      height: 0%;
     }
-    
-    .timeline-progress-animate {
-      animation: timeline-progress 2s ease-out forwards;
+    to {
+      height: 100%;
     }
-    
-    /* Quick staggered animations */
-    .timeline-quick-1 { animation: slide-down-blur 0.4s ease-out forwards; }
-    .timeline-quick-2 { animation: slide-down-blur 0.4s ease-out forwards; }
-    .timeline-quick-3 { animation: slide-down-blur 0.4s ease-out forwards; }
-    .timeline-quick-4 { animation: slide-down-blur 0.4s ease-out forwards; }
-    .timeline-quick-5 { animation: slide-down-blur 0.4s ease-out forwards; }
-    .timeline-quick-6 { animation: slide-down-blur 0.4s ease-out forwards; }
-    .timeline-quick-7 { animation: slide-down-blur 0.4s ease-out forwards; }
-    .timeline-quick-8 { animation: slide-down-blur 0.4s ease-out forwards; }
-    .timeline-quick-9 { animation: slide-down-blur 0.4s ease-out forwards; }
+  }
+
+  .timeline-progress-animate {
+    animation: timeline-progress 2s ease-out forwards;
+  }
+
+  /* Quick staggered animations */
+  .timeline-quick-1 {
+    animation: slide-down-blur 0.4s ease-out forwards;
+  }
+  .timeline-quick-2 {
+    animation: slide-down-blur 0.4s ease-out forwards;
+  }
+  .timeline-quick-3 {
+    animation: slide-down-blur 0.4s ease-out forwards;
+  }
+  .timeline-quick-4 {
+    animation: slide-down-blur 0.4s ease-out forwards;
+  }
+  .timeline-quick-5 {
+    animation: slide-down-blur 0.4s ease-out forwards;
+  }
+  .timeline-quick-6 {
+    animation: slide-down-blur 0.4s ease-out forwards;
+  }
+  .timeline-quick-7 {
+    animation: slide-down-blur 0.4s ease-out forwards;
+  }
+  .timeline-quick-8 {
+    animation: slide-down-blur 0.4s ease-out forwards;
+  }
+  .timeline-quick-9 {
+    animation: slide-down-blur 0.4s ease-out forwards;
+  }
 
   /* Styles for blogs */
   @keyframes slideInUp {
@@ -325,15 +349,20 @@
     }
   }
 
-    /* Styles for 404 animations */
-    @keyframes float {
-      0%, 100% { transform: translateY(0px); }
-      50% { transform: translateY(-10px); }
+  /* Styles for 404 animations */
+  @keyframes float {
+    0%,
+    100% {
+      transform: translateY(0px);
     }
-    
-    .float-animation {
-      animation: float 3s ease-in-out infinite;
+    50% {
+      transform: translateY(-10px);
     }
+  }
+
+  .float-animation {
+    animation: float 3s ease-in-out infinite;
+  }
 
   /* Styles for Contact CTA Section */
   .contact-cta-btn {
@@ -348,7 +377,6 @@
     @apply font-display font-bold bg-black text-white px-6 py-3 rounded-lg hover:bg-text-secondary transition-all duration-300 transform hover:scale-105 inline-block;
   }
 
- 
   .contact-submit-btn {
     @apply w-full font-display font-bold bg-black text-white py-4 rounded-lg hover:bg-text-secondary transition-all duration-300 transform hover:scale-105 flex items-center justify-center;
   }
@@ -434,7 +462,7 @@
   .group-hover\:text-text-secondary {
     transition: color 0.3s ease;
   }
-  
+
   .group:hover .group-hover\:text-text-secondary {
     color: var(--color-text-secondary);
   }

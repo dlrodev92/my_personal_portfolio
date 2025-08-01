@@ -11,13 +11,13 @@ interface VideoPlayerProps {
 }
 
 export default function VideoPlayer({
-  videoUrl = "public/Por qué DESAPARECE tanta GENTE_.mp4",
-  posterUrl = "https://media4.giphy.com/media/cYZkY9HeKgofpQnOUl/giphy.gif",
-  title = "Meet David",
-  description = "Full-stack developer from Spain, now in London",
+  videoUrl = 'public/Por qué DESAPARECE tanta GENTE_.mp4',
+  posterUrl = 'https://media4.giphy.com/media/cYZkY9HeKgofpQnOUl/giphy.gif',
+  title = 'Meet David',
+  description = 'Full-stack developer from Spain, now in London',
   autoplay = false, // desactivado por defecto
   loop = false,
-  muted = false,    // sonido activado
+  muted = false, // sonido activado
 }: VideoPlayerProps) {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const videoRef = useRef<HTMLVideoElement>(null);
@@ -43,7 +43,7 @@ export default function VideoPlayer({
     if (isModalOpen && videoRef.current) {
       videoRef.current.muted = muted; // set mute
       videoRef.current.play().catch((err) => {
-        console.warn("El navegador bloqueó la reproducción automática:", err);
+        console.warn('El navegador bloqueó la reproducción automática:', err);
       });
     }
   }, [isModalOpen, muted]);
@@ -77,7 +77,9 @@ export default function VideoPlayer({
                 </div>
 
                 <div className="space-y-2">
-                  <h3 className="font-semibold text-white drop-shadow">{title}</h3>
+                  <h3 className="font-semibold text-white drop-shadow">
+                    {title}
+                  </h3>
                   <p className="text-sm text-gray-200">{description}</p>
                   <p className="text-xs text-gray-300">Tap to watch</p>
                 </div>
@@ -112,8 +114,18 @@ export default function VideoPlayer({
               }}
               className="absolute top-2 right-2 z-50 p-2 rounded-full bg-white/80 hover:bg-white transition-all"
             >
-              <svg className="w-6 h-6 text-black" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12" />
+              <svg
+                className="w-6 h-6 text-black"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="2"
+                  d="M6 18L18 6M6 6l12 12"
+                />
               </svg>
             </button>
 

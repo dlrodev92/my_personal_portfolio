@@ -6,12 +6,40 @@ import ContactLogosSection from '../components/sections/contact/ContactLogosSect
 import FunEasterEggSection from '../components/sections/contact/FunEasterEggSection.astro';
 import ContactCTASection from '../components/sections/index/ContactCTASection.astro';
 import ContactFormSection from '../components/sections/contact/ContactFormSection.astro';
+
+const companies = [
+  {
+    name: "El Dorado",
+    logo: "public/elDoradoLogo.webp",
+    alt: "El Dorado logo"
+  },
+  {
+    name: "IbetjoClean",
+    logo: "public/ibetjoLogo.webp", 
+    alt: "IbetjoClean logo"
+  },
+  {
+    name: "IberoSucre",
+    logo: "public/iberosucreLogo.webp",
+    alt: "IberoSucre logo"
+  },
+  {
+	name: "UWTS University",
+	logo: "public/uwtsdLogo.webp",
+	alt: "UWTS University logo"
+  }
+];
 ---
+
+
 
 <Layout>
 	<ContactHeroSection />
 	<ServicesSection />
-	<ContactLogosSection />
+	<ContactLogosSection
+		companies={companies} 
+		title='Companies I’ve Worked With'
+	/>
 	<FunEasterEggSection />
 	<ContactFormSection /> 
 	<ContactCTASection />
