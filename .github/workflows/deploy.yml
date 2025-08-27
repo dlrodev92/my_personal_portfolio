@@ -37,4 +37,4 @@ jobs:
           aws-region: 'eu-west-2'
 
       - name: Sync dist/ to S3
-        run: aws s3 sync ./dist s3://myportfoliofrontend --delete
+        run: aws s3 sync ./dist s3://www.daviddevlopez.com --delete
