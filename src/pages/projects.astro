@@ -15,7 +15,11 @@ const stats = {
 };
 ---
 
-<Layout>
+<Layout
+  title="Projects Portfolio | David Lopez Full-Stack Developer"
+  description="Explore a curated showcase of projects built by David Lopez — from freelance work to personal apps and infrastructure experiments. Filter by category or technology stack."
+  image="/projects-seo-image.webp"
+>
 	<ProjectsHeroSection stats={stats} />
 	<ProjectsGridSection projects={allProjects} client:load />
 </Layout>

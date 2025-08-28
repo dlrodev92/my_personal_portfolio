@@ -46,8 +46,8 @@ const Navigation = () => {
                 </NavLink>
               ))}
               <a
-                href="/cv.pdf"
-                download="David_Rodriguez_CV.pdf"
+                href="/DL-CV.pdf"
+                download="David-lopez-CV.pdf"
                 className="inline-flex items-center gap-2 bg-black text-white text-xs font-display font-bold px-4 py-2 rounded-lg hover:bg-text-secondary transition-all duration-300 transform hover:scale-105 group"
               >
                 <svg

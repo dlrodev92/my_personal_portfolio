@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://daviddevlopez.com/sitemap-index.xml

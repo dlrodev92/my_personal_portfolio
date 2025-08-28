@@ -16,7 +16,11 @@ const latestBlogResponse = await portfolioAPI.getLatestBlogPosts(1);
 const latestBlog = latestBlogResponse.success && Array.isArray(latestBlogResponse.data) && latestBlogResponse.data.length > 0 ? latestBlogResponse.data[0] : null;
 ---
 
-<Layout>
+<Layout
+  title="David Lopez | Full-Stack Developer Portfolio"
+  description="Full-Stack Developer based in London and Granada. Skilled in Astro, Next.js, TypeScript, and AWS. Explore my projects, blog posts, and journey in web development and DevOps."
+  image="/index-seo-image.webp"
+>
 	<HeroSection />
 	<Overview />
 	<FeaturedProjectsSection projects={featuredProjects} />

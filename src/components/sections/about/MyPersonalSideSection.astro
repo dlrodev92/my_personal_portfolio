@@ -6,100 +6,67 @@
     </div>
 
     <!-- Bento Grid -->
-    <div class="grid grid-cols-12 grid-rows-6 gap-4 h-[700px]">
+    <div class="
+      grid gap-4 
+      grid-cols-1 auto-rows-auto 
+      sm:grid-cols-6 
+      lg:grid-cols-12 lg:grid-rows-6 lg:h-[700px]
+    ">
       
-      <!-- Row 1: Hero - Urban Explorer (spans 8 cols, 2 rows) -->
-      <div class="col-span-8 row-span-2 rounded-2xl p-8 relative overflow-hidden">
-        <!-- Background Image with Overlay -->
-        <div 
-          class="absolute inset-0 bg-cover bg-top grayscale"
-          style="background-image: url('https://blogger.googleusercontent.com/img/a/AVvXsEiQQss6Eh5S5wBJhvyK4LK172Dk52cuv0vlzb2z2bfw1MkyhKDSafy_gmJNvuCpTWjS2wlDlC5MZ6LOgu5IZmZfsZRGLXqeu4mZRZhnWocunse6X9afxYbIrZ8Yzv3-v26UBSUC0FRnjwb2_ItzfWrSjMF-HKzA-9AYlNivehAU6U9UyGIwWuluF3SF5g=w1200-h630-p-k-no-nu')"
-        ></div>
+      <!-- Hero -->
+      <div class="col-span-1 sm:col-span-6 lg:col-span-8 lg:row-span-2 rounded-2xl p-8 relative overflow-hidden">
+        <div class="absolute inset-0 bg-cover bg-top grayscale"
+          style="background-image: url('https://blogger.googleusercontent.com/img/a/AVvXsEiQQss6Eh5S5wBJhvyK4LK172Dk52cuv0vlzb2z2bfw1MkyhKDSafy_gmJNvuCpTWjS2wlDlC5MZ6LOgu5IZmZfsZRGLXqeu4mZRZhnWocunse6X9afxYbIrZ8Yzv3-v26UBSUC0FRnjwb2_ItzfWrSjMF-HKzA-9AYlNivehAU6U9UyGIwWuluF3SF5g=w1200-h630-p-k-no-nu')">
+        </div>
         <div class="absolute inset-0 bg-black/40"></div>
-        
         <div class="relative z-10 h-full flex flex-col justify-between items-start">
-          <div>
-            <h3 class="font-display text-2xl font-bold text-text-primary mb-4">Urban Explorer</h3>
-            <p class="text-text-primary leading-relaxed max-w-md">
-              History reminds me that nothing is really new. I read about the past Spain, Hispanic America, the old Mediterranean world to better understand the present and how people repeat the same patterns.
-            </p>
-          </div>
-  
+          <h3 class="font-display text-2xl font-bold text-white mb-4">History Lover</h3>
+          <p class="text-white/90 max-w-md">History reminds me that nothing is really new...</p>
         </div>
       </div>
 
-     <!-- Row 1-2: Football Passion (4 cols, 2 rows) -->
-        <div class="col-span-4 row-span-2 rounded-2xl p-6 relative overflow-hidden">
-        <!-- Background Image with Overlay -->
-        <div 
-            class="absolute inset-0 bg-cover bg-center grayscale"
-            style="background-image: url('https://www.granadaenjuego.com/ficheros/202505/imagen60740_0_original.jpg')"
-        ></div>
+      <!-- Football -->
+      <div class="col-span-1 sm:col-span-6 lg:col-span-4 lg:row-span-2 rounded-2xl p-6 relative overflow-hidden">
+        <div class="absolute inset-0 bg-cover bg-center grayscale"
+          style="background-image: url('https://www.granadaenjuego.com/ficheros/202505/imagen60740_0_original.jpg')"></div>
         <div class="absolute inset-0 bg-black/50"></div>
-        
-        <div class="relative z-10 h-full flex flex-col justify-between">
-            <div>
-            <h3 class="font-display text-xl font-bold text-white mb-4 flex items-center gap-2">
-              <span>
-                <img src="https://statics-maker.llt-services.com/gra/images/2023/02/14/xlarge/4ad4997f-e480-4bf4-90da-f91c77a3212c.png" alt="Granada CF" class="h-7 w-auto" />
-              </span>
-              Football Passion
-            </h3>
-            <p class="text-text-primary text-sm leading-relaxed mb-4">
-                "Football is the most important thing among the least important things in life."
-            </p>
-            <p class="text-text-primary text-sm leading-relaxed">
-                Every weekend, I’m watching football and yes, always rooting for Granada CF, no matter how rough the season.
-            </p>
-            </div>
-        </div>
-        </div>
-
-      <!-- Row 3: Guitar (4 cols, 1 row) -->
-      <div class="col-span-4 row-span-1 bg-white border-2 border-gray-100 rounded-2xl p-6 hover:border-yellow-400 transition-colors duration-200">
-        <div class="h-full flex flex-col justify-center">
-          <h4 class="font-semibold text-black mb-2">Lifting Weights</h4>
-          <p class="text-gray-600 text-sm">I train a few times a week — nothing fancy, just consistent lifting. It keeps my mind sharp and reminds me that progress is built rep by rep.</p>
-        </div>
-      </div>
-
-      <!-- Row 3: Japanese Culture (4 cols, 1 row) -->
-      <div class="col-span-4 row-span-1 bg-white border-2 border-gray-100 rounded-2xl p-6 hover:border-yellow-400 transition-colors duration-200">
-        <div class="h-full flex flex-col justify-center">
-          <h4 class="font-semibold text-black mb-2">On Two Wheels</h4>
-          <p class="text-gray-600 text-sm">My bicycle’s my main way around London. No delays, no small talk just fresh air and a good route.</p>
-        </div>
-      </div>
-
-      <!-- Row 3: Reading (4 cols, 1 row) -->
-      <div class="col-span-4 row-span-1 bg-white border-2 border-gray-100 rounded-2xl p-6 hover:border-yellow-400 transition-colors duration-200">
-        <div class="h-full flex flex-col justify-center">
-          <h4 class="font-semibold text-black mb-2">Gaming Fan</h4>
-          <p class="text-gray-600 text-sm">Big gamer at heart, just not much lately life’s busy, and GTA VI refuses to come out.
-
-</p>
-        </div>
-      </div>
-
-      <!-- Row 4-5: Cooking Adventures (6 cols, 2 rows) -->
-     
-        <div class="col-span-6 row-span-2 rounded-2xl p-8 relative overflow-hidden">
-        <!-- Background Image with Overlay -->
-        <div 
-            class="absolute inset-0 bg-cover bg-center grayscale"
-            style="background-image: url('https://www.dephna.com/wp-content/uploads/pexels-elle-hughes-2696064-1-1024x683.jpg')"
-        ></div>
-        <div class="absolute inset-0 bg-black/60"></div>
-        
         <div class="relative z-10 h-full flex flex-col">
-            <h3 class="font-display text-xl font-bold text-white mb-6">Code Wasn’t My First Craft</h3>
-            <p class="text-white/90 leading-relaxed">I learned to build things under pressure long before I wrote code. Working as a chef shaped how I solve problems: fast, focused, and always aiming for better.
-            </p>
+          <h3 class="font-display text-xl font-bold text-white mb-4 flex items-center gap-2">
+            <img src="https://statics-maker.llt-services.com/gra/images/2023/02/14/xlarge/4ad4997f-e480-4bf4-90da-f91c77a3212c.png" alt="Granada CF" class="h-7 w-auto" />
+            Football Passion
+          </h3>
+          <p class="text-white/90 text-sm">Every weekend, I’m watching football...</p>
         </div>
-        </div>
+      </div>
 
-      <!-- Row 4-5: Random Hobbies (6 cols, 2 rows) -->
-    <div class="col-span-6 row-span-2 bg-cover bg-center grayscale rounded-2xl"
-    style="background-image: url('../../../../public/collage.webp')"></div>
+      <!-- Row 3 small cards -->
+      <div class="col-span-1 sm:col-span-3 lg:col-span-4 bg-white border-2 border-gray-100 rounded-2xl p-6">
+        <h4 class="font-semibold text-black mb-2">Lifting Weights</h4>
+        <p class="text-gray-600 text-sm">I train a few times a week...</p>
+      </div>
+      <div class="col-span-1 sm:col-span-3 lg:col-span-4 bg-white border-2 border-gray-100 rounded-2xl p-6">
+        <h4 class="font-semibold text-black mb-2">On Two Wheels</h4>
+        <p class="text-gray-600 text-sm">My bicycle’s my main way around London...</p>
+      </div>
+      <div class="col-span-1 sm:col-span-6 lg:col-span-4 bg-white border-2 border-gray-100 rounded-2xl p-6">
+        <h4 class="font-semibold text-black mb-2">Gaming Fan</h4>
+        <p class="text-gray-600 text-sm">Big gamer at heart...</p>
+      </div>
+
+      <!-- Cooking -->
+      <div class="col-span-1 sm:col-span-6 lg:col-span-6 lg:row-span-2 rounded-2xl p-8 relative overflow-hidden">
+        <div class="absolute inset-0 bg-cover bg-center grayscale"
+          style="background-image: url('https://www.dephna.com/wp-content/uploads/pexels-elle-hughes-2696064-1-1024x683.jpg')"></div>
+        <div class="absolute inset-0 bg-black/60"></div>
+        <div class="relative z-10 h-full flex flex-col justify-between items-start">
+          <h3 class="font-display text-xl font-bold text-white">Code Wasn’t My First Craft</h3>
+          <p class="text-white/90">I learned to build things under pressure long before I wrote code...</p>
+        </div>
+      </div>
+
+      <!-- Collage -->
+      <div class="col-span-1 sm:col-span-6 lg:col-span-6 lg:row-span-2 bg-cover bg-center grayscale rounded-2xl"
+        style="background-image: url('../../../../public/collage.webp')"></div>
+    </div>
   </div>
 </section>

@@ -97,7 +97,11 @@ const project = {
 };
 ---
 
-<Layout>
+<Layout
+  title={`${project.hero.title} | Project by David Lopez`}
+  description={project.overview.solution || project.overview.problem || "Full-stack project case study by David Lopez"}
+  image={project.hero.image}
+>
   <ProjectHero project={project.hero} />
   <ProjectOverview project={project.overview} />
   <TechnicalDeepDive project={project.technical} />

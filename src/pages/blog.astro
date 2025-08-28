@@ -5,15 +5,15 @@ import BlogGridSection from '../components/sections/blog/BlogGridSection';
 import LatestBlog from '../components/sections/blog/LatestBlog.tsx';
 import { portfolioAPI } from '../lib/api';
 
-// Fetch all blog posts from API
+
 const blogPostsResponse = await portfolioAPI.getBlogPosts();
 const allBlogPosts = blogPostsResponse.success && Array.isArray(blogPostsResponse.data) ? blogPostsResponse.data : [];
 
-// Get latest blog post
-const latestBlogResponse = await portfolioAPI.getLatestBlogPosts(1);
-const latestBlogPost = latestBlogResponse.success && latestBlogResponse.data.length > 0 ? latestBlogResponse.data[0] : null;
 
-// Generate blog statistics
+const latestBlogResponse = await portfolioAPI.getLatestBlogPosts(1);
+const latestBlogPost = latestBlogResponse.success && Array.isArray(latestBlogResponse.data) && latestBlogResponse.data.length > 0 ? latestBlogResponse.data[0] : null;
+
+
 const stats = {
   totalPosts: allBlogPosts.length,
   totalReadTime: allBlogPosts.reduce((sum, post) => sum + (post.readTime || 0), 0),
@@ -21,7 +21,11 @@ const stats = {
 };
 ---
 
-<Layout>
+<Layout
+  title="David Lopez | Tech Blog & Digital Journal"
+  description="Personal journal on web development, freelancing, mindset, and growth. Weekly notes on coding, cloud, and the human side of tech."
+  image="/blog-seo-image.webp"
+>
 	<BlogHeroSection stats={stats} />
 	<LatestBlog latestPost={latestBlogPost} client:load />
 	<BlogGridSection blogPosts={allBlogPosts} client:load/>

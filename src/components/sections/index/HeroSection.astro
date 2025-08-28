@@ -8,13 +8,19 @@
     style="background-image: url('/BM.webp');"
   ></div>
 
-  <img
-  src="/david_photo.webp"
-  alt="Portrait of David"
-  loading="lazy"
-  decoding="async"
-  class=" min-w-[150%] md:min-w-[900px] md:w-[60%] h-auto drop-shadow-xl bottom-0  md:left-[35%] lg:left-[45%] xl-[60%] z-20 absolute"
-  />
+  <div class="absolute bottom-0 max-w-[400px]
+            -right-10 w-full 
+            sm:right-4 
+            md:right-8 
+            lg:right-16 
+            xl:right-24 xl:max-w-[700px]
+            z-20">
+    <img src="/david_photo.webp"
+         alt="Portrait of David"
+         loading="lazy"
+         decoding="async"
+         class="w-full h-auto aspect-[3/4] object-cover drop-shadow-xl" />
+</div>
 
   <!-- Triangle overlay -->
   <div class="absolute inset-0 w-full h-full bg-text-secondary/85 clip-triangle flex mt-2 justify-end items-end overflow-visible"/>
