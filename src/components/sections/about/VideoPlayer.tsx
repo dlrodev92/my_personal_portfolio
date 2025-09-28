@@ -11,8 +11,8 @@ interface VideoPlayerProps {
 }
 
 export default function VideoPlayer({
-  videoUrl = 'public/PERSONAL_VIDEO.mp4',
-  posterUrl = 'public/davidVideoCover.webp',
+  videoUrl = '/PERSONAL_VIDEO.mp4',
+  posterUrl = '/davidVideoCover.webp',
   title = 'Meet David',
   description = 'Full-stack developer from Spain, now in London',
   autoplay = false, // desactivado por defecto
