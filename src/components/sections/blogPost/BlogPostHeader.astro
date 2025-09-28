@@ -35,11 +35,16 @@ function formatDate(dateString) {
         {post.category}
       </span>
       
-      {post.tags.slice(0, 3).map((tag) => (
-        <span class="text-sm text-gray-600 border border-gray-200 px-2 py-1 rounded">
-          {tag}
-        </span>
-      ))}
+     {Array.isArray(post.tags) && post.tags.map(tag => (
+  <a
+    href={`/blog/tag/${tag.slug}`}
+    class="inline-block text-xs font-medium px-2 py-1 rounded bg-gray-100 text-gray-700 hover:bg-gray-200 transition-colors"
+  >
+    {tag.name}
+  </a>
+))}
+
+
     </div>
 
     <!-- Title & Subtitle -->

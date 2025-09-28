@@ -6,22 +6,23 @@ import ImageBlock from './blocks/ImageBlock.astro';
 import CalloutBlock from './blocks/CalloutBlock.astro';
 import QuoteBlock from './blocks/QuoteBlock.astro';
 import ListBlock from './blocks/ListBlock.astro';
-import VideoBlock from './blocks/VideoBlock.astro'; // ⭐ Falta este componente
+import VideoBlock from './blocks/VideoBlock.astro';
 
 export interface Props {
-  blocks: any[];
+  blocks?: any[];
 }
 
-const { blocks } = Astro.props;
+// Default vacío y protección
+const { blocks = [] } = Astro.props;
 
-// Ordenar los bloques por el campo order
-const sortedBlocks = blocks.sort((a, b) => a.order - b.order);
+const sortedBlocks = Array.isArray(blocks)
+  ? [...blocks].sort((a, b) => (a?.order ?? 0) - (b?.order ?? 0))
+  : [];
 ---
 
 <div class="prose prose-lg max-w-none">
-  {sortedBlocks.map((block) => {
-    // ⭐ Convertir a lowercase para hacer match
-    const blockType = block.type.toLowerCase();
+  {Array.isArray(sortedBlocks) && sortedBlocks.map((block) => {
+    const blockType = (block?.type || '').toLowerCase();
     
     switch (blockType) {
       case 'paragraph':
@@ -38,10 +39,10 @@ const sortedBlocks = blocks.sort((a, b) => a.order - b.order);
         return <QuoteBlock block={block} />;
       case 'list':
         return <ListBlock block={block} />;
-      case 'video': // ⭐ Agregar soporte para VIDEO
+      case 'video': 
         return <VideoBlock block={block} />;
       default:
-        return <div class="bg-red-100 p-4 rounded">Unknown block type: {block.type}</div>;
+        return <div class="bg-red-100 p-4 rounded">Unknown block type: {block?.type}</div>;
     }
   })}
 </div>

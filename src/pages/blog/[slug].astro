@@ -32,7 +32,15 @@ const transformedPost = {
   wordCount: blogPostData.wordCount || 0,
   views: blogPostData.views || 0,
   category: blogPostData.category?.name || 'Uncategorized',
-  tags: blogPostData.blogPostTags?.map(tag => tag.blogTag.name) || [],
+  tags: Array.isArray(blogPostData.blogPostTags)
+    ? blogPostData.blogPostTags
+        .filter(tag => tag?.blogTag)
+        .map(tag => ({
+          name: tag.blogTag.name,
+          slug: tag.blogTag.slug
+        }))
+    : [],
+
   series: blogPostData.series ? {
     name: blogPostData.series.name,
     part: blogPostData.seriesPart || 1,
@@ -58,9 +66,19 @@ const transformedPost = {
 
 // Related posts
 const relatedResponse = await portfolioAPI.getBlogPosts();
-const relatedPosts = relatedResponse.success && Array.isArray(relatedResponse.data) 
+const currentTags = transformedPost.tags.map(t => t.slug);
+const relatedPosts = relatedResponse.success && Array.isArray(relatedResponse.data)
   ? relatedResponse.data
-      .filter(post => post.id !== blogPostData.id && post.category?.name === blogPostData.category?.name)
+      .filter(post => post.id !== blogPostData.id)
+      .filter(post => {
+        const postTags = Array.isArray(post.blogPostTags)
+          ? post.blogPostTags.map(t => t.blogTag?.slug).filter(Boolean)
+          : [];
+        // Coincidencia por categoría o al menos 1 tag
+        const sameCategory = post.category?.name === blogPostData.category?.name;
+        const sameTag = postTags.some(tag => currentTags.includes(tag));
+        return sameCategory || sameTag;
+      })
       .slice(0, 3)
       .map(post => ({
         slug: post.slug,
@@ -72,6 +90,9 @@ const relatedPosts = relatedResponse.success && Array.isArray(relatedResponse.da
         publishedAt: post.publishedAt || post.createdAt
       }))
   : [];
+
+
+
 ---
 
 <Layout
@@ -111,7 +132,11 @@ const relatedPosts = relatedResponse.success && Array.isArray(relatedResponse.da
     </section>
     <BlogPostAuthor author={transformedPost.author} />
     <BlogPostEngagement post={transformedPost} />
-    <BlogPostRelated posts={relatedPosts} series={transformedPost.series} />
+    <BlogPostRelated 
+  posts={Array.isArray(relatedPosts) ? relatedPosts : []} 
+  series={transformedPost.series || null} 
+/>
+
   </main>
 </Layout>
 

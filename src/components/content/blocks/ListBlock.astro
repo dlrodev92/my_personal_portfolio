@@ -4,11 +4,14 @@ export interface Props {
     id: string;
     type: 'list';
     style: 'bullet' | 'numbered' | 'checklist';
-    items: string[];
+    items?: string[]; // ojo: puede venir undefined
   };
 }
 
 const { block } = Astro.props;
+
+// Fuerza siempre un array seguro
+const items = Array.isArray(block?.items) ? block.items : [];
 
 function processInlineMarkdown(text: string): string {
   return text
@@ -21,16 +24,20 @@ const ListTag = block.style === 'numbered' ? 'ol' : 'ul';
 ---
 
 <ListTag class={`my-6 ${block.style === 'checklist' ? 'list-none' : ''}`}>
-  {block.items.map((item) => (
-    <li class={`${block.style === 'checklist' ? 'flex items-start' : ''}`}>
-      {block.style === 'checklist' && (
-        <input 
-          type="checkbox" 
-          disabled 
-          class="mt-1 mr-2 flex-shrink-0"
-        />
-      )}
-      <span set:html={processInlineMarkdown(item)} />
-    </li>
-  ))}
+  {items.length > 0 ? (
+    items.map((item) => (
+      <li class={`${block.style === 'checklist' ? 'flex items-start' : ''}`}>
+        {block.style === 'checklist' && (
+          <input 
+            type="checkbox" 
+            disabled 
+            class="mt-1 mr-2 flex-shrink-0"
+          />
+        )}
+        <span set:html={processInlineMarkdown(item)} />
+      </li>
+    ))
+  ) : (
+    <li class="text-gray-500 italic">No items available</li>
+  )}
 </ListTag>
