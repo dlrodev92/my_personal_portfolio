@@ -11,8 +11,8 @@ interface VideoPlayerProps {
 }
 
 export default function VideoPlayer({
-  videoUrl = 'public/Por qué DESAPARECE tanta GENTE_.mp4',
-  posterUrl = 'https://media4.giphy.com/media/cYZkY9HeKgofpQnOUl/giphy.gif',
+  videoUrl = 'public/PERSONAL_VIDEO.mp4',
+  posterUrl = 'public/davidVideoCover.webp',
   title = 'Meet David',
   description = 'Full-stack developer from Spain, now in London',
   autoplay = false, // desactivado por defecto

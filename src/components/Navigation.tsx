@@ -31,9 +31,9 @@ const Navigation = () => {
           <div className="flex-shrink-0">
             <a
               href="/"
-              className="font-display text-xl text-black hover:text-text-muted transition-colors"
+              className="font-logo text-2xl text-surface/80 hover:text-text-muted transition-colors tracking-tighter "
             >
-              Your Name
+              DavidLopezDev
             </a>
           </div>
 

@@ -39,6 +39,7 @@ export default {
         sans: ['Inter'],
         display: ['Bespoke Stencil'],
         body: ['Inter'],
+        groote: ['Groote', 'sans-serif']
       },
       animation: {
         'fade-in': 'fadeIn 0.5s ease-in-out',
