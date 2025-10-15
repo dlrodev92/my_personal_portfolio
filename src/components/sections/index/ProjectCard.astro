@@ -6,6 +6,7 @@ export interface Project {
   status: string;
   tech: string[];
   link: string;
+  slug: string;
 }
 
 export interface Props {
@@ -41,7 +42,7 @@ const { project, class: className } = Astro.props;
         <span class="px-2 py-1 border border-white/30 rounded bg-white/10 backdrop-blur">{tech}</span>
       ))}
     </div>
-    <a href={project.link} class="text-yellow-400 text-sm font-bold hover:text-white transition">
+    <a href={`/projects/${project.slug}`} class="text-yellow-400 text-sm font-bold hover:text-white transition">
       View Project →
     </a>
   </div>
